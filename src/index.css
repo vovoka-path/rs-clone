@@ -1,0 +1,18 @@
+:root {
+    --color--primary-4: #FFD173;
+}
+
+.center {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.header {
+    height: 80px;
+    background: var(--color--primary-4);
+}
+.header-conteiner {
+    display: flex;
+}
+.header-logo {
+    width: 120px;
+}
