@@ -4,18 +4,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Photo agency</title>
 </head>
 <body>
     <header class="header">
-        <div class="center">
-            <div class="header-conteiner">
-                <img class="header-logo" src="./assets/550d.png" alt="camera">
-                <h1 class="headre-title">life in one frame</h1>
+        <div class="header-conteiner center">
+            <div class="header-wrapper">
+                <div class="header-logo">
+                    <img class="header-img" src="./assets/Camera-Lens-Transparent-Free-PNG.png" alt="camera">
+                    <p class="header-logo-title">Photo Agency</p>
+                </div>
+                <ul class="header-navbar" id="navbar">
+                    <li><a href="#">Маршруты</a></li>
+                    <li><a href="#">Фотосессии</a></li>
+                    <li><a href="#">О нас</a></li>
+                    <li><a href="#">Контакты</a></li>
+                </ul>
+                <a class="header-tel" href="tel:+7(800) 000 00 00">Позвоните нам</a>
+            </div>
+            <div class="header-wrapper item">
+                <h1 class="header-title">Вся жизнь в одном кадре - фотосессия на улице</h1>
+                <button type="button" class="btn btn-outline-dark">Забронировать</button>
             </div>
         </div>
     </header> 
+
     <main class="main">
+        <div class="main-conteoner center">
+           <div class="routes">
+                <h3 class="routes-title">Фото-маршруты</h3>
+           </div> 
+           <div class="routes-description">
+
+           </div> 
+        </div>
         <div class="center main-center">
             <form class="form" action="URL">
                 <h1 class="form-title">Забронировать фотосессию</h1>
@@ -29,6 +52,7 @@
             </form>
         </div>
     </main>
-    <footer class="footer">footer</footer> 
+    <footer class="footer">footer</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>
 </html>

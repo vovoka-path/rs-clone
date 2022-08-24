@@ -1,0 +1,100 @@
+:root {
+    --color--white: rgba(255, 255, 255, 1);
+    --color--blue--1: #025167;
+    --color--blue--2: #03313d;
+}
+
+body {
+    margin: 10px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 16px;
+}
+.header {
+    height: 650px;
+    background: url("./assets/image.png") no-repeat center center fixed;
+    background-size: cover;
+}
+.center {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+}
+.header-wrapper.item {
+    position: absolute;
+    top: 250px;
+    padding: 0 120px 0 50px;
+}
+.header-conteiner {
+    display: flex;
+    flex-direction: column;
+}
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header-logo-title {
+    color: var(--color--blue--1);
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 36px;
+    letter-spacing: -1px;
+    margin-left: 10px;
+    font-family: Oswald;
+}
+.header-logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.header-img {
+    width: 60px;
+}
+.header-navbar {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.header-navbar a,
+.header-conteiner a {
+    display: block;
+    text-decoration: none;
+    color: var(--color--blue--1);
+    font-weight: 800;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+.header-navbar a:hover,
+.header-conteiner a:hover,
+.header-logo-title:hover {
+    color: var(--color--blue--2);
+}
+.header-title {
+    width: 50%;
+    font-weight: 700;
+    font-family: Oswald;
+    font-size: 42px;
+    color: var(--color--blue--2);
+    text-align: center; 
+}
+
+/*стили для main*/
+.main-conteoner {
+    display: flex;
+}
+.main-center {
+    display: flex;
+    justify-content: flex-end;
+}
+/*стили для формы*/
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 420px;
+    padding: 1rem;
+    border-radius: 0.7rem;
+    box-shadow: inset 2px 2px 5px var(--color--grey-2), 1px 1px 5px var(--color--white);
+}

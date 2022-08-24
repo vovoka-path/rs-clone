@@ -1,2 +1,3 @@
-import './index.css';
+import './index.scss';
 import './reset.css';
+//import bootstrap from 'bootstrap';
