@@ -3,6 +3,14 @@
     --color--blue--1: #025167;
     --color--blue--2: #03313d;
 }
+@mixin h1 {
+    font: {
+        family: Oswald;
+        size: 42px;
+        weight: 900;
+    };
+    color: var(--color--blue--2);
+}
 
 body {
     margin: 10px;
@@ -20,13 +28,13 @@ body {
     padding: 10px;
 }
 .header-wrapper.item {
-    position: absolute;
-    top: 250px;
-    padding: 0 120px 0 50px;
+    flex-direction: column;
+    gap: 40px;
 }
 .header-conteiner {
     display: flex;
     flex-direction: column;
+    gap: 150px;
 }
 .header-wrapper {
     display: flex;
@@ -72,21 +80,42 @@ body {
     color: var(--color--blue--2);
 }
 .header-title {
-    width: 50%;
-    font-weight: 700;
-    font-family: Oswald;
-    font-size: 42px;
-    color: var(--color--blue--2);
-    text-align: center; 
+    @include h1;
 }
 
 /*стили для main*/
-.main-conteoner {
+.main-conteiner {
     display: flex;
+    justify-content: space-between;
+    padding: 0;
+    gap: 1rem;
 }
 .main-center {
     display: flex;
     justify-content: flex-end;
+}
+.routes{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}
+.routes-title,
+.prices-title {
+    @include h1;
+    text-align: center;
+    padding: 20px;
+}
+.carousel.slide {
+    width: 70%;
+}
+.inactive {
+    display: none;
+}
+/* стили для прайса */
+.main-prices {
+    height: 650px;
+    background: url("./assets/image.png") no-repeat center center fixed;
+    background-size: cover;
 }
 /*стили для формы*/
 
