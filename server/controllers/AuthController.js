@@ -3,6 +3,7 @@ import Role from '../models/Role.js';
 import Validator  from 'express-validator';
 import bcrypt from 'bcryptjs';
 import generateAccessToken from '../helpers/generateAccessToken.js';
+import UserService from '../services/UserService.js';
 const { validationResult } = Validator;
 
 class AuthController {
@@ -61,6 +62,27 @@ class AuthController {
             console.log(error);
             res.status(400).json({message: 'Get error'});
         }
+    }
+
+    async updateUser(req, res) {
+        try {
+            const user = req.body;
+            const newUser = await UserService.update(user);
+            return res.json(newUser);
+        } catch (error) {
+            res.status(500).json(error);
+        }
+    }
+
+    async deleteUser(req, res) {
+        try {
+            const user = await UserService.delete(req.params.id);
+            return res.json(user);
+        } catch (error) {
+            console.log(error);
+            res.status(400).json({message: 'Delete error'});
+        }
+        
     }
 }
 

@@ -11,6 +11,8 @@ router.post('/registration', [
 ], AuthController.registration);
 router.post('/login', AuthController.login);
 router.get('/users',authMiddleware , AuthController.getUsers);
+router.put('/users', authMiddleware, AuthController.updateUser);
+router.delete('/users/:id', authMiddleware, AuthController.deleteUser);
 
 export default router;
 
