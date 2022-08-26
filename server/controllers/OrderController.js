@@ -1,4 +1,8 @@
 import OrderService from '../services/OrderService.js';
+import jwt from 'jsonwebtoken';
+import config from '../config.js';
+
+const {secretKey} = config; 
 class OrderController {
     async create(req, res) {
         try {
@@ -13,6 +17,19 @@ class OrderController {
         try {
             const order = await OrderService.getAll();
             return res.json(order);
+        } catch (err) {
+            res.status(500).json(err);
+        }
+    }
+    async getAllForEmployee(req, res) {
+        try {
+            const token = (req.headers.authorization || '').split(' ')[1];
+            if(!token) {
+                return res.status(403).json({message: 'User not authorized'});
+            }
+            const { role, id: idEmployee } = jwt.verify(token, secretKey);
+            const orders = await OrderService.getAllForEmployee(role, idEmployee);
+            return res.json(orders);
         } catch (err) {
             res.status(500).json(err);
         }
