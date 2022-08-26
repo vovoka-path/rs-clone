@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import AuthRouter from './routes/AuthRouter.js'
 import ApiRouter from './routes/ApiRouter.js';
+import MailRouter from './routes/MailRouter.js';
 import cors from 'cors';
 
 const PORT = process.env.PORT || 5000;
@@ -13,6 +14,7 @@ app.use(jsonParser);
 app.use(cors());
 app.use('/auth', AuthRouter);
 app.use('/api', ApiRouter);
+app.use('/mail', MailRouter);
 
 
 async function startApp() {
