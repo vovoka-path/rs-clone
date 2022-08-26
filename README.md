@@ -76,7 +76,7 @@ Api for "CRM Photo-agancy".
         - URL *'/auth/registration'*
         - HEADERS: 
             - *"Content-Type": "aplication/json"*
-        - BODY: *{username: String, pasword: String, role: 'manager' || 'photographer' || 'editor'}*
+        - BODY: *{username: String, password: String, role: 'manager' || 'photographer' || 'editor'}*
         - RETURN: *Message* or *ERROR*
 
 ***
@@ -86,7 +86,7 @@ Api for "CRM Photo-agancy".
         - URL *'/auth/login'*
         - HEADERS: 
             - *"Content-Type": "aplication/json"*
-        - BODY: *{username: String, pasword: String}*
+        - BODY: *{username: String, password: String}*
         - RETURN: *{token: String, username: String, role: String}* or *ERROR*
 
 ***
