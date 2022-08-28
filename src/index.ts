@@ -23,14 +23,15 @@ button.addEventListener('click', async (e) => {
   e.preventDefault();
   const city = (document.querySelector('#city') as HTMLInputElement).value;
   const route = (document.querySelector('#route') as HTMLInputElement).value;
-  const packages = (document.querySelector('#package') as HTMLInputElement).value;
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  const package_name = (document.querySelector('#package') as HTMLInputElement).value;
   const clientEmail = (document.querySelector('#email') as HTMLInputElement).value;
   const clientMessage = (document.querySelector('#message') as HTMLInputElement).value;
 
   const order = {
     city,
     route,
-    packages,
+    package_name,
     clientEmail,
     clientMessage,
     date: {
@@ -54,7 +55,7 @@ async function postOrder(data: Order): Promise<void> {
       body: JSON.stringify(data),
     });
   } catch (error) {
-    //console.log(error.message);
+    console.log(error);
   }
 }
 
@@ -62,5 +63,15 @@ document.querySelectorAll('.li').forEach((currentRow, index, primarys) => {
   currentRow.addEventListener('click', () => {
     primarys.forEach((row) => row.classList.remove('active'));
     currentRow.classList.add('active');
+  });
+});
+
+
+document.querySelectorAll('.menu-item').forEach((currentItem) => {
+  currentItem.addEventListener('click', () => {
+    const menubox = document.querySelector('.menubox');
+    if (menubox) {
+      menubox.classList.add('a');
+    }
   });
 });
