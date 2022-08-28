@@ -11,7 +11,7 @@ for (let i = 0; i < items.length; i++) {
       if (i == j) {
         carousels[j].classList.remove('inactive');
       } else {
-        carousels[j].classList.add('inactive');
+        carousels[j].classList.add('inactive');  
       }
     }
   });
@@ -57,3 +57,10 @@ async function postOrder(data: Order): Promise<void> {
     //console.log(error.message);
   }
 }
+
+document.querySelectorAll('.li').forEach((currentRow, index, primarys) => {
+  currentRow.addEventListener('click', () => {
+    primarys.forEach((row) => row.classList.remove('active'));
+    currentRow.classList.add('active');
+  });
+});
