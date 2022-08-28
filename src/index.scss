@@ -2,6 +2,10 @@
     --color--white: rgba(255, 255, 255, 1);
     --color--blue--1: #025167;
     --color--blue--2: #03313d;
+    --color--grey: #d6dadb;
+    --color--primary-0: #FF7800;
+    --color--primary-1: #FF9A40;
+    --color--primary-2: #ffd9b8;
 }
 @mixin h1 {
     font: {
@@ -25,7 +29,7 @@ body {
 .center {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px;
+    padding: 10px 10px 0 10px;
 }
 .header-wrapper.item {
     flex-direction: column;
@@ -42,7 +46,7 @@ body {
     align-items: center;
 }
 .header-logo-title {
-    color: var(--color--blue--1);
+    color: var(--color--blue--2);
     font-weight: 600;
     font-size: 24px;
     line-height: 36px;
@@ -70,17 +74,39 @@ body {
 .header-conteiner a {
     display: block;
     text-decoration: none;
-    color: var(--color--blue--1);
+    color: var(--color--blue--2);
     font-weight: 800;
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .header-navbar a:hover,
 .header-conteiner a:hover,
 .header-logo-title:hover {
-    color: var(--color--blue--2);
+    text-decoration: 3px underline;
 }
 .header-title {
     @include h1;
+    text-align: center;
+}
+.btn-primary {
+    background-color: var(--color--blue--2);
+    width: 200px;
+    border-radius: 0.9rem;
+    border: 5px solid var(--color--blue--1);
+    color: var(--color--grey);
+}
+.btn-primary:hover,
+.btn-primary:visited,
+.btn-primary:active {
+    background-color: var(--color--primary-0);
+    border-color: #FFB573;
+    
+}
+.btn-primary:active:focus,
+.btn-primary:focus {
+    box-shadow: 0 0 0 0.25rem var(--color--primary-2);
+    background-color: var(--color--primary-0);
+    border-color: #FFB573;
+    outline: none;
 }
 
 /*стили для main*/
@@ -100,11 +126,13 @@ body {
     width: 30%;
 }
 .routes-title,
-.prices-title {
+.prices-title,
+.form-title {
     @include h1;
     text-align: center;
     padding: 20px;
 }
+
 .carousel.slide {
     width: 70%;
 }
@@ -113,17 +141,68 @@ body {
 }
 /* стили для прайса */
 .main-prices {
-    height: 650px;
+    height: 400px;
     background: url("./assets/image.png") no-repeat center center fixed;
     background-size: cover;
+    margin-bottom: 48px;
+}
+.center-button {
+    text-align: center;
+}
+.table {
+    margin-bottom: 15px;
 }
 /*стили для формы*/
+.drop {
+    background: url("./assets/forma_3.jpg");
+    background-size: cover;
+}
+.modal-header {
+    margin-bottom: 20px;
+}
+.length {
+    width: 100%;
+}
 
-.form {
+/* footer */
+.footer {
     display: flex;
-    flex-direction: column;
-    width: 420px;
-    padding: 1rem;
-    border-radius: 0.7rem;
-    box-shadow: inset 2px 2px 5px var(--color--grey-2), 1px 1px 5px var(--color--white);
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 20px;
+    height: 100px;
+    background: var(--color--blue--2);
+}
+
+.footer-avtor a,
+.footer-avtor {
+    text-decoration: none;
+    color: var(--color--grey);
+    font-size: 1rem;
+}
+
+.footer-avtor a:hover {
+    text-decoration: 3px underline; 
+}
+
+.footer p {
+    font-weight: 600;
+    color: var(--color--grey);
+    font-size: 0.8rem;
+}
+
+.footer-linck-rsschool img {
+    width: 100px;
+    height: 40px;
+    border: 4px double var(--color--blue--2);
+    border-radius: 10px;
+    padding: 4px;
+    transition: 0.25s;
+    background: var(--color--grey);
+}
+
+.footer-linck-rsschool img:hover {
+    background: var(--color--blue--2);
+    border: 4px double var(--color--grey);
 }

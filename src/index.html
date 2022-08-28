@@ -16,16 +16,16 @@
                     <p class="header-logo-title">Photo Agency</p>
                 </div>
                 <ul class="header-navbar" id="navbar">
-                    <li><a href="#">Забронировать</a></li>
+                    <li data-bs-toggle="modal" data-bs-target="#exampleModal"><a href="#form">Забронировать</a></li>
                     <li><a href="#">Фотосессии</a></li>
                     <li><a href="#">Цены</a></li>
                     <li><a href="#">Контакты</a></li>
                 </ul>
-                <a class="header-tel" href="tel:+7(800) 000 00 00">Позвоните нам</a>
+                <a class="header-tel" href="tel:+7(800) 800 10 10">+7(800) 800 10 10</a>
             </div>
             <div class="header-wrapper item">
-                <h1 class="header-title">Вся жизнь в одном кадре - фотосессия на улице</h1>
-                <button type="button" class="btn btn-outline-dark">Забронировать</button>
+                <h1 class="header-title">Вся жизнь в одном кадре - фотосессия на улице.<br> Закажите фотосессию своей мечты.</h1>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Забронировать</button>
             </div>
         </div>
     </header> 
@@ -230,52 +230,98 @@
                 <h1 class="prices-title">Цены на услуги</h1>
                 <table class="table">
                     <thead>
-                      <tr>
+                    <tr>
                         <th scope="col"></th>
                         <th scope="col">Тариф "Мини"</th>
                         <th scope="col">Тариф "Cтандарт"</th>
                         <th scope="col">Тариф "Элита"</th>
-                      </tr>
+                    </tr>
                     </thead>
                     <tbody>
-                      <tr>
+                    <tr>
                         <th scope="row">Время</th>
                         <td>1 час</td>
                         <td>1,5 часа</td>
                         <td>2,5 часа</td>
-                      </tr>
-                      <tr>
+                    </tr>
+                    <tr>
                         <th scope="row">К-во фото</th>
                         <td>25</td>
                         <td>50</td>
                         <td>100</td>
-                      </tr>
-                      <tr>
+                    </tr>
+                    <tr>
                         <th scope="row">Цена</th>
                         <td>70$</td>
                         <td>100$</td>
                         <td>160$</td>
-                      </tr>
+                    </tr>
                     </tbody>
-                  </table>
-                  <button type="button" class="btn btn-outline-dark">Забронировать</button>
+                </table>
+                <div class="center-button">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Забронировать</button>
+                </div>
             </div>
         </div>
-            <div class="center main-center">
-                <form class="form" action="URL">
-                    <h1 class="form-title">Забронировать фотосессию</h1>
-                    <p class="form-text">Вы всегда сможете бесплатно отменить бронирование или перенести съемку на другую дату</p>
-                    <input type="text" name="name" placeholder="Ваше имя">
-                    <input type="email" name="email" placeholder="Ваша почта">
-                    <p>Выберите день проведения фотосессии</p>
-                    <input type="date" name="date">
-                    <textarea name="message" id="form-message" cols="10" rows="5" placeholder="Особые пожелания"></textarea>
-                    <input type="submit" value="Забронировать">
+
+        <div class="main-form modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="center main-center modal-dialog">
+                <form class="row g-3 form shadow p-3 mb-5 bg-white rounded drop modal-content" action="">
+                    <div class="modal-header">
+                        <h5 class="modal-title form-title" id="exampleModalLabel">Бронирование без предоплаты</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="col-md-6 row">
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" value="Прага" id="city" style="display: none;">
+                        </div>
+                        <select class="form-select shadow p-2 mb-4 bg-white rounded" id="route">
+                            <option selected>Выберите Фотосессию</option>
+                            <option value="1">"Старинная Прага"</option>
+                            <option value="2">"Уютная Прага"</option>
+                            <option value="3">"Сердце Праги"</option>
+                            <option value="4">"Парк 300-летия Праги"</option>
+                            <option value="5">"Фото и видео на свадьбу"</option>
+                        </select>
+                        <select class="form-select shadow p-2 mb-4 bg-white rounded" id="package">
+                            <option selected>Выберите Тариф</option>
+                            <option value="1">Тариф "Мини"</option>
+                            <option value="2">Тариф "Cтандарт"</option>
+                            <option value="3">Тариф "Элита"</option>
+                        </select>
+                        <div class="shadow p-2 mb-4 bg-white rounded">
+                            <input type="email" class="form-control" id="email" placeholder="Ваш Email">
+                        </div>
+                        <div class="shadow p-2 mb-4 bg-white rounded">
+                            <textarea class="form-control" rows="8" id="message" placeholder="Ваше имя, дата съемки, контактные данные для связи, количество человек и пожелания"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn btn-primary length" id="submit">Забронировать</button>
+                            <a id="form"></a>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
                 </form>
             </div>
-       
+        </div>
+
     </main>
-    <footer class="footer">footer</footer>
+    <footer class="footer">
+        <h3 class="footer-avtor">
+            <a href="https://github.com/vovoka-path">Владимир Поланский</a> &
+            <a href="https://github.com/pavel1303">Павел Лебедев</a> &
+            <a href="https://github.com/Elena-code-dev">Елена Кузнецова</a>
+        </h3>
+        <p>2022 </p>
+        <p class="footer-linck-rsschool">
+            <a href="https://rs.school/js/">
+            <img src="https://rs.school/images/rs_school_js.svg" alt="RS SCHOOL"> 
+            </a>
+        </p>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>
 </html>
