@@ -28,6 +28,16 @@ Api for "CRM Photo-agancy".
 
 ***
 
+    - Get Orders for employee: Returns json data about orders for employee.
+        - Method *GET* 
+        - URL *'/orders/employee'*
+        - HEADERS: 
+            - *"Authorization": "Bearer <-YOU TOKEN->"*
+            - *"Content-Type": "aplication/json"*
+        - RETURN: *[Orders]* or *ERROR*
+
+***
+
     - Get Order: Returns json data specified order.
         - Method *GET* 
         - URL *'api/orders/:id'*
@@ -53,19 +63,19 @@ Api for "CRM Photo-agancy".
         - URL *'api/orders/:id'*
         - HEADERS:
             - *"Authorization": "Bearer <-YOU TOKEN->"*
-        - RETURN: *Order* or *ERROR*
+        - RETURN: *Delete Order* or *ERROR*
 
 ***
 
     - Update Order: Updates attributes of specified.
-                - Method *PUT* 
+        - Method *PUT* 
         - URL *'api/orders/'*
         - HEADERS:
             - *"Authorization": "Bearer <-YOU TOKEN->"*
             - *"Content-Type": "aplication/json"*
         - BODY
             - *{_id: String, and other changeable parameters }*
-        - RETURN: *Order* or *ERROR*
+        - RETURN: *Update Order* or *ERROR*
 
 ## **Auth**
 
@@ -98,3 +108,38 @@ Api for "CRM Photo-agancy".
             - *"Authorization": "Bearer <-YOU TOKEN->"* 
             - *"Content-Type": "aplication/json"*
         - RETURN: *{token: String, username: String, role: String}* or *ERROR*
+
+***
+
+    - Delete user: Delete specified user.
+        - Method *DELETE* 
+        - URL *'/auth/users/:id'*
+        - HEADERS:
+            - *"Authorization": "Bearer <-YOU TOKEN->"*
+        - RETURN: *Delete user* or *ERROR*
+
+***
+
+    - Update user: Updates attributes of specified.
+        - Method *PUT* 
+        - URL *'/auth/users'*
+        - HEADERS:
+            - *"Authorization": "Bearer <-YOU TOKEN->"*
+            - *"Content-Type": "aplication/json"*
+        - BODY
+            - *{_id: String, and other changeable parameters }*
+        - RETURN: *Update user* or *ERROR*
+
+## **Mail**
+
+***
+
+    - Send Mail: Send mail to the specified address.
+        - Method *POST* 
+        - URL *'/mail/send'*
+        - HEADERS:
+            - *"Authorization": "Bearer <-YOU TOKEN->"*
+            - *"Content-Type": "aplication/json"*
+        - BODY
+            - *{ clientEmail: String, title: String, msg: String }*
+        - RETURN: *status* or *ERROR*
