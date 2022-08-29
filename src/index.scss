@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Festive&display=swap');
 :root {
     --color--white: rgba(255, 255, 255, 1);
     --color--blue--1: #025167;
@@ -12,7 +11,6 @@
 }
 @mixin h1 {
     font: {
-        family: 'Festive', cursive;
         size: 2rem;
         weight: 900;
     };
@@ -28,11 +26,12 @@ body {
     height: 650px;
     background: url("./assets/image.png") no-repeat center center fixed;
     background-size: cover;
+    margin-bottom: 1rem;
 }
 .center {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 10px 10px 0 10px;
+    padding: 15px;
 }
 .header-wrapper.item {
     flex-direction: column;
@@ -55,7 +54,6 @@ body {
     line-height: 36px;
     letter-spacing: -1px;
     margin-left: 10px;
-    font-family: Oswald;
 }
 .header-logo-1,
 .header-logo-2 {
@@ -73,6 +71,10 @@ body {
     margin: 0;
     padding: 0;
     list-style-type: none;
+    font-size: 0.9rem;
+}
+.header-tel {
+    font-size: 0.9rem;
 }
 .header-navbar a,
 .header-conteiner a {
@@ -80,12 +82,11 @@ body {
     text-decoration: none;
     color: var(--color--blue--2);
     font-weight: 800;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 .header-navbar a:hover,
 .header-conteiner a:hover,
 .header-logo-title:hover {
-    text-decoration: 3px underline;
+    text-decoration: 1.5px underline;
 }
 .header-title {
     @include h1;
@@ -114,11 +115,15 @@ body {
 }
 
 /*стили для main*/
-.main-routes {
-    margin-bottom: 48px;
+.main-routes,
+.main-prices,
+.map,
+.main-questions {
+    margin-bottom: 1rem;
 }
 .main-conteiner {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     padding: 0;
     gap: 1rem;
@@ -127,11 +132,6 @@ body {
     display: flex;
     justify-content: flex-end;
 }
-.routes{
-    display: flex;
-    flex-direction: column;
-    width: 30%;
-}
 .routes-title,
 .prices-title,
 .form-title {
@@ -139,15 +139,19 @@ body {
     text-align: center;
     padding: 20px;
 }
-
-.carousel.slide {
-    width: 70%;
+.list-group {
+    flex-direction: row;
+    justify-content: space-between;
+}
+.mb-5 {
+    margin-bottom: 0rem!important;
 }
 .inactive {
     display: none;
 }
 .li {
     cursor: pointer;
+    width: 32%;
 }
 .list-group-item.active {
     background-color: var(--color--primary-0);
@@ -179,10 +183,18 @@ body {
 .length {
     width: 100%;
 }
+/* Отзывы */
+.main-reviews-prices-title {
+    
+}
 
-/* map */
-.map {
-    margin-bottom: 48px;
+/* Вопросы-ответы */
+.accordion-item {
+    border: none; 
+    margin-bottom: 1rem;
+}
+.accordion-button:focus {
+    border-color: var(--color--blue--1);
 }
 
 /* footer */
@@ -193,24 +205,22 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 20px;
-    height: 100px;
 }
 
 .footer-avtor a,
-.footer-avtor {
+.footer-avtor,
+.footer-avtor p {
     text-decoration: none;
     color: var(--color--grey);
     font-size: 0.8rem;
+    width: 30%;
 }
 
 .footer-avtor a:hover {
-    text-decoration: 3px underline; 
+    text-decoration: 1px underline; 
 }
 
 .footer p {
-    font-weight: 600;
     color: var(--color--grey);
     font-size: 0.8rem;
 }
@@ -233,20 +243,36 @@ body {
 .footer-contacts {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    align-items: center;
+    width: 30%;
 }
 .footer-icon {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    gap: 1rem;
 }
 .footer-icon img{
     width: 30px;
 }
 .footer-title {
     color: var(--color--grey);
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 1.2rem;
+}
+.footer-copyright {
+    display: flex;
+    justify-content: space-between;
+}
+.footer-copyright p,
+.footer-copyright a {
+    width: 30%;
+    text-align: center;
+}
+.footer-linck-rsschool {
+    display: flex;
+    justify-content: center;
+}
+.wigth0 {
+    display: none;
 }
 
 /* burger-menu*/
@@ -320,7 +346,6 @@ body {
         display: block;
         padding: 12px 24px;
         color: #333;
-        font-family: 'Roboto', sans-serif;
         font-size: 20px;
         font-weight: 600;
         text-decoration: none;
@@ -383,11 +408,17 @@ body {
     .main-conteiner {
         flex-direction: column;
     }
-    .routes {
-        width: 100%;
-    }
     .mb-5 {
-        margin-bottom: 1.5rem!important;
+        margin-bottom: 0.5rem!important;
+    }
+    .p-3 {
+        padding: 0.5rem!important;
+    }
+    .list-group {
+        flex-direction: column;
+    }
+    .li {
+        width: 100%;
     }
     .carousel.slide {
         width: 100%;
