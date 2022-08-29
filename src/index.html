@@ -21,17 +21,19 @@
                         <div class="header-logo-2">
                             <img class="header-img" src="./assets/Camera-Lens-Transparent-Free-PNG.png" alt="camera">
                             <p class="header-logo-title">Photo Agency</p>
+                        </div>
+                        <div class="burger-conteiner">
+                            <input id="menu-toggle" type="checkbox"></input>
+                            <label class="menu-btn" for="menu-toggle">
+                                <span></span>
+                            </label>
+                            <nav class="menubox">
+                                <li><a  class="menu-item" href="#photoshoot">Фотосессии</a></li>
+                                <li><a class="menu-item" href="#prices">Цены</a></li>
+                                <li><a class="menu-item" href="#contacts">Контакты</a></li>
+                                <li><a class="menu-item" href="tel:+7(800) 800 10 10">+7(800) 800 10 10</a></li>
+                            </nav>
                         </div>   
-                        <input id="menu-toggle" type="checkbox"></input>
-                        <label class="menu-btn" for="menu-toggle">
-                            <span></span>
-                        </label>
-                        <nav class="menubox">
-                            <li><a  class="menu-item" href="#photoshoot">Фотосессии</a></li>
-                            <li><a class="menu-item" href="#prices">Цены</a></li>
-                            <li><a class="menu-item" href="#contacts">Контакты</a></li>
-                            <li><a class="menu-item" href="tel:+7(800) 800 10 10">+7(800) 800 10 10</a></li>
-                        </nav>
                     </div>
                 </div>
 
@@ -247,7 +249,7 @@
             </div>  
         </div>
         <div class="main-prices">
-            <div class="center">
+            <div class="center center-prices">
                 <a name="prices"></a>
                 <h1 class="prices-title">Цены на услуги</h1>
                 <table class="table">
@@ -283,6 +285,7 @@
                 <div class="center-button">
                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Забронировать</button>
                 </div>
+                
             </div>
         </div>
 
@@ -323,8 +326,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
                     </div>
                 </form>
             </div>
@@ -337,18 +339,35 @@
         </section>
     </main>
     <footer class="footer">
-        <h3 class="footer-avtor">
-            <a href="https://github.com/vovoka-path">Владимир Поланский</a> &
-            <a href="https://github.com/pavel1303">Павел Лебедев</a> &
-            <a href="https://github.com/Elena-code-dev">Елена Кузнецова</a>
-        </h3>
-        <p>2022 </p>
-        <a class="wigth0" name="contacts"></a>
-        <p class="footer-linck-rsschool">
-            <a href="https://rs.school/js/">
-            <img src="https://rs.school/images/rs_school_js.svg" alt="RS SCHOOL"> 
-            </a>
-        </p>
+        <div class="footer-conteiner center">
+            <div class="footer-contacts">
+                <h3 class="footer-title">Контакты</h3>
+                <p class="footer-text">140000 Чехия, Прага, Роскотова 1225</p>
+                <p class="footer-text">тел: +7 (343) 375 75 75 +7 912 21 00 496</p>
+            </div>
+            <div class="footer-add">
+                <h3 class="footer-title">Добавляйтесь</h3>
+                <div class="footer-icon">
+                    <img src="./assets/classmates_logo_icon_134599.png" alt="icon">
+                    <img src="./assets/vk-com.png" alt="icon">
+                    <img src="./assets/1491580658-yumminkysocialmedia06_83104.png" alt="icon">
+                </div>
+            </div>
+        </div>
+        <div class="footer-conteiner center">
+            <h3 class="footer-avtor">
+                <a href="https://github.com/vovoka-path">Владимир Поланский</a> &
+                <a href="https://github.com/pavel1303">Павел Лебедев</a> &
+                <a href="https://github.com/Elena-code-dev">Елена Кузнецова</a>
+            </h3>
+            <p>2022 </p>
+            <a class="wigth0" name="contacts"></a>
+            <p class="footer-linck-rsschool">
+                <a href="https://rs.school/js/">
+                <img src="https://rs.school/images/rs_school_js.svg" alt="RS SCHOOL"> 
+                </a>
+            </p>
+        </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
 </body>

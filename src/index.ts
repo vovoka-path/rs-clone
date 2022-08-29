@@ -1,5 +1,6 @@
 import './index.scss';
 import './reset.css';
+import './canves.scss';
 import { Order } from './type';
 
 const items = document.querySelectorAll('.list-group-item');

@@ -1,16 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Festive&display=swap');
 :root {
     --color--white: rgba(255, 255, 255, 1);
     --color--blue--1: #025167;
     --color--blue--2: #03313d;
     --color--grey: #d6dadb;
+    --color--grey--1: #ECEFF1;
+    --color--grey--2: rgba(0, 0, 0, .2);
     --color--primary-0: #FF7800;
     --color--primary-1: #FF9A40;
     --color--primary-2: #ffd9b8;
 }
 @mixin h1 {
     font: {
-        family: Oswald;
-        size: 42px;
+        family: 'Festive', cursive;
+        size: 2rem;
         weight: 900;
     };
     color: var(--color--blue--2);
@@ -99,14 +102,14 @@ body {
 .btn-primary:visited,
 .btn-primary:active {
     background-color: var(--color--primary-0);
-    border-color: #FFB573;
+    border-color: var(--color--primary-1);
     
 }
 .btn-primary:active:focus,
 .btn-primary:focus {
     box-shadow: 0 0 0 0.25rem var(--color--primary-2);
     background-color: var(--color--primary-0);
-    border-color: #FFB573;
+    border-color: var(--color--primary-1);
     outline: none;
 }
 
@@ -158,6 +161,7 @@ body {
     background: url("./assets/image.png") no-repeat center center fixed;
     background-size: cover;
 }
+
 .center-button {
     text-align: center;
 }
@@ -183,20 +187,22 @@ body {
 
 /* footer */
 .footer {
+    background: var(--color--blue--2);
+}
+.footer-conteiner {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
     padding: 20px;
     height: 100px;
-    background: var(--color--blue--2);
 }
 
 .footer-avtor a,
 .footer-avtor {
     text-decoration: none;
     color: var(--color--grey);
-    font-size: 1rem;
+    font-size: 0.8rem;
 }
 
 .footer-avtor a:hover {
@@ -223,6 +229,26 @@ body {
     background: var(--color--blue--2);
     border: 4px double var(--color--grey);
 }
+.footer-add,
+.footer-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+.footer-icon {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.footer-icon img{
+    width: 30px;
+}
+.footer-title {
+    color: var(--color--grey);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.2rem;
+}
+
 /* burger-menu*/
 .burger-menu {
     display: flex;
@@ -256,7 +282,7 @@ body {
         width: 26px;
         height: 26px;
         cursor: pointer;
-        z-index: 1;
+        z-index: 10;
     }
     .menu-btn > span,
     .menu-btn > span::before,
@@ -286,8 +312,8 @@ body {
         height: 220px;
         margin: 0;
         list-style: none;
-        background-color: #ECEFF1;
-        box-shadow: 1px 0px 6px rgba(0, 0, 0, .2);
+        background-color: var(--color--grey--1);
+        box-shadow: 1px 0px 6px var(--color--grey--2);
         transition-duration: .25s;
     }
     .menu-item {
@@ -326,11 +352,11 @@ body {
 
 @media(max-width: 728px) {
     .menubox {
+        flex-direction: column;
         top: 80px;
         width: 100%;
         display: flex;
-        height: 100px;
-        flex-wrap: wrap;
+        z-index: 5;
     }
     .menu-btn {
         top: 90px;
@@ -342,5 +368,44 @@ body {
     .visible {
         visibility: visible;
         right: 0;
+    }
+
+    .table {
+        font-size: 0.7rem;
+    }
+    .header-title,
+    .modal-footer,
+    .routes-title,
+    .prices-title, 
+    .modal-title {
+        font-size: 1.7rem;
+    }
+    .main-conteiner {
+        flex-direction: column;
+    }
+    .routes {
+        width: 100%;
+    }
+    .mb-5 {
+        margin-bottom: 1.5rem!important;
+    }
+    .carousel.slide {
+        width: 100%;
+    }
+    .footer-conteiner {
+        flex-direction: column;
+        height: 100%;
+    }
+    .footer-title {
+        font-size: 0.9rem;
+    }
+    .footer-text {
+        font-size: 0.8rem;
+    }
+    .footer-avtor {
+        font-size: 0.7rem;
+    }
+    .footer-contacts {
+        align-items: center;
     }
 }
