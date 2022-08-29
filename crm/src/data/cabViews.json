@@ -1,0 +1,233 @@
+{
+    "manager": {
+        "incoming": {
+            "method": "renderIncoming",
+            "statusesForOrders": ["incoming"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Назначить",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "acceptingPhotographer": {
+            "method": "renderAcceptingPhotographer",
+            "statusesForOrders": ["acceptingPhotographer"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": ""
+                }
+            }
+        },
+        "shooting": {
+            "method": "renderShooting",
+            "statusesForOrders": ["shooting"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": ""
+                }
+            }
+        },
+        "acceptingEditor": {
+            "method": "renderAcceptingEditor",
+            "statusesForOrders": ["acceptingEditor"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": ""
+                }
+            }
+        },
+        "editing": {
+            "method": "renderEditing",
+            "statusesForOrders": ["editing"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": ""
+                }
+            }
+        },
+        "sending": {
+            "method": "renderSending",
+            "statusesForOrders": ["sending"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Отправлено клиенту",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": "Обработчику исправить",
+                    "en": ""
+                }
+            }
+        },
+        "completed": {
+            "method": "renderCompleted",
+            "statusesForOrders": ["completed"],
+            "statusButtonText": null
+        },
+        "canceled": {
+            "method": "renderCanceled",
+            "statusesForOrders": ["canceled"],
+            "statusButtonText": null
+        },
+        "feedbacks": {
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "statusButtonText": null
+        },
+        "addOrder": {
+            "method": "renderAddOrder",
+            "statusesForOrders": ["addOrder"],
+            "statusButtonText": null
+        },
+        "statistics": {
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButtonText": null
+        },
+        "employees": {
+            "method": "renderEmployees",
+            "statusesForOrders": ["employees"],
+            "statusButtonText": null
+        }
+    },
+    "photographer": {
+        "incoming": {
+            "method": "renderAcceptingPhotographer",
+            "statusesForOrders": ["acceptingPhotographer"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Принять",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": "Отказаться",
+                    "en": ""
+                }
+            }
+        },
+        "shooting": {
+            "method": "renderShooting",
+            "statusesForOrders": ["shooting"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Передать обработчику",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "editing": {
+            "method": "renderEditing",
+            "statusesForOrders":
+                [
+                    "acceptingEditor",
+                    "editing",
+                    "sending"
+                ],
+            "statusButtonText": null
+        },
+        "completed": {
+            "method": "renderCompleted",
+            "statusesForOrders":
+                [
+                    "acceptingEditor",
+                    "editing",
+                    "sending", 
+                    "completed"
+                ],
+            "statusButtonText": null
+        },
+        "canceled": {
+            "method": "renderCanceled",
+            "statusesForOrders": ["canceled"],
+            "statusButtonText": null
+        },
+        "feedbacks": {
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "statusButtonText": null
+        },
+        "statistics": {
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButtonText": null
+        }
+    },
+    "editor": {
+        "incoming": {
+            "method": "renderIncoming",
+            "statusesForOrders": ["acceptingEditor"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Принять",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": "Отказаться",
+                    "en": ""
+                }
+            }
+        },
+        "editing": {
+            "method": "renderEditing",
+            "statusesForOrders": ["editing"],
+            "statusButtonText": {
+                "accept": {
+                    "ru": "Обработано",
+                    "en": ""
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "completed": {
+            "method": "renderCompleted",
+            "statusesForOrders": 
+                [
+                    "sending", 
+                    "completed"
+                ],
+            "statusButtonText": null
+        },
+        "feedbacks": {
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "statusButtonText": null
+        },
+        "statistics": {
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButtonText": null
+        }
+    }
+}

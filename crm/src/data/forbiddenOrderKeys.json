@@ -1,0 +1,47 @@
+{
+    "incoming": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [],
+        "editor": []
+    },
+    "acceptingPhotographer": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "photographerId" ],
+        "editor": []
+    },
+    "shooting": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "photographerId" ],
+        "editor": []
+    },
+    "acceptingEditor": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    },
+    "editing": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    },
+    "sending": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    },
+    "completed": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    },
+    "canceled": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    },
+    "feedbacks": {
+        "manager": [ "_id", "__v" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
+    }
+}

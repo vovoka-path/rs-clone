@@ -1,0 +1,105 @@
+{
+    "manager": {
+        "incoming": {
+            "path": "/manager/incoming",
+            "ru": "Входящие"
+        },
+        "acceptingPhotographer": {
+            "path": "/manager/accepting-photographer",
+            "ru": "Фотограф не принял"
+        },
+        "shooting": {
+            "path": "/manager/shooting",
+            "ru": "У фотографа"
+        },
+        "acceptingEditor": {
+            "path": "/manager/accepting-editor",
+            "ru": "Обработчик не принял"
+        },
+        "editing": {
+            "path": "/manager/editing",
+            "ru": "У обработчика"
+        },
+        "sending": {
+            "path": "/manager/sending",
+            "ru": "Отправить клиенту"
+        },
+        "completed": {
+            "path": "/manager/completed",
+            "ru": "Завершенные"
+        },
+        "canceled": {
+            "path": "/manager/canceled",
+            "ru": "Отмененные"
+        },
+        "feedbacks": {
+            "path": "/manager/feedbacks",
+            "ru": "Отзывы"
+        },
+        "addOrder": {
+            "path": "/manager/add-order",
+            "ru": "Добавить заказ"
+        },
+        "statistics": {
+            "path": "/manager/statistics",
+            "ru": "Статистика"
+        },
+        "employees": {
+            "path": "/manager/employees",
+            "ru": "Регистрация работника"
+        }
+    },
+    "photographer": {
+        "acceptingPhotographer": {
+            "path": "/photographer/incoming",
+            "ru": "Входящие"
+        },
+        "shooting": {
+            "path": "/photographer/shooting",
+            "ru": "Текущие"
+        },
+        "editing": {
+            "path": "/photographer/editing",
+            "ru": "У обработчика"
+        },
+        "completed": {
+            "path": "/photographer/completed",
+            "ru": "Завершенные"
+        },
+        "canceled": {
+            "path": "/photographer/canceled",
+            "ru": "Отмененные"
+        },
+        "feedbacks": {
+            "path": "/photographer/feedbacks",
+            "ru": "Отзывы"
+        },
+        "statistics": {
+            "path": "/photographer/statistics",
+            "ru": "Статистика"
+        }
+    },
+    "editor": {
+        "acceptingEditor": {
+            "path": "/editor/incoming",
+            "ru": "Входящие"
+        },
+        "editing": {
+            "path": "/editor/editing",
+            "ru": "Текущие"
+        },
+        "completed": {
+            "path": "/editor/completed",
+            "ru": "Завершенные"
+        },
+        "feedbacks": {
+            "path": "/editor/feedbacks",
+            "ru": "Отзывы"
+        },
+        "statistics": {
+            "path": "/editor/statistics",
+            "ru": "Статистика"
+        }
+    },
+    "signin": "Войти"
+}

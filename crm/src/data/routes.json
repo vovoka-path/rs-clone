@@ -1,0 +1,125 @@
+{
+    "manager": {
+        "/": {
+            "status": "signin"
+        },
+        "/manager/incoming": {
+            "status": "incoming",
+            "statusesForOrders": ["incoming"]
+        },
+        "/manager/accepting-photographer": {
+            "status": "acceptingPhotographer",
+            "statusesForOrders": ["acceptingPhotographer"]
+        },
+        "/manager/shooting": {
+            "status": "shooting",
+            "statusesForOrders": ["shooting"]
+        },
+        "/manager/accepting-editor": {
+            "status": "acceptingEditor",
+            "statusesForOrders": ["acceptingEditor"]
+        },
+        "/manager/editing": {
+            "status": "editing",
+            "statusesForOrders": ["editing"]
+        },
+        "/manager/sending": {
+            "status": "sending",
+            "statusesForOrders": ["sending"]
+        },
+        "/manager/completed": {
+            "status": "completed",
+            "statusesForOrders": ["completed"]
+        },
+        "/manager/canceled": {
+            "status": "canceled",
+            "statusesForOrders": ["canceled"]
+        },
+        "/manager/feedbacks": {
+            "status": "feedbacks",
+            "statusesForOrders": ["feedbacks"]
+        },
+        "/manager/add-order": {
+            "status": "shooting",
+            "statusesForOrders": ["shooting"]
+        },
+        "/manager/statistics": {
+            "status": "statistics",
+            "statusesForOrders": ["statistics"]
+        },
+        "/manager/employees": {
+            "status": "employees",
+            "statusesForOrders": ["employees"]
+        }
+    },
+    "photographer": {
+        "/": {
+            "status": "signin"
+        },
+        "/photographer/incoming": {
+            "status": "incoming",
+            "statusesForOrders": ["acceptingPhotographer"]
+        },
+        "/photographer/shooting": {
+            "status": "shooting",
+            "statusesForOrders": ["shooting"]
+        },
+        "/photographer/editing": {
+            "status": "editing",
+            "statusesForOrders":
+                [
+                    "acceptingEditor",
+                    "editing",
+                    "sending"
+                ]
+        },
+        "/photographer/completed": {
+            "status": "completed",
+            "statusesForOrders":
+            [
+                "acceptingEditor",
+                "editing",
+                "sending", 
+                "completed"
+            ]
+        },
+        "/photographer/canceled": {
+            "status": "canceled",
+            "statusesForOrders": ["canceled"]
+        },
+        "/photographer/feedbacks": {
+            "status": "feedbacks",
+            "statusesForOrders": ["feedbacks"]
+        },
+        "/photographer/statistics": {
+            "status": "statistics",
+            "statusesForOrders": ["statistics"]
+        }
+    },
+    "editor": {
+        "/": "signin",
+        "/editor/incoming": {
+            "status": "incoming",
+            "statusesForOrders": ["acceptingEditor"]
+        },
+        "/editor/editing": {
+            "status": "editing",
+            "statusesForOrders": ["editing"]
+        },
+        "/editor/completed": {
+            "status": "completed",
+            "statusesForOrders": [
+                "sending", 
+                "completed"
+            ]
+        },
+        "/editor/feedbacks": {
+            "status": "feedbacks",
+            "statusesForOrders": ["feedbacks"]
+        },
+        "/editor/statistics": {
+            "status": "statistics",
+            "statusesForOrders": ["statistics"]
+        }
+    }
+}
