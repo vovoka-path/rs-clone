@@ -5,6 +5,16 @@ import { isShowOrderKey } from '../../utils/utils.js';
 class OrderInList {
     constructor() {
         this.order = '';
+        this.colorStatus = {
+            incoming: 'crimson',
+            acceptingPhotographer: 'crimson',
+            shooting: 'rgb(233, 233, 96)',
+            acceptingEditor: 'crimson',
+            editing: 'rgb(233, 233, 96)',
+            sending: 'rgb(233, 233, 96)',
+            completed: 'rgb(53, 185, 64)',
+            canceled: 'rgb(218, 3, 207)',
+        }
     }
 
     // Button 'Посмотреть' = this.order.buttonViewOrder
@@ -64,6 +74,10 @@ class OrderInList {
             nameKey = key.incomingOrder;
             const date = new Date(order[key].incomingOrder)
             dataKey = date.toLocaleDateString('ru-RU') + ', ' + date.toTimeString().slice(0, 5);
+        } else if (key === 'status') {
+            nameKey = key;
+            dataKey = order[key];
+            OrderKeyElement.style.backgroundColor = this.colorStatus[dataKey];
         } else {
             nameKey = key;
             dataKey = order[key];
