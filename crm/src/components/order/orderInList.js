@@ -34,6 +34,7 @@ class OrderInList {
         this.orderItemsContainer.className = 'order-items-container';
         
         // Отрисовываем все поля заказа
+        
         for ( let key in order) {
             if ( isShowOrderKey(key, forbiddenOrderKeys[roleStatus][role]) ) {
                 this.renderOrderKeyElement(order, key);
@@ -56,8 +57,20 @@ class OrderInList {
     // Отрисовываем один ключ заказа
     renderOrderKeyElement(order, key) {
         const OrderKeyElement = document.createElement('div');
-        OrderKeyElement.className = `order_item ${key}`;
-        OrderKeyElement.innerText = order[key];
+        let nameKey = '';
+        let dataKey = '';
+
+        if (key === 'date') {
+            nameKey = key.incomingOrder;
+            const date = new Date(order[key].incomingOrder)
+            dataKey = date.toLocaleDateString('ru-RU') + ', ' + date.toTimeString().slice(0, 15);
+        } else {
+            nameKey = key;
+            dataKey = order[key];
+        }
+
+        OrderKeyElement.className = `order_item ${nameKey}`;
+        OrderKeyElement.innerText = dataKey;
 
         this.orderItemsContainer.append(OrderKeyElement);
     }

@@ -16,14 +16,14 @@ class Cab {
         this.mainContainer = createCustomElement('main', styles.mainContainer);
         this.cabContainer = createCustomElement('div', styles.cabContainer);
         this.ordersList = new OrdersList();
-        this.statusButtons = [];
+        // this.statusButtons = [];
     }
 
     // DELETE
     fakeView(props) {
-        console.log('# props = ', props);
+        // console.log('# props = ', props);
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
-        const changedElement = createCustomElement('div', 'fake');
+        this.changedElement = createCustomElement('div', 'fake');
         const title = createCustomElement('h4');
 
         title.innerText = `
@@ -31,27 +31,37 @@ class Cab {
             ${roleStatus} - статус у ${role} (отобразить тут нужные блоки)
         `;
             
-        changedElement.append(title);
+        this.changedElement.append(title);
 
-        const lang = 'ru';
-        const statusButtonTexts = cabViews[role][roleStatus].statusButtonText;
+        // this.renderStatusButtons(props);
 
-        console.log('# statusButtonListener = ', statusButtonListener);
-        for (let key in statusButtonTexts) {
-            const statusButtonText = statusButtonTexts[key][lang];
-
-            if (statusButtonText !== null) {
-                console.log('# statusButtonText = ', statusButtonText);
-                this.statusButton = new StatusButton().create(statusButtonText);
-                this.statusButtons.push(this.statusButton);
-                // Вешаем обработчик
-                this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
-                changedElement.append(this.statusButton);
-            }
-        }
-
-        this.cabContainer.append(changedElement);
+        this.cabContainer.append(this.changedElement);
     }
+
+    // renderStatusButtons(props) {
+    //     const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
+    //     const lang = 'ru';
+    //     const statusButtonTexts = cabViews[role][roleStatus].statusButtonText;
+
+    //     for (let key in statusButtonTexts) {
+    //         const statusButtonText = statusButtonTexts[key][lang];
+
+    //         if (statusButtonText !== null) {
+    //             // console.log('# statusButtonText = ', statusButtonText);
+    //             const btnProps = {
+    //                 statusButtonText: statusButtonText,
+    //                 action: key,
+    //             }
+    //             this.statusButton = new StatusButton().create(btnProps);
+    //             this.statusButtons.push(this.statusButton);
+
+    //             // Вешаем обработчик
+    //             this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
+                
+    //             this.changedElement.append(this.statusButton);
+    //         }
+    //     }
+    // }
     
     render(props) {
         this.addMenu();

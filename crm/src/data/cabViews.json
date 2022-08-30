@@ -1,20 +1,24 @@
 {
     "manager": {
         "incoming": {
+            "path": "/manager/incoming",
             "method": "renderIncoming",
             "statusesForOrders": ["incoming"],
             "statusButtonText": {
                 "accept": {
                     "ru": "Назначить",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "acceptingPhotographer"
                 },
                 "cancel": {
                     "ru": null,
-                    "en": null
+                    "en": null,
+                    "newStatus": null
                 }
             }
         },
         "acceptingPhotographer": {
+            "path": "/manager/accepting-photographer",
             "method": "renderAcceptingPhotographer",
             "statusesForOrders": ["acceptingPhotographer"],
             "statusButtonText": {
@@ -24,11 +28,13 @@
                 },
                 "cancel": {
                     "ru": "Отменить",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "incoming"
                 }
             }
         },
         "shooting": {
+            "path": "/manager/shooting",
             "method": "renderShooting",
             "statusesForOrders": ["shooting"],
             "statusButtonText": {
@@ -38,11 +44,13 @@
                 },
                 "cancel": {
                     "ru": "Отменить",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "incoming"
                 }
             }
         },
         "acceptingEditor": {
+            "path": "/manager/accepting-editor",
             "method": "renderAcceptingEditor",
             "statusesForOrders": ["acceptingEditor"],
             "statusButtonText": {
@@ -51,12 +59,13 @@
                     "en": null
                 },
                 "cancel": {
-                    "ru": "Отменить",
-                    "en": ""
+                    "ru": null,
+                    "en": null
                 }
             }
         },
         "editing": {
+            "path": "/manager/editing",
             "method": "renderEditing",
             "statusesForOrders": ["editing"],
             "statusButtonText": {
@@ -65,51 +74,60 @@
                     "en": null
                 },
                 "cancel": {
-                    "ru": "Отменить",
-                    "en": ""
+                    "ru": null,
+                    "en": null
                 }
             }
         },
         "sending": {
+            "path": "/manager/sending",
             "method": "renderSending",
             "statusesForOrders": ["sending"],
             "statusButtonText": {
                 "accept": {
                     "ru": "Отправлено клиенту",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "completed"
                 },
                 "cancel": {
                     "ru": "Обработчику исправить",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "editing"
                 }
             }
         },
         "completed": {
+            "path": "/manager/completed",
             "method": "renderCompleted",
             "statusesForOrders": ["completed"],
             "statusButtonText": null
         },
         "canceled": {
+            "path": "/manager/canceled",
             "method": "renderCanceled",
             "statusesForOrders": ["canceled"],
             "statusButtonText": null
         },
         "feedbacks": {
+            "path": "/manager/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
             "statusButtonText": null
         },
         "addOrder": {
+            "path": "/manager/add-order",
             "method": "renderAddOrder",
             "statusesForOrders": ["addOrder"],
             "statusButtonText": null
         },
         "statistics": {
+            "path": "/manager/statistics",
             "method": "renderStatistics",
             "statusesForOrders": ["statistics"],
             "statusButtonText": null
         },
         "employees": {
+            "path": "/manager/employees",
             "method": "renderEmployees",
             "statusesForOrders": ["employees"],
             "statusButtonText": null
@@ -117,34 +135,41 @@
     },
     "photographer": {
         "incoming": {
+            "path": "/photographer/incoming",
             "method": "renderAcceptingPhotographer",
             "statusesForOrders": ["acceptingPhotographer"],
             "statusButtonText": {
                 "accept": {
                     "ru": "Принять",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "editing"
                 },
                 "cancel": {
                     "ru": "Отказаться",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "incoming"
                 }
             }
         },
         "shooting": {
+            "path": "/photographer/shooting",
             "method": "renderShooting",
             "statusesForOrders": ["shooting"],
             "statusButtonText": {
                 "accept": {
                     "ru": "Передать обработчику",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "acceptingEditor"
                 },
                 "cancel": {
-                    "ru": null,
-                    "en": null
+                    "ru": "Клиент отменил",
+                    "en": "",
+                    "newStatus": "canceled"
                 }
             }
         },
         "editing": {
+            "path": "/photographer/editing",
             "method": "renderEditing",
             "statusesForOrders":
                 [
@@ -155,6 +180,7 @@
             "statusButtonText": null
         },
         "completed": {
+            "path": "/photographer/completed",
             "method": "renderCompleted",
             "statusesForOrders":
                 [
@@ -166,16 +192,19 @@
             "statusButtonText": null
         },
         "canceled": {
+            "path": "/photographer/canceled",
             "method": "renderCanceled",
             "statusesForOrders": ["canceled"],
             "statusButtonText": null
         },
         "feedbacks": {
+            "path": "/photographer/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
             "statusButtonText": null
         },
         "statistics": {
+            "path": "/photographer/statistics",
             "method": "renderStatistics",
             "statusesForOrders": ["statistics"],
             "statusButtonText": null
@@ -183,26 +212,31 @@
     },
     "editor": {
         "incoming": {
+            "path": "/editor/incoming",
             "method": "renderIncoming",
             "statusesForOrders": ["acceptingEditor"],
             "statusButtonText": {
                 "accept": {
-                    "ru": "Принять",
-                    "en": ""
+                    "ru": null,
+                    "en": null,
+                    "newStatus": null
                 },
                 "cancel": {
-                    "ru": "Отказаться",
-                    "en": ""
+                    "ru": null,
+                    "en": null,
+                    "newStatus": null
                 }
             }
         },
         "editing": {
+            "path": "/editor/editing",
             "method": "renderEditing",
             "statusesForOrders": ["editing"],
             "statusButtonText": {
                 "accept": {
                     "ru": "Обработано",
-                    "en": ""
+                    "en": "",
+                    "newStatus": "sending"
                 },
                 "cancel": {
                     "ru": null,
@@ -211,6 +245,7 @@
             }
         },
         "completed": {
+            "path": "/editor/completed",
             "method": "renderCompleted",
             "statusesForOrders": 
                 [
@@ -220,11 +255,13 @@
             "statusButtonText": null
         },
         "feedbacks": {
+            "path": "/editor/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
             "statusButtonText": null
         },
         "statistics": {
+            "path": "/editor/statistics",
             "method": "renderStatistics",
             "statusesForOrders": ["statistics"],
             "statusButtonText": null

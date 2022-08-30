@@ -1,13 +1,16 @@
+import domen from '../data/domen.json' assert { type: "json" };
+
 class Api {
     constructor() {
-        this.domen = 'http://127.0.0.1:5000';
+        this.domen = domen.url;
     }
 
-    async getOrderData(token){
+    async getOrderData(token, role){
         const authorization = `Bearer ${token}`;
+        const path = (role === 'manager') ? '/api/orders' : '/api/orders/employee';
 
         try {
-            const response = await fetch(`${this.domen}/api/orders`, {
+            const response = await fetch(`${this.domen}${path}`, {
                 method: 'GET',
                 headers: {
                     "Authorization": authorization,
@@ -93,17 +96,6 @@ class Api {
             })
     }
 
-
-
-
-    // - Login: Returns object - {token: String, username: String, role: String}.
-    //     - Method *POST* 
-    //     - URL *'/auth/login'*
-    //     - HEADERS: 
-    //         - *"Content-Type": "aplication/json"*
-    //     - BODY: *{username: String, pasword: String}*
-    //     - RETURN: *{token: String, username: String, role: String}* or *ERROR*
-
     // - Get users: Returns array with users.
     // - Method *GET* 
     // - URL *'/auth/users'*
@@ -112,16 +104,34 @@ class Api {
     //     - *"Content-Type": "aplication/json"*
     // - RETURN: *{token: String, username: String, role: String}* or *ERROR*
 
-    async gerUsers(token) {
+    async getUsers(token) {
         const authorization = `Bearer ${token}`;
 
-        return fetch(`${this.domen}/api/orders`, {
+        return fetch(`${this.domen}/auth/users`, {
             method: 'GET',
             headers: {
                 "Authorization": authorization,
                 'Content-Type': 'application/json' 
             },
-            body: JSON.stringify(data),
+        })
+            .then(async(response) => {
+                return {
+                    data: await response.json(),
+                }
+            })
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
+    async deleteUser(token, id) {
+        const authorization = `Bearer ${token}`;
+
+        return fetch(`${this.domen}/auth/users/${id}`, {
+            method: 'DELETE',
+            headers: {
+                "Authorization": authorization,
+            },
         })
             .then(async(response) => {
                 return {
@@ -137,10 +147,9 @@ class Api {
 
 export default Api;
 
-// - Registration: Returns message successfully registered.
-//         - Method *POST* 
-//         - URL *'/auth/registration'*
-//         - HEADERS: 
-//             - *"Content-Type": "aplication/json"*
-//         - BODY: *{username: String, pasword: String, role: 'manager' || 'photographer' || 'editor'}*
-//         - RETURN: *Message* or *ERROR*
+// - Delete user: Delete specified user.
+//         - Method *DELETE* 
+//         - URL *'/auth/users/:id'*
+//         - HEADERS:
+//             - *"Authorization": "Bearer <-YOU TOKEN->"*
+//         - RETURN: *Delete user* or *ERROR*

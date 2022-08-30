@@ -1,3 +1,4 @@
+import domen from '../data/domen.json' assert { type: "json" };
 import routes from '../data/routes.json' assert { type: "json" };
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 
@@ -5,6 +6,7 @@ import cabViews from '../data/cabViews.json' assert { type: "json" };
 // Создание props (listeners)
 class Router {
     constructor() {
+        this.domen = domen.url;
         this._routes = [];
     }
 
@@ -36,15 +38,21 @@ class Router {
 
     // Установка обработчиков клика в меню
     routingMenu(role) {
-        const view = this.controller.view;
-
         this.init(role);
 
         // обработчик нажатий на ссылки
+        // console.log('# this = ', this);
+        
         let handler = event =>  {
+            // this = Listeners
             event.preventDefault();
-            
-            let url = new URL(event.currentTarget.href);
+            // console.log('# event.target.href = ', event.target.href);
+            // console.log('# this.controller.view.cab.menu.container = ', this.controller.view.cab.menu.container.classList.remove('menu-toggle'));
+   
+            this.controller.view.cab.menu.container.classList.remove('menu-toggle');
+
+            let url = new URL(this.domen + event.currentTarget.getAttribute('path'));
+            // let url = new URL(event.target.href); // 'menu-item-a'
             
             // запускаем роутер, предавая ему path
             this.dispatch(url.pathname);
@@ -54,20 +62,32 @@ class Router {
             // console.log('# path = ', path);
             const roleStatus = routes[role][path].status;
             // console.log('# roleStatus = ', roleStatus);
-            const orderStatus = cabViews[role][roleStatus].status;
-            view.cab.ordersList.header.innerText = orderStatus;
+            this.controller.view.cab.ordersList.header.innerText = roleStatus;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
 
             return false;
         }
 
         // получаем все ссылки на странице
-        let anchors = document.getElementsByName('menu-item');
+        let anchors = document.getElementsByName('menu-item-li'); 
         
         // вешаем на событие click обработчик
         for( let anchor of anchors ) {
             anchor.addEventListener('click', handler);
         }
+    }
+
+    handleStatusButtonClick(path) {
+        // запускаем роутер, предавая ему path
+        this.dispatch(path);
+
+        // заголовок DELETE ?
+        const role = this.controller.model.auth.role;
+
+        const roleStatus = routes[role][path].status;
+        this.controller.view.cab.ordersList.header.innerText = roleStatus;
+
+        return false;
     }
     
     dispatch(path) {

@@ -2,14 +2,18 @@ class Model {
     constructor() {
         // this.role = 'signin';
         this.auth = {};
+        this.usersID = '';
         this.roleStatus = '';
+        this.orderId = '';
         this.orderStatus = ''; // ?
+        this.orderStatuses = []; // ?
         this.orders = []; // ?
         this.startStatuses = {
             manager: 'incoming',
             photographer: 'acceptingPhotographer',
             editor: 'acceptingEditor',
         };
+        this.users = {};
     }
 
     setAuth(data) {
