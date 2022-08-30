@@ -8,7 +8,10 @@ const styles = {
     a: 'menu-link',
 }
 
-const nameAttr = 'menu-item';
+const nameAttr = {
+    li: 'menu-item-li',
+    a: 'menu-item-a',
+};
 
 class Menu {
     constructor(cabName) {
@@ -34,7 +37,7 @@ class Menu {
         this.a = createCustomElement('a', styles.a);
         
         setAttributesElement(this.a, {
-            'name': nameAttr,
+            'name': nameAttr.a,
             'href': path,
             'id': orderStatus,
         })
@@ -43,6 +46,13 @@ class Menu {
         this.a.appendChild(this.innerText);
 
         this.li = createCustomElement('li', styles.li);
+
+        setAttributesElement(this.li, {
+            'name': nameAttr.li,
+            'path': path,
+            'id': orderStatus,
+        })
+
         this.li.append(this.a);
 
         return this.li;
