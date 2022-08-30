@@ -30,6 +30,7 @@ class Controller {
     async getRole(formData) {
         const json = await this.api.signIn(formData);
         const data = json.data;
+        // console.log('# data = ', data);
 
         this.model.setAuth(data);
 
@@ -37,7 +38,14 @@ class Controller {
     }
     
     async getOrderData(){
-        const orders = await this.api.getOrderData(this.model.auth.token);
+        const { token, role } = this.model.auth;
+        if (role === 'manager') {
+            this.getUsersByRole('photographer');
+            console.log('# this.getUsersByRole');
+        }
+        // console.log('# token = ', role, token);
+        
+        const orders = await this.api.getOrderData(token, role);
         this.model.orders = orders;
         // console.log('# orders = ', orders);
 
@@ -54,7 +62,53 @@ class Controller {
         this.api.updateOrder({ data, token })
         this.model.orderStatus = orderStatus;
     }
-   
+
+    async getUsersByRole(role) {
+        // this.deleteUser("630cf62c84370666755cafe6");
+        // this.addUser();
+
+        const allUsers = await this.getAllUsers();
+        // console.log('# allUsers = ', allUsers, role);
+
+        const filteredUsers = allUsers.filter((user) => {
+            // console.log('# user.role = ', user.role);
+            if (user.role) return user.role === role
+        });
+        // console.log('# filteredUsers = ', filteredUsers);
+
+        return filteredUsers;
+    }
+
+    async addUser() {
+        // role: 'manager' || 'photographer' || 'editor'
+        const formData = {
+            username: 'egor',
+            password: 'qweasdzxcqweasdzxc',
+            role: 'photographer',
+        }
+        // username: {type: String, unique: true, required: true},
+        // password: {type: String, required: true},
+        // status: {type: String},
+        // name: {type: String},
+        // role: {type: String, ref: 'Role'}
+
+        await this.api.signUp(formData);
+    }
+
+    async getAllUsers() {
+        const token = this.model.auth.token;
+        const users = await this.api.getUsers(token).then(json => json.data.users);
+        this.model.users = users;
+
+        return users;
+    }
+
+    async deleteUser(id) {
+        const token = this.model.auth.token;
+        // console.log('# token = ', token);
+        const response = await this.api.deleteUser(token, id);
+        // console.log('# response = ', response);
+    }
 }
 
 export default Controller;
