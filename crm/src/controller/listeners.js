@@ -1,4 +1,5 @@
 import Router from './router.js';
+import cabViews from '../data/cabViews.json' assert { type: "json" };
 import { getStatuses, getOrdersByStatuses } from '../utils/utils.js';
 
 class Listeners extends Router{
@@ -54,10 +55,15 @@ class Listeners extends Router{
            
         // TODO?: get orders depend on defaultStatus
         const allOrders = await this.controller.getOrderData();
-       //  console.log('# allOrders = ', allOrders);
+        console.log('# allOrders = ', allOrders);
         const role = this.controller.model.auth.role;
+
         const orderStatuses = getStatuses(role, roleStatus);
+        this.controller.model.orderStatuses = orderStatuses;
+
         const orders = getOrdersByStatuses(allOrders, orderStatuses);
+
+        const users = (role === 'manager') ? await this.controller.getAllUsers() : [];
         
         const props = {
             role: role,
@@ -65,9 +71,12 @@ class Listeners extends Router{
             orderStatuses: orderStatuses,
             order: {},
             orders: orders,
+            users: users,
             orderButtonListener: this.orderButtonListener,
             statusButtonListener: null, // добавляем после входа в конкретный заказ
         };
+
+        console.log('# props = ', props);
 
         return props;
    }
@@ -77,12 +86,16 @@ class Listeners extends Router{
         // показать M2: Входящий заказ (один)
         return (event) => {
             // this = controller
-            console.log('# orderButtonListener: this = ', this);
+            // console.log('# orderButtonListener: this = ', this);
+            // if (event.currentTarget)
             const orderId = event.target.id;
+            this.model.orderId = orderId;
+
             const role = this.model.auth.role;
             const roleStatus = this.model.roleStatus;
 
-            const statuses = getStatuses(role, roleStatus);
+            const orderStatuses = getStatuses(role, roleStatus);
+            this.model.orderStatuses = orderStatuses;
 
             const orders = this.model.orders;
             
@@ -90,13 +103,16 @@ class Listeners extends Router{
                 return order._id === orderId;
             });
 
-            console.log('# this.listeners.statusButtonListener = ', this.listeners.statusButtonListener);
+            const users = this.model.users;
+
+            // console.log('# this.listeners.statusButtonListener = ', this.listeners.statusButtonListener);
             const props = {
                 role: role,
                 roleStatus: roleStatus,
-                orderStatuses: statuses,
+                orderStatuses: orderStatuses,
                 order: currentOrder,
                 orders: orders,
+                users: users,
                 // orderButtonListener: this.orderButtonListener,
                 statusButtonListener: this.listeners.statusButtonListener,
             }
@@ -106,11 +122,53 @@ class Listeners extends Router{
         }
     }
     
+    // statusButtonListener() {
     statusButtonListenerNotBind() {
-        // statusButtonListener() {
-        return (event) => {
-            console.log('# statusButtonListener worked! this = ', this)
-            console.log('# event = ', event);
+        return async (event) => {
+            const action = event.target.getAttribute('action');
+            const orderId = this.model.orderId;
+            const role = this.model.auth.role;
+            const roleStatus = this.model.roleStatus;
+            const orderStatus = this.model.orderStatuses[0];
+            
+            // console.log('# orderId = ', orderId);
+            // console.log('# action = ', action);
+            // console.log('# orderStatus = ', orderStatus);
+            // console.log('# role = ', role);
+            // console.log('# roleStatus = ', roleStatus);
+            const newRoleStatus = cabViews[role][roleStatus].statusButtonText[action].newStatus;
+            // console.log('# newRoleStatus = ', newRoleStatus);
+            this.model.roleStatus = newRoleStatus;
+            
+            const newOrderStatus = cabViews[role][newRoleStatus].statusesForOrders[0];
+            this.model.orderStatuses = newOrderStatus
+            // console.log('# this.model.orderStatuses = ', this.model.orderStatuses);
+
+            // TODO: UPDATE ORDER STATUS API
+            // TODO: Сделать запись в поле photographerId
+            // console.log('# event.target.parentElement = ', event.target.parentElement);
+            // console.log('# event.currentTarget = ', event.currentTarget);
+            const photographerId = event.target.parentElement.getAttribute('id');
+
+            const dataOrder = {
+                _id: orderId,
+                status: newOrderStatus,
+                photographerId: photographerId,
+                date: {
+                    photographerAppointed: Date.now(),
+                },
+            }
+
+            console.log('# dataOrder = ', dataOrder);
+            
+            this.updateOrderStatus(orderId, orderStatus);
+
+            const path = cabViews[role][newRoleStatus].path;
+            // console.log('# path = ', path);
+            this.listeners.handleStatusButtonClick(path);
+
+
+            // this.listeners.handleRoute()();
         }
     }
 }
