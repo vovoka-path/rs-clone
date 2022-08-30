@@ -56,8 +56,23 @@ class Cab {
     render(props) {
         this.addMenu();
         this.addFirstCabView(props);
+        this.addMenuBtn();
 
         return this.mainContainer;
+    }
+
+    addMenuBtn(){
+        const menuBlock = document.createElement('div');
+        const menuBtn = document.createElement('div');
+        menuBlock.className = 'menu-block';
+        menuBtn.className = 'menu-btn';
+        menuBtn.addEventListener('click', () => {
+            const menu = document.querySelector('.menu-container');
+            menu.classList.toggle('menu-toggle');
+        });
+
+        menuBlock.append(menuBtn);
+        this.mainContainer.append(menuBlock);
     }
     
     addMenu() {

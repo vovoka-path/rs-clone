@@ -4,7 +4,7 @@ import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 const styles = {
     container: 'menu-container',
     ul: 'menu-items',
-    li: 'menu-item',
+    li: 'menu-item ',
     a: 'menu-link',
 }
 
@@ -37,12 +37,18 @@ class Menu {
             'name': nameAttr,
             'href': path,
             'id': orderStatus,
-        })
+        });
+
+        const img = document.createElement('img');
+        img.className = 'menu-img';
+        img.src = `./public/${orderStatus}.png`;
+   
         
         this.innerText = document.createTextNode(ru);
         this.a.appendChild(this.innerText);
 
-        this.li = createCustomElement('li', styles.li);
+        this.li = createCustomElement('li', (styles.li + ' ' + orderStatus));
+        this.li.append(img);
         this.li.append(this.a);
 
         return this.li;
