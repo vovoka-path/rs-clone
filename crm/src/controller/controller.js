@@ -41,7 +41,6 @@ class Controller {
         const { token, role } = this.model.auth;
         if (role === 'manager') {
             this.getUsersByRole('photographer');
-            console.log('# this.getUsersByRole');
         }
         // console.log('# token = ', role, token);
         
@@ -80,12 +79,14 @@ class Controller {
     }
 
     async addUser() {
-        // role: 'manager' || 'photographer' || 'editor'
-        const formData = {
-            username: 'egor',
-            password: 'qweasdzxcqweasdzxc',
-            role: 'photographer',
-        }
+			// role: 'manager' || 'photographer' || 'editor'
+            const formData = {
+                username: 'alex',
+                password: 'qweasdzxcqweasdzxc',
+                status: 'доступен',
+                name: 'Александр Иванов',
+                role: 'photographer',
+            }
         // username: {type: String, unique: true, required: true},
         // password: {type: String, required: true},
         // status: {type: String},
