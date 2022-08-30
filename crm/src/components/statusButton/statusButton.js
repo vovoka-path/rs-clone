@@ -1,13 +1,17 @@
 import cabViews from '../../data/cabViews.json' assert { type: "json" };
-import { createCustomElement } from '../../utils/utils.js';
+import { createCustomElement, setAttributesElement } from '../../utils/utils.js';
 
 class statusButton {
     constructor() {
-        this.button = createCustomElement('button', 'btn-status');
+        this.button = document.createElement('button');
     }
 
-    create(statusButtonText) {
+    create(props) {
+        const { statusButtonText, action } = props;
         this.button.innerText = statusButtonText;
+        this.action = action;
+        this.button.setAttribute('action', action);
+        //, 'btn-status'
         
         return this.button;
     }
