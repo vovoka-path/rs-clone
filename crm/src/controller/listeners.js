@@ -55,7 +55,7 @@ class Listeners extends Router{
            
         // TODO?: get orders depend on defaultStatus
         const allOrders = await this.controller.getOrderData();
-        console.log('# allOrders = ', allOrders);
+        // console.log('# allOrders = ', allOrders);
         const role = this.controller.model.auth.role;
 
         const orderStatuses = getStatuses(role, roleStatus);
