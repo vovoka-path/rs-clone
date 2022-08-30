@@ -5,7 +5,8 @@ class viewSignIn{
         this.password = '';
 
         this.form = this.createForm();
-        this.header = this.createHeader('Enter CRM system:');
+        this.header = this.createHeader('CYP');
+        this.description = document.createElement('p');
         this.role = this.creatRoleInput();
         this.login = this.creatLoginInput();
         this.password = this.createPasswordInput();
@@ -15,10 +16,30 @@ class viewSignIn{
     render() {
         // console.log('# sign this.form= ', this.form);
         this.form.append(this.header);
+        this.description.textContent = 'Photo-agency CRM system'; // Паша
+        this.description.className = 'form-description';  // Паша
+        this.form.append(this.description); // Паша
         // this.form.append(this.role);
         this.form.append(this.login);
         this.form.append(this.password);
         this.form.append(this.button);
+
+        // append images
+        for(let i = 1; i <= 14; i++) {
+            const screenWidth = window.screen.width;
+            const screenHeight = window.screen.height;
+            const width = Math.floor(Math.random() * 50);
+            const top = Math.floor(Math.random() * (screenHeight - 50));
+            const left = Math.floor(Math.random() * (screenWidth - 50));
+            const img = document.createElement('img');
+            img.src = `./public/${i}.svg`;
+            img.className = 'form-img';
+            img.style.top = `${top}px`;
+            img.style.left = `${left}px`;
+            img.style.width = `${width}px`;
+
+            this.form.append(img);
+        }
 
         // parent.append(this.form);
         return this.form;
@@ -35,6 +56,7 @@ class viewSignIn{
     createHeader(text) {
         const header = document.createElement('h2');
         header.innerText = text;
+        header.className = 'form-title';
 
         return header;
     }
@@ -94,6 +116,7 @@ class viewSignIn{
 
         return button;
     }
+    
 }
 
 export default viewSignIn;
