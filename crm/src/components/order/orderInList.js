@@ -63,13 +63,13 @@ class OrderInList {
         if (key === 'date') {
             nameKey = key.incomingOrder;
             const date = new Date(order[key].incomingOrder)
-            dataKey = date.toLocaleDateString('ru-RU') + ', ' + date.toTimeString().slice(0, 15);
+            dataKey = date.toLocaleDateString('ru-RU') + ', ' + date.toTimeString().slice(0, 5);
         } else {
             nameKey = key;
             dataKey = order[key];
         }
 
-        OrderKeyElement.className = `order_item ${nameKey}`;
+        OrderKeyElement.className = `order_item order-item-list list-${nameKey}`;
         OrderKeyElement.innerText = dataKey;
 
         this.orderItemsContainer.append(OrderKeyElement);
