@@ -10,7 +10,7 @@ class OrdersList {
     // В зависимости от роли показываются только разрешенные данные заказа
     render(props) {
         const { role, roleStatus, orderStatus, order, orders, orderButtonListener } = props;
-        console.log('# class OrdersList: orders = ', orders);
+        // console.log('# class OrdersList: orders = ', orders);
 
         if (this.ordersContainer.innerHTML) {
             this.ordersContainer.innerHTML = '';
