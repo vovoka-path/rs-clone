@@ -30,8 +30,9 @@ class Api {
         }
     }
 
-    async updateOrder({ data, token }) {
+    async updateOrder(data, token) {
         const authorization = `Bearer ${token}`;
+        console.log('# data = ', data);
 
         return fetch(`${this.domen}/api/orders`, {
             method: 'PUT',

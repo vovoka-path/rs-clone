@@ -51,15 +51,12 @@ class Controller {
         return orders;
     }
 
-    updateOrderStatus(id, orderStatus) {
-        const data = {
-            _id: id,
-            status: orderStatus,
-        }
+    updateOrderStatus(dataOrder) {
         const token = this.model.auth.token;
-
-        this.api.updateOrder({ data, token })
-        this.model.orderStatus = orderStatus;
+        console.log('# token = ', token);
+        console.log('# dataOrder = ', dataOrder);
+        this.api.updateOrder(dataOrder, token)
+        this.model.orderStatus = dataOrder.status;
     }
 
     async getUsersByRole(role) {
@@ -67,7 +64,7 @@ class Controller {
         // this.addUser();
 
         const allUsers = await this.getAllUsers();
-        // console.log('# allUsers = ', allUsers, role);
+        console.log('# allUsers = ', allUsers, role);
 
         const filteredUsers = allUsers.filter((user) => {
             // console.log('# user.role = ', user.role);
@@ -81,11 +78,11 @@ class Controller {
     async addUser() {
 			// role: 'manager' || 'photographer' || 'editor'
             const formData = {
-                username: 'alex',
+                username: 'nataly',
                 password: 'qweasdzxcqweasdzxc',
                 status: 'доступен',
-                name: 'Александр Иванов',
-                role: 'photographer',
+                name: 'Наташа Королева',
+                role: 'editor',
             }
         // username: {type: String, unique: true, required: true},
         // password: {type: String, required: true},

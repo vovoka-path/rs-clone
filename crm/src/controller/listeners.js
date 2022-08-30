@@ -150,18 +150,59 @@ class Listeners extends Router{
             // console.log('# event.currentTarget = ', event.currentTarget);
             const photographerId = event.target.parentElement.getAttribute('id');
 
-            const dataOrder = {
-                _id: orderId,
-                status: newOrderStatus,
-                photographerId: photographerId,
-                date: {
-                    photographerAppointed: Date.now(),
+            const additionalData = {
+                'acceptingPhotographer': {
+                    photographerId: photographerId,
+                    date: {
+                        photographerAppointed: Date.now(),
+                    },
+                },
+                'shooting': {
+                    date: {
+                        photographerAccepted: Date.now(),
+                    },
+                },
+                'acceptingEditor': {
+                    editorId: "630e31db3f4dd1fd2ac944fd",
+                    date: {
+                        editorAppointed: Date.now(),
+                    },
+                },
+                'editing': {
+                    date: {
+                        editorAccepted: Date.now(),
+                    },
+                },
+                'sending': {
+                    date: {
+                        photoCompleted: Date.now(),
+                    },
+                },
+                'completed': {
+                    date: {
+                        photoSended: Date.now(),
+                    },
                 },
             }
 
-            console.log('# dataOrder = ', dataOrder);
+            //     photographerAccepted: {type: Date},
+            // editorAppointed: {type: Date},
+            // editorAccepted: {type: Date},
+            // photoCompleted: {type: Date},
+            // photoSended: {type: Date},
+
+            const dataOrder = {
+                _id: orderId,
+                status: newOrderStatus,
+            }
+
+            if (additionalData[orderStatus]) {
+                dataOrder = {...dataOrder, ...additionalData[orderStatus]};
+            }
+
+            // console.log('# dataOrder = ', dataOrder);
             
-            this.updateOrderStatus(orderId, orderStatus);
+            this.updateOrderStatus(dataOrder);
 
             const path = cabViews[role][newRoleStatus].path;
             // console.log('# path = ', path);

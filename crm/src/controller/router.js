@@ -62,7 +62,7 @@ class Router {
             const path = '/' + url.pathname.split('/')[1] + '/' + url.pathname.split('/')[2];
             // console.log('# path = ', path);
             const roleStatus = routes[role][path].status;
-            // console.log('# roleStatus = ', roleStatus);
+            console.log('# roleStatus = ', roleStatus);
             this.controller.view.cab.ordersList.header.innerText = menuData[role][roleStatus].ru;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
 
@@ -86,7 +86,7 @@ class Router {
         const role = this.controller.model.auth.role;
 
         const roleStatus = routes[role][path].status;
-        this.controller.view.cab.ordersList.header.innerText = roleStatus;
+        this.controller.view.cab.ordersList.header.innerText = menuData[role][roleStatus].ru;
 
         return false;
     }

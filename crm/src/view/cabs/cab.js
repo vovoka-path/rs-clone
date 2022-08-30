@@ -33,7 +33,9 @@ class Cab {
             
         this.changedElement.append(title);
 
-        // this.renderStatusButtons(props);
+        if (!(role == 'manager' && roleStatus == 'incoming')) {
+            this.renderStatusButtons(props);
+        }
 
         this.cabContainer.append(this.changedElement);
     }
