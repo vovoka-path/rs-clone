@@ -1,7 +1,7 @@
 import Cab from './cab.js';
 import OrderInCab from '../../components/order/orderInCab.js';
 import PhotographerList from '../../components/photographerList/photographerList.js';
-// import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
+import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 
 const role = 'manager';
 // const styles = {
@@ -23,15 +23,16 @@ class ManagerCab extends Cab{
     // *** Cab Views ***
 
     renderIncoming(props) {
-        this.fakeView(props); // DELETE
+        // this.fakeView(props); // DELETE
+        this.changedElement = createCustomElement('div', 'cab-incoming');
 
         this.photographerList = new PhotographerList();
-        console.log('# this.photographerList = ', this.photographerList);
-        console.log('# this.photographerList.create = ', this.photographerList.create);
+        // console.log('# this.photographerList = ', this.photographerList);
+        // console.log('# this.photographerList.create = ', this.photographerList.create);
         this.list = this.photographerList.create(props);
-        console.log('# this.list  = ', this.list);
+        // console.log('# this.list  = ', this.list);
         this.changedElement.append(this.list);
-
+        this.cabContainer.append(this.changedElement);
     }
 
     renderAcceptingPhotographer(props) {
