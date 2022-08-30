@@ -6,19 +6,19 @@
         },
         "acceptingPhotographer": {
             "path": "/manager/accepting-photographer",
-            "ru": "Фотограф не принял"
+            "ru": "Фотограф принимает"
         },
         "shooting": {
             "path": "/manager/shooting",
-            "ru": "У фотографа"
+            "ru": "У фотографа в работе"
         },
         "acceptingEditor": {
             "path": "/manager/accepting-editor",
-            "ru": "Обработчик не принял"
+            "ru": "Обработчик принимает"
         },
         "editing": {
             "path": "/manager/editing",
-            "ru": "У обработчика"
+            "ru": "У обработчика в работе"
         },
         "sending": {
             "path": "/manager/sending",

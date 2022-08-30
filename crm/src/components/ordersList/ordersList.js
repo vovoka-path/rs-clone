@@ -40,7 +40,7 @@ class OrdersList {
 
     createHeader() {
         const header = document.createElement('h3');
-        header.innerText = 'incoming';
+        header.innerText = 'Входящие';
 
         return header;
     }

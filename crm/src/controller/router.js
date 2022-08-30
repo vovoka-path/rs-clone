@@ -1,6 +1,7 @@
 import domen from '../data/domen.json' assert { type: "json" };
 import routes from '../data/routes.json' assert { type: "json" };
 import cabViews from '../data/cabViews.json' assert { type: "json" };
+import menuData from '../data/menuData.json' assert { type: "json" };
 
 // Меню кабинета (by statusRole)
 // Создание props (listeners)
@@ -62,7 +63,7 @@ class Router {
             // console.log('# path = ', path);
             const roleStatus = routes[role][path].status;
             // console.log('# roleStatus = ', roleStatus);
-            this.controller.view.cab.ordersList.header.innerText = roleStatus;
+            this.controller.view.cab.ordersList.header.innerText = menuData[role][roleStatus].ru;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
 
             return false;
