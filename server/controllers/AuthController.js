@@ -13,7 +13,7 @@ class AuthController {
             if (!errors.isEmpty()){
                 return res.status(400).json({message:'Registration error', errors});
             }
-            const { username, password, role } = req.body;
+            const { username, password, role, name, status } = req.body;
             const candidat = await User.findOne({username});
 
             if (candidat) {
@@ -22,7 +22,7 @@ class AuthController {
 
             const hashPassword = bcrypt.hashSync(password, 5);
             const userRole = await Role.findOne({value: role}); 
-            const user = new User({username, password: hashPassword, role: userRole.value});
+            const user = new User({username, password: hashPassword, role: userRole.value, name, status});
             user.save();
 
             return res.json({message: 'User successfully registered'})
