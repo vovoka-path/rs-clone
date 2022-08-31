@@ -62,10 +62,14 @@ class Router {
             const path = '/' + url.pathname.split('/')[1] + '/' + url.pathname.split('/')[2];
             // console.log('# path = ', path);
             const roleStatus = routes[role][path].status;
-            console.log('# roleStatus = ', roleStatus);
-            this.controller.view.cab.ordersList.header.innerText = menuData[role][roleStatus].ru;
+            const orderStatus = cabViews[role][roleStatus].statusesForOrders[0];
+            // console.log('# role = ', role);
+            // console.log('# roleStatus = ', roleStatus);
+            // console.log('# menuData = ', menuData);
+            console.log(`# menuData[${role}][${orderStatus}] = `, menuData[role][orderStatus]);
+            this.controller.view.cab.ordersList.header.innerText = menuData[role][orderStatus].ru;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
-
+            
             return false;
         }
 
