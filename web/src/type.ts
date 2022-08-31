@@ -4,5 +4,5 @@ export interface Order {
   package_name: string,
   clientEmail: string,
   clientMessage: string,
-  date: { incomingOrder: number } 
+  date: { incoming: number } 
 }
