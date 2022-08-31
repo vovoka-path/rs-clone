@@ -46,17 +46,17 @@ class Controller {
         
         const orders = await this.api.getOrderData(token, role);
         this.model.orders = orders;
-        // console.log('# orders = ', orders);
+        // console.log('# 2 this.model.orders = ', this.model.orders);
 
         return orders;
     }
 
-    updateOrderStatus(dataOrder) {
+    updateOrderStatus(orderData) {
         const token = this.model.auth.token;
-        console.log('# token = ', token);
-        console.log('# dataOrder = ', dataOrder);
-        this.api.updateOrder(dataOrder, token)
-        this.model.orderStatus = dataOrder.status;
+        // console.log('# token = ', token);
+        // console.log('# dataOrder = ', orderData);
+        this.api.updateOrder(orderData, token)
+        this.model.orderStatus = orderData.status;
     }
 
     async getUsersByRole(role) {
