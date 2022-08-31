@@ -55,3 +55,12 @@ export const filterOrdersByStatus = (orders, status) => {
 
     return filteredOrders;
 }
+
+export const getFormattedDate = (dateString) => {
+    const statusDate = new Date(dateString);
+    const localStatusDate = statusDate.toLocaleDateString('ru-RU');
+    const statusTime = statusDate.toTimeString().slice(0, 5);
+    const orderValue = `${localStatusDate}, ${statusTime}`;
+
+    return orderValue;
+}
