@@ -3,17 +3,17 @@ class Model {
         // this.role = 'signin';
         this.auth = {};
         this.usersID = '';
-        this.roleStatus = '';
         this.orderId = '';
-        this.orderStatus = ''; // ?
+        this.roleStatus = 'incoming';
+        this.orderStatus = 'incoming'; // ?
         this.orderStatuses = []; // ?
         this.orders = []; // ?
+        this.users = {};
         this.startStatuses = {
             manager: 'incoming',
             photographer: 'acceptingPhotographer',
             editor: 'acceptingEditor',
         };
-        this.users = {};
     }
 
     setAuth(data) {
