@@ -1,5 +1,7 @@
 import Router from './router.js';
 import cabViews from '../data/cabViews.json' assert { type: "json" };
+import menuData from '../data/menuData.json' assert { type: "json" };
+import orderStatusToRoleStatus from '../data/orderStatusToRoleStatus.json' assert { type: "json" };
 import { getStatuses, getOrdersByStatuses } from '../utils/utils.js';
 
 class Listeners extends Router{
@@ -47,6 +49,10 @@ class Listeners extends Router{
 
         const props = await this.createProps(roleStatus);
         this.controller.view.cab.renderOrderList(props);
+
+        const {role} = props;
+
+
     }
 
     async createProps(roleStatus) {
@@ -55,7 +61,9 @@ class Listeners extends Router{
            
         // TODO?: get orders depend on defaultStatus
         const allOrders = await this.controller.getOrderData();
-        // console.log('# allOrders = ', allOrders);
+        this.controller.model.orders = [...allOrders];
+        // console.log('# 3 allOrders = ', allOrders);
+        // console.log('# 3 this.controller.model.orders = ', this.controller.model.orders);
         const role = this.controller.model.auth.role;
 
         const orderStatuses = getStatuses(role, roleStatus);
@@ -73,7 +81,7 @@ class Listeners extends Router{
             orders: orders,
             users: users,
             orderButtonListener: this.orderButtonListener,
-            statusButtonListener: null, // добавляем после входа в конкретный заказ
+            // statusButtonListener: null, // добавляем после входа в конкретный заказ
         };
 
         console.log('# props = ', props);
@@ -81,7 +89,7 @@ class Listeners extends Router{
         return props;
    }
 
-    // обработчик кнопки списка заказов "Посмотреть заказ"
+    // обработчик кнопки списка заказов "Посмотреть"
     orderButtonListenerNotBind() {
         // показать M2: Входящий заказ (один)
         return (event) => {
@@ -118,98 +126,110 @@ class Listeners extends Router{
             }
             
             this.view.cab.cabContainer.innerHTML = '';
+            console.log('# this.view.cab.renderStatusView = ', this.view.cab.renderStatusView);
             this.view.cab.renderStatusView(props);
+
+            // const method = cabViews[role][roleStatus].method;
+            // console.log('# method = ', method);
+            // this.view.cab[method](props);
         }
+    }
+
+    getOrderById(orderId) {
+        return this.controller.model.orders.filter((order) => order._id === orderId)[0];
+    }
+
+    getRoleStatusFromOrderStatus(orderStatus, role) {
+        console.log('# 5 orderStatus, role = ', orderStatus, role);
+        const roleStatus = orderStatusToRoleStatus[orderStatus][role];
+
+        this.controller.model.roleStatus = roleStatus;
+
+        return roleStatus;
     }
     
     // statusButtonListener() {
     statusButtonListenerNotBind() {
         return async (event) => {
+            // console.log('# 4 this = ', this);
             const action = event.target.getAttribute('action');
+            console.log('# action = ', action);
             const orderId = this.model.orderId;
+            // const orderStatus = this.model.orderStatuses[0];
             const role = this.model.auth.role;
-            const roleStatus = this.model.roleStatus;
-            const orderStatus = this.model.orderStatuses[0];
-            
+            const orderStatus = this.model.orderStatus;
+            const roleStatus = this.listeners.getRoleStatusFromOrderStatus(orderStatus, role);
+
             // console.log('# orderId = ', orderId);
             // console.log('# action = ', action);
             // console.log('# orderStatus = ', orderStatus);
             // console.log('# role = ', role);
-            // console.log('# roleStatus = ', roleStatus);
-            const newRoleStatus = cabViews[role][roleStatus].statusButtonText[action].newStatus;
-            // console.log('# newRoleStatus = ', newRoleStatus);
-            this.model.roleStatus = newRoleStatus;
-            
-            const newOrderStatus = cabViews[role][newRoleStatus].statusesForOrders[0];
-            this.model.orderStatuses = newOrderStatus
-            // console.log('# this.model.orderStatuses = ', this.model.orderStatuses);
+            console.log('# role, roleStatus, orderStatus, action = ', role, roleStatus, orderStatus, action);
+            const newOrderStatus = cabViews[role][roleStatus].statusButton[action].newOrderStatus;
+            console.log('# newOrderStatus = ', newOrderStatus);
+            this.model.orderStatus = newOrderStatus;
+            // this.model.orderStatuses = newRoleStatus;
 
-            // TODO: UPDATE ORDER STATUS API
-            // TODO: Сделать запись в поле photographerId
-            // console.log('# event.target.parentElement = ', event.target.parentElement);
-            // console.log('# event.currentTarget = ', event.currentTarget);
-            const photographerId = event.target.parentElement.getAttribute('id');
+            if (roleStatus === null) {
+                const orderId = this.model.orderId;
+                const key = `${role}Id`;
+                const orderData = {
+                    _id: orderId,
+                    [key]: null
+                };
+    
+                (async () => {
+                    await this.updateOrderStatus(orderData);
+                    this.model.orders = await this.controller.getOrderData();
+                })();
 
-            const additionalData = {
-                'acceptingPhotographer': {
-                    photographerId: photographerId,
-                    date: {
-                        photographerAppointed: Date.now(),
+                const orderStatus = 'incoming'; // default
+                this.model.orderStatus = 
+                getRoleStatusFromOrderStatus(orderStatus, role)
+                const path = menuData[role]['incoming'].path;
+                this.listeners.handleStatusButtonClick(path);
+            } else {
+                
+                const photographerId = event.target.parentElement.getAttribute('id');
+
+                const additionalData = {
+                    'incoming': {
+                        photographerId: photographerId,
                     },
-                },
-                'shooting': {
-                    date: {
-                        photographerAccepted: Date.now(),
+                    'shooting': {
+                        editorId: "630e31db3f4dd1fd2ac944fd",
                     },
-                },
-                'acceptingEditor': {
-                    editorId: "630e31db3f4dd1fd2ac944fd",
+                }
+
+                let newOrderData = {
+                    _id: orderId,
+                    status: newOrderStatus,
                     date: {
-                        editorAppointed: Date.now(),
+                        // newRoleStatus: Date.now(),
                     },
-                },
-                'editing': {
-                    date: {
-                        editorAccepted: Date.now(),
-                    },
-                },
-                'sending': {
-                    date: {
-                        photoCompleted: Date.now(),
-                    },
-                },
-                'completed': {
-                    date: {
-                        photoSended: Date.now(),
-                    },
-                },
+                }
+
+                // const orderData = this.model.orders.filter((order) => order._id === orderId)[0];
+                const orderData = this.listeners.getOrderById(orderId)
+                console.log('# ---------- orderData = ', orderData, orderId);
+                // newOrderData.date[newRoleStatus] = Date.now();
+                newOrderData.date = { ...orderData.date, [newOrderStatus]: Date.now() };
+
+                if (additionalData[orderStatus]) {
+                    newOrderData = {...newOrderData, ...additionalData[orderStatus]};
+                }
+
+                // console.log('# dataOrder = ', dataOrder);
+                
+                this.updateOrderStatus(newOrderData);
+                console.log('# role, newOrderStatus = ', role, newOrderStatus);
+                const path = menuData[role][newOrderStatus].path;
+                // console.log('# path = ', path);
+                this.listeners.handleStatusButtonClick(path);
+
+
+                // this.listeners.handleRoute()();
             }
-
-            //     photographerAccepted: {type: Date},
-            // editorAppointed: {type: Date},
-            // editorAccepted: {type: Date},
-            // photoCompleted: {type: Date},
-            // photoSended: {type: Date},
-
-            const dataOrder = {
-                _id: orderId,
-                status: newOrderStatus,
-            }
-
-            if (additionalData[orderStatus]) {
-                dataOrder = {...dataOrder, ...additionalData[orderStatus]};
-            }
-
-            // console.log('# dataOrder = ', dataOrder);
-            
-            this.updateOrderStatus(dataOrder);
-
-            const path = cabViews[role][newRoleStatus].path;
-            // console.log('# path = ', path);
-            this.listeners.handleStatusButtonClick(path);
-
-
-            // this.listeners.handleRoute()();
         }
     }
 }
