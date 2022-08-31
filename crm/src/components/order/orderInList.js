@@ -1,11 +1,13 @@
 import forbiddenOrderKeys from '../../data/forbiddenOrderKeys.json' assert { type: "json" };
-import { isShowOrderKey } from '../../utils/utils.js';
+import { isShowOrderKey, getFormattedDate } from '../../utils/utils.js';
 
-// TODO: универсальный для всех кабинетов
+// Универсальный список заказов для всех кабинетов
+// Зависит от props
 class OrderInList {
     constructor() {
-        this.order = '';
-        this.colorStatus = {
+        this.buttunText = 'Посмотреть';
+        // TODO: colorStatus перенести в config
+        this.statusButtonColor = {
             incoming: 'crimson',
             acceptingPhotographer: 'crimson',
             shooting: 'rgb(233, 233, 96)',
@@ -17,77 +19,76 @@ class OrderInList {
         }
     }
 
-    // Button 'Посмотреть' = this.order.buttonViewOrder
-    render(props) {
-        // console.log('# OrderInList: props = ', props);
-        const { role, orderStatus, order, orderButtonListener } = props;
-
-        // Если статус в виде массива статусов
-        // if (Array.isArray(orderStatus)) {
-        //     orderStatus.forEach((status) => {
-        //         this.renderOrderElement({ ...props, orderStatus: status });
-        //     })
-        // } else {
-            this.renderOrderElement(props);
-        // }
-
-        return this.orderContainer;
-    }
-
-    renderOrderElement(props) {
-        // console.log('# props = ', props);
+    create(props) {
         const { role, roleStatus, orderStatuses, order, orderButtonListener } = props;
 
-        this.orderContainer = document.createElement('div');
-        this.orderContainer.className = 'order-container';
-        this.orderItemsContainer = document.createElement('div');
-        this.orderItemsContainer.className = 'order-items-container';
+        const orderContainer = this.createContainer('order-container');
+        const orderItemsContainer = this.createContainer('order-items-container');
         
-        // Отрисовываем все поля заказа
-        
+        // Отрисовываем все поля заказа - 
+        // TODO: use CONFIG
         for ( let key in order) {
             if ( isShowOrderKey(key, forbiddenOrderKeys[roleStatus][role]) ) {
-                this.renderOrderKeyElement(order, key);
+                orderItemsContainer.append(this.createOrderKeyElement(props, key))
             }
         }
 
-        this.orderContainer.append(this.orderItemsContainer);
+        orderContainer.append(orderItemsContainer);
         
-        const buttonOrder = document.createElement('button');
-        buttonOrder.className = 'btn-order';
-        buttonOrder.innerText = 'Посмотреть';
-        buttonOrder.setAttribute('id', order._id);
+        const buttonOrder = this.createButton(order);
 
         // Вешаем обработчик
         buttonOrder.addEventListener('click', orderButtonListener());
         
-        this.order = this.orderContainer.append(buttonOrder);
+        orderContainer.append(buttonOrder);
+
+        return orderContainer;
     }
 
-    // Отрисовываем один ключ заказа
-    renderOrderKeyElement(order, key) {
+    createContainer(className) {
+        const orderContainer = document.createElement('div');
+        orderContainer.className = className;
+        
+        return orderContainer;
+    }
+
+    createButton(order) {
+        const buttonOrder = document.createElement('button');
+        buttonOrder.className = 'btn-order';
+        buttonOrder.innerText = this.buttunText;
+        buttonOrder.setAttribute('id', order._id);
+
+        return buttonOrder;
+    }
+
+    // Отрисовываем один ключ заказа 
+    // (возможно сделать отдельным общим компонентом для orderInList и orderInCab)
+    createOrderKeyElement(props, key) {
+        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
+
         const OrderKeyElement = document.createElement('div');
-        let nameKey = '';
-        let dataKey = '';
+        let orderKey = '';
+        let orderValue = '';
 
         if (key === 'date') {
-            nameKey = key.incomingOrder;
-            const date = new Date(order[key].incomingOrder)
-            dataKey = date.toLocaleDateString('ru-RU') + ', ' + date.toTimeString().slice(0, 5);
+            orderKey = key[roleStatus];
+            const orderDate = order[key][roleStatus];
+            orderValue = getFormattedDate(orderDate);
         } else if (key === 'status') {
-            nameKey = key;
-            dataKey = order[key];
-            OrderKeyElement.style.backgroundColor = this.colorStatus[dataKey];
+            orderKey = key;
+            orderValue = order[key];
+            const backgroundColor = this.statusButtonColor[orderValue];
+            OrderKeyElement.style.backgroundColor = backgroundColor;
         } else {
-            nameKey = key;
-            dataKey = order[key];
+            orderKey = key;
+            orderValue = order[key];
         }
 
-        OrderKeyElement.className = `order_item order-item-list list-${nameKey}`;
-        OrderKeyElement.innerText = dataKey;
+        OrderKeyElement.className = `order_item order-item-list list-${orderKey}`;
+        OrderKeyElement.innerText = orderValue;
 
-        this.orderItemsContainer.append(OrderKeyElement);
+        return OrderKeyElement;
     }
 }
 
-export default OrderInList;
+export default new OrderInList();
