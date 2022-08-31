@@ -393,7 +393,9 @@ body {
         visibility: visible;
         right: 0;
     }
-    
+    .d-none {
+        display: block!important;
+    }
 }
 
 @media(max-width: 728px) {
@@ -470,5 +472,20 @@ body {
     }
     .modal-header {
         justify-content: center;
+    }
+    .main-reviews-prices-title {
+        padding: 0px;
+    }
+    .main-reviews-prices-title::after,
+    .main-reviews-prices-title::before {
+        margin: 10px;
+    }
+    
+    .carousel-caption {
+        top: 8%;
+        bottom: 10%;
+    }
+    .main-reviews .carousel-item img {
+        height: 100vh;
     }
 }

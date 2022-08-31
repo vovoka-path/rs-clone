@@ -28,7 +28,6 @@ button.addEventListener('click', async (e) => {
   const package_name = (document.querySelector('#package') as HTMLInputElement).value;
   const clientEmail = (document.querySelector('#email') as HTMLInputElement).value;
   const clientMessage = (document.querySelector('#message') as HTMLInputElement).value;
-  const form = (document.querySelector('#exampleModal')) as HTMLButtonElement;
 
   const order = {
     city,
@@ -40,8 +39,6 @@ button.addEventListener('click', async (e) => {
       incoming: Date.now(),
     }
   };
-  console.log(form);
-
   // eslint-disable-next-line @typescript-eslint/no-use-before-define
   postOrder(order);
   console.log(order);
