@@ -16,77 +16,67 @@ class PhotographerList {
     }
 
     create(props) {
-        const { users } = props;
-        // console.log('# props = ', props);
+        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener, users } = props;
         const photographers = users.filter((user) => user.role === 'photographer');
 
         photographers.forEach((photographer) => {
-            // this.photographer = document.createElement('h3');
-            // console.log('# photographer = ', photographer, Object.entries(photographer));
-            const photographerContainer = createCustomElement('div', styles.photographerContainer);
-
-            for (let [key, value] of Object.entries(photographer)) {
-                if (!['password', 'role', 'username', '__v', '_id'].includes(key)) {
-                    const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
-                    photographerKey.innerText = photographer[key];
-
-                    photographerContainer.append(photographerKey);
-                }
-            }
-
-            this.container.append(photographerContainer);
-
-            setAttributesElement(photographerContainer, {
-                'name': photographer.name,
-                'status': photographer.status,
-                'id': photographer._id,
-            })
-            
-            this.renderStatusButtons(photographerContainer, props);
-
-            // this.StatusButton = new StatusButton() 
-            // const statusButtonTexts = cabViews[role][roleStatus].statusButtonText;
-
-            // const { statusButtonText, action } = props;
-
-            // this.button = this.StatusButton.create(props); // props!!!
-            // console.log('# this.button = ', this.button);
-            // this.photogrpherContainer.append(this.button);
+            this.renderPhotographerContainer(photographer);
+            this.renderStatusButtons(this.container.photographerContainer, props);
         });
         
 
         return this.container;
     }
 
+    renderPhotographerContainer(photographer) {
+        this.photographerContainer = createCustomElement('div', styles.photographerContainer);
+
+            for (let [key, value] of Object.entries(photographer)) {
+                // TODO: replace keys in config
+                if (!['password', 'role', 'username', '__v', '_id'].includes(key)) {
+                    const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
+
+                    photographerKey.innerText = value;
+
+                    this.photographerContainer.append(photographerKey);
+                }
+            }
+
+            this.container.append(this.photographerContainer);
+
+            setAttributesElement(this.photographerContainer, {
+                'name': photographer.name,
+                'status': photographer.status,
+                'id': photographer._id,
+            })
+
+            return 
+    }
+
     renderStatusButtons(photographerContainer, props) {
-        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
+        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener, users } = props;
         const lang = 'ru';
-        const statusButtonTexts = cabViews[role][roleStatus].statusButtonText;
+        const statusButtonTexts = cabViews[role][roleStatus].statusButton;
 
         for (let key in statusButtonTexts) {
             const statusButtonText = statusButtonTexts[key][lang];
 
             if (statusButtonText !== null) {
-                // console.log('# statusButtonText = ', statusButtonText);
                 const btnProps = {
                     statusButtonText: statusButtonText,
                     action: key,
                 }
+
                 this.statusButton = new StatusButton().create(btnProps);
                 this.statusButtons.push(this.statusButton);
 
                 // Вешаем обработчик
                 this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
                 
-                photographerContainer.append(this.statusButton);
-                // this.changedElement.append(this.statusButton);
+                this.photographerContainer.append(this.statusButton);
             }
         }
     }
-    // renderButton() {
-    //     const button = createCustomElement('button', styles.button);
-
-    // }
 }
 
 export default PhotographerList;
