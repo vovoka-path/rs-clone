@@ -40,8 +40,8 @@
             "statusesForOrders": ["feedbacks"]
         },
         "/manager/add-order": {
-            "status": "shooting",
-            "statusesForOrders": ["shooting"]
+            "status": "addOrder",
+            "statusesForOrders": ["addOrder"]
         },
         "/manager/statistics": {
             "status": "statistics",
