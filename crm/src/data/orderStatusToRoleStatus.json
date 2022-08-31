@@ -1,0 +1,62 @@
+{
+    "incoming": {
+        "manager": "incoming",
+        "photographer": null,
+        "editor": null
+    },
+    "acceptingPhotographer": {
+        "manager": "acceptingPhotographer",
+        "photographer": "incoming",
+        "editor": null
+    },
+    "shooting": {
+        "manager": "shooting",
+        "photographer": "shooting",
+        "editor": null
+    },
+    "acceptingEditor": {
+        "manager": "acceptingEditor",
+        "photographer": "editing",
+        "editor": "У обработчика в работе"
+    },
+    "editing": {
+        "manager": "editing",
+        "photographer": "editing",
+        "editor": "editing"
+    },
+    "sending": {
+        "manager": "sending",
+        "photographer": "editing",
+        "editor": "completed"
+    },
+    "completed": {
+        "manager": "completed",
+        "photographer": "completed",
+        "editor": "completed"
+    },
+    "canceled": {
+        "manager": "canceled",
+        "photographer": "canceled",
+        "editor": null
+    },
+    "feedbacks": {
+        "manager": "feedbacks",
+        "photographer": "feedbacks",
+        "editor": "feedbacks"
+    },
+    "addOrder": {
+        "manager": null,
+        "photographer": null,
+        "editor": null
+    },
+    "statistics": {
+        "manager": null,
+        "photographer": null,
+        "editor": null
+    },
+    "employees": {
+        "manager": null,
+        "photographer": null,
+        "editor": null
+    }
+}
