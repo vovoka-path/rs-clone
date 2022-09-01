@@ -50,8 +50,7 @@ body {
 
 .order-container {
   position: relative;
-  min-width: 290px;
-  max-width: 350px;
+  width: 290px;
   display: flex;
   background: linear-gradient(180deg, #167293 0%, #0ca896 100%);
   color: white;
