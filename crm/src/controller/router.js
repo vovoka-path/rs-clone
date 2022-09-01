@@ -49,8 +49,7 @@ class Router {
             event.preventDefault();
             // console.log('# event.target.href = ', event.target.href);
             // console.log('# this.controller.view.cab.menu.container = ', this.controller.view.cab.menu.container.classList.remove('menu-toggle'));
-            let menuContainer = document.querySelector('.menu-container'); // ЭТО====>>>> this.controller.view.cab.menu.container.classList.remove('menu-toggle');
-            menuContainer.classList.remove('menu-toggle') //<<<<===== ЗАМЕНИЛ НА ЭТО (52,53)
+            this.controller.view.cab.menu.menuContainer.classList.remove('menu-toggle');
 
             let url = new URL(this.domen + event.currentTarget.getAttribute('path'));
             // let url = new URL(event.target.href); // 'menu-item-a'

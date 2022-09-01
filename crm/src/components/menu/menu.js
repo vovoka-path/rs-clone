@@ -16,10 +16,10 @@ export class Menu {
       li: "menu-item-li",
       a: "menu-item-a",
     };
+    this.menuContainer = Container.create(this.styles.container);
   }
 
   create() {
-    const menuContainer = Container.create(this.styles.container);
     const menu = List.create(this.styles.ul);
 
     for (let [orderStatus, data] of Object.entries(menuData[this.cabName])) {
@@ -35,9 +35,9 @@ export class Menu {
       );
     }
 
-    menuContainer.append(menu);
+    this.menuContainer.append(menu);
 
-    return menuContainer;
+    return this.menuContainer;
   }
 }
 

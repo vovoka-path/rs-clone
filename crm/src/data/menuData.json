@@ -58,7 +58,7 @@
         "employees": {
             "roleStatus": null,
             "path": "/manager/employees",
-            "ru": "Регистрация работника"
+            "ru": "Сотрудники"
         }
     },
     "photographer": {
