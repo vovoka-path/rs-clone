@@ -49,8 +49,8 @@ class Router {
             event.preventDefault();
             // console.log('# event.target.href = ', event.target.href);
             // console.log('# this.controller.view.cab.menu.container = ', this.controller.view.cab.menu.container.classList.remove('menu-toggle'));
-   
-            this.controller.view.cab.menu.container.classList.remove('menu-toggle');
+            let menuContainer = document.querySelector('.menu-container'); // ЭТО====>>>> this.controller.view.cab.menu.container.classList.remove('menu-toggle');
+            menuContainer.classList.remove('menu-toggle') //<<<<===== ЗАМЕНИЛ НА ЭТО (52,53)
 
             let url = new URL(this.domen + event.currentTarget.getAttribute('path'));
             // let url = new URL(event.target.href); // 'menu-item-a'
@@ -74,7 +74,7 @@ class Router {
         }
 
         // получаем все ссылки на странице
-        let anchors = document.getElementsByName('menu-item-li'); 
+        let anchors = document.getElementsByClassName('menu-item'); // Поменял селектор
         
         // вешаем на событие click обработчик
         for( let anchor of anchors ) {

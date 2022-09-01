@@ -1,5 +1,6 @@
 import cabViews from '../../data/cabViews.json' assert { type: "json" };
-import Menu from '../../components/menu/menu.js';
+// import Menu from '../../components/menu/menu.js';
+import { Menu } from '../../components/Menu/Menu.js';
 import OrdersList from '../../components/ordersList/ordersList.js';
 import StatusButton from '../../components/statusButton/statusButton.js';
 import { createCustomElement } from '../../utils/utils.js';
@@ -88,7 +89,7 @@ class Cab {
     }
     
     addMenu() {
-        this.mainContainer.append(this.menu.render());
+        this.mainContainer.append(this.menu.create());
     }
 
     // Показывает список входящих заказов, разный для каждой роли.
