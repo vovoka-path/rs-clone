@@ -14,6 +14,7 @@ class OrderInCab {
         this.orderCabContainer = createCustomElement('div', 'order-cab-container');
         this.orderItemsContainer = createCustomElement('div', 'order-cab-items-container');
         
+        console.log('# order = ', order);
         // Отрисовываем все поля заказа
         for ( let key in order) {
             if (isShowOrderKey(role, order.status, key)) {
