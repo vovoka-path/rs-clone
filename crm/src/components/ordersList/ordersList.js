@@ -25,13 +25,6 @@ class OrdersList {
         
         return ordersContainer;
     }
-    
-    // createStatusHeader(startStatus) {
-    //     const statusHeader = document.createElement('h3');
-    //     statusHeader.innerText = startStatus;
-        
-    //     return statusHeader;
-    // }
 
     renderOrdersList(props) {
         const { orders } = props;
