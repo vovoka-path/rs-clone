@@ -1,12 +1,12 @@
 {
     "incoming": {
-        "manager": [ "_id", "__v" ],
+        "manager": [ "_id", "__v", "comments" ],
         "photographer": [],
         "editor": []
     },
     "acceptingPhotographer": {
-        "manager": [ "_id", "__v" ],
-        "photographer": [ "_id", "__v", "clientEmail", "photographerId" ],
+        "manager": [ "_id", "__v", "comments" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientPhone", "photographerId", "editorLink", "comments" ],
         "editor": []
     },
     "shooting": {
@@ -26,22 +26,22 @@
     },
     "sending": {
         "manager": [ "_id", "__v" ],
-        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "editorLink", "photographerId", "editorId" ],
         "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
     },
     "completed": {
         "manager": [ "_id", "__v" ],
-        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "editorLink", "photographerId", "editorId" ],
         "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
     },
     "canceled": {
         "manager": [ "_id", "__v" ],
-        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "editorLink", "photographerId", "editorId" ],
         "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
     },
     "feedbacks": {
         "manager": [ "_id", "__v" ],
-        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "linkToReadyPhoto", "photographerId", "editorId" ],
+        "photographer": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "editorLink", "photographerId", "editorId" ],
         "editor": [ "_id", "__v", "clientEmail", "clientMsg", "clientPhone", "photographerId", "editorId" ]
     }
 }
