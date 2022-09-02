@@ -1,23 +1,23 @@
 {
     "incoming": {
         "manager": "incoming",
-        "photographer": null,
-        "editor": null
+        "photographer": "none",
+        "editor": "none"
     },
     "acceptingPhotographer": {
         "manager": "acceptingPhotographer",
         "photographer": "incoming",
-        "editor": null
+        "editor": "none"
     },
     "shooting": {
         "manager": "shooting",
         "photographer": "shooting",
-        "editor": null
+        "editor": "none"
     },
     "acceptingEditor": {
         "manager": "acceptingEditor",
         "photographer": "editing",
-        "editor": "У обработчика в работе"
+        "editor": "acceptingEditor"
     },
     "editing": {
         "manager": "editing",
@@ -37,7 +37,7 @@
     "canceled": {
         "manager": "canceled",
         "photographer": "canceled",
-        "editor": null
+        "editor": "none"
     },
     "feedbacks": {
         "manager": "feedbacks",
@@ -45,18 +45,18 @@
         "editor": "feedbacks"
     },
     "addOrder": {
-        "manager": null,
-        "photographer": null,
-        "editor": null
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
     },
     "statistics": {
-        "manager": null,
-        "photographer": null,
-        "editor": null
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
     },
     "employees": {
-        "manager": null,
-        "photographer": null,
-        "editor": null
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
     }
 }

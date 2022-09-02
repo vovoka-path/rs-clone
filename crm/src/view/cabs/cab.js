@@ -122,9 +122,9 @@ class Cab {
         return this.container;
     }
     
-    // remove() {
-    //     this.mainContainer.innerHTML = '';
-    // }
+    removeOrderList() {
+        this.cabContainer.innerHTML = '';
+    }
 }
 
 export default Cab;

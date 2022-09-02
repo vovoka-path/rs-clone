@@ -147,7 +147,7 @@
                 "cancel": {
                     "ru": "Отказаться",
                     "en": "",
-                    "newOrderStatus": "acceptingPhotographer"
+                    "newOrderStatus": "incoming"
                 }
             }
         },
@@ -222,9 +222,9 @@
                     "newOrderStatus": "editing"
                 },
                 "cancel": {
-                    "ru": "Отказаться",
-                    "en": "",
-                    "newOrderStatus": "shooting"
+                    "ru": null,
+                    "en": null,
+                    "newOrderStatus": null
                 }
             }
         },

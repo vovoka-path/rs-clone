@@ -26,13 +26,14 @@ export const isShowOrderKey = (key, forbiddenOrderKeys) => {
 
     return true;
 }
-
+// DELETE
 export const getStatuses = (role, roleStatus) => {
     const statuses = cabViews[role][roleStatus].statusesForOrders;
 
     return statuses;
 }
 
+// DELETE
 export const getOrdersByStatuses = (allOrders, statuses) => {
     let orders = [];
 

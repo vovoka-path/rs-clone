@@ -1,13 +1,15 @@
-import domen from '../data/domen.json' assert { type: "json" };
+// import domen from '../data/domen.json' assert { type: "json" };
+import { domen } from '../data/constants.js';
 import routes from '../data/routes.json' assert { type: "json" };
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 import menuData from '../data/menuData.json' assert { type: "json" };
+import orderStatusToRoleStatus from '../data/orderStatusToRoleStatus.json' assert { type: "json" };
 
 // Меню кабинета (by statusRole)
 // Создание props (listeners)
 class Router {
     constructor() {
-        this.domen = domen.url;
+        this.domen = domen;
         this._routes = [];
     }
 
@@ -87,9 +89,15 @@ class Router {
 
         // заголовок DELETE ?
         const role = this.controller.model.auth.role;
+        // const roleStatus = routes[role][path].status;
+        console.log('# role, path = ', role, path) //, ' -> roleStatus = ', roleStatus);
+        let orderStatus = this.controller.model.orderStatus;
 
-        const roleStatus = routes[role][path].status;
-        this.controller.view.cab.ordersList.header.innerText = menuData[role][roleStatus].ru;
+        if (orderStatusToRoleStatus[orderStatus][role] === 'none') {
+            orderStatus = this.controller.model.startStatuses[role];
+        }
+
+        this.controller.view.cab.ordersList.header.innerText = menuData[role][orderStatus].ru;
 
         return false;
     }
@@ -99,16 +107,11 @@ class Router {
             // смотрим есть ли маршруты
             const paths = path.match(route.pattern);
 
-            // если машруты найдены
-            // вызываем обработчик из объекта, передавая ему маршруты
+            // если машрут найден
+            // вызываем обработчик из проверяемого route
+            // переменная roleStatus уже есть в обработчике
             // paths.slice(1) отрезает всю найденную строку
-            // console.log('# route.pattern = ', route.pattern);
             if (paths) {
-                // console.log('# this = ', this);
-                // console.log('# paths = ', paths);
-                // console.log('# paths.slice(1) = ', paths.slice(1));
-                // const correctPath = paths[0].slice(1);
-                // route.callback.apply(this, correctPath);
                 // route.callback.apply(this, paths.slice(1));
                 route.callback.apply(this);
             }

@@ -81,12 +81,15 @@ class ManagerCab extends Cab{
     }
 
     renderStatistics(props) {
+        this.cabContainer.innerHTML = '';
         this.fakeView(props); // DELETE
 
     }
 
     renderEmployees(props) {
+        this.cabContainer.innerHTML = '';
         this.fakeView(props); // DELETE
+        console.log('# props = ', props);
 
     }
 }

@@ -1,3 +1,6 @@
+import { admin, editorId } from '../data/constants.js';
+import { filterOrdersByStatus, getStatuses, getOrdersByStatuses } from '../utils/utils.js';
+import cabViews from '../data/cabViews.json' assert { type: "json" };
 import Api from './api.js';
 import Listeners from './listeners.js';
 
@@ -6,7 +9,7 @@ class Controller {
         this.view = view;
         this.model = model;
         this.api = new Api();
-        this.listeners = new Listeners();
+        this.listeners = new Listeners(this);
     }
 
     start() {
@@ -25,19 +28,31 @@ class Controller {
     
     async getOrderData(){
         const { token, role } = this.model.auth;
-        if (role === 'manager') {
-            this.getUsersByRole('photographer');
-        }
-        
         const orders = await this.api.getOrderData(token, role);
+
         this.model.orders = orders;
+
+        if (role === admin) {
+            this.model.photographers = this.getUsersByRole('photographer');
+
+            orders.forEach((order) => {
+                if (!order.editorId) {
+                    const orderData = {
+                        _id: order._id,
+                        editorId: order.editorId,
+                    }
+
+                    this.updateOrder(orderData);
+                }
+            })
+        }
 
         return orders;
     }
 
-    updateOrderStatus(orderData) {
+    async updateOrder(orderData) {
         const token = this.model.auth.token;
-        const response = this.api.updateOrder(orderData, token);
+        const response = await this.api.updateOrder(orderData, token);
         // TODO: проверять response
         this.model.orderStatus = orderData.status;
     }
@@ -84,6 +99,52 @@ class Controller {
         const response = await this.api.deleteUser(token, id);
         // TODO: проверять response
     }
+
+    async updateModelDataByNewRoleStatus(roleStatus) {
+        // Запоминаем новый текущий статус работника в model 
+        // значение передается из метода роутера (массив методов для каждого пути)
+        console.log('# 1 roleStatus = ', roleStatus);
+        this.model.roleStatus = roleStatus;
+        this.model.orders = await this.getOrderData();
+        this.model.statuses = this.getOrderStatusesByRoleStatus();
+    }
+
+    updateModelDataByOrderId(orderId) {
+        this.model.orderId = orderId;
+        this.model.orderData = this.getOrderDataByOrderId(orderId);
+    }
+
+    getOrderStatusesByRoleStatus() {
+        const role = this.model.auth.role;
+        const roleStatus = this.model.roleStatus;
+        console.log('# 2 role, roleStatus = ', role, roleStatus);
+        const orderStatuses = cabViews[role][roleStatus].statusesForOrders;
+        this.model.orderStatuses = orderStatuses;
+    
+        return orderStatuses;
+    }
+
+    getOrdersByRoleStatus() {
+        const statuses = this.model.statuses;
+        const orders = this.model.orders;
+        let ordersByRoleStatus = [];
+    
+        statuses.forEach((status) => {
+            ordersByRoleStatus.push(...filterOrdersByStatus(orders, status));
+            // ordersByRoleStatus = [...ordersByRoleStatus, ...filterOrdersByStatus(orders, status)];
+        })
+    
+        return ordersByRoleStatus;
+    }
+
+    getOrderDataByOrderId(orderId) {
+        const orders = this.model.orders;
+
+        const [ orderData ] = orders.filter((order) => order._id === orderId);
+    
+        return orderData;
+    }
+    
 }
 
 export default Controller;

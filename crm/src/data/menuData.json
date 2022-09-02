@@ -77,6 +77,11 @@
             "path": "/photographer/editing",
             "ru": "У обработчика"
         },
+        "editing": {
+            "roleStatus": "editing",
+            "path": "/photographer/editing",
+            "ru": "У обработчика"
+        },
         "completed": {
             "roleStatus": "completed",
             "path": "/photographer/completed",

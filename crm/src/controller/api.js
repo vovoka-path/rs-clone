@@ -1,8 +1,9 @@
-import domen from '../data/domen.json' assert { type: "json" };
+// import domen from '../data/domen.json' assert { type: "json" };
+import { domen } from '../data/constants.js';
 
 class Api {
     constructor() {
-        this.domen = domen.url;
+        this.domen = domen;
     }
 
     async getOrderData(token, role){
@@ -32,7 +33,7 @@ class Api {
 
     async updateOrder(data, token) {
         const authorization = `Bearer ${token}`;
-        console.log('# data = ', data);
+        // console.log('# data = ', data);
 
         return fetch(`${this.domen}/api/orders`, {
             method: 'PUT',
