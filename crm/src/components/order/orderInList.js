@@ -1,7 +1,6 @@
 import statusButtonColor from '../../data/statusButtonColor.json' assert { type: "json" };
 import orderKeysInList from '../../data/orderKeysInList.json' assert { type: "json" };
 import orderKeyTitles from '../../data/orderKeyTitles.json' assert { type: "json" };
-import forbiddenOrderKeys from '../../data/forbiddenOrderKeys.json' assert { type: "json" };
 import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../utils/utils.js';
 
 // Универсальный список заказов для всех кабинетов
