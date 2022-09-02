@@ -39,55 +39,55 @@ class ManagerCab extends Cab{
     }
 
     renderAcceptingPhotographer(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
         
     }
 
     renderShooting(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderAcceptingEditor(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderEditing(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderSending(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderCompleted(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderCanceled(props) {
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderFeedbacks(props) {
         this.cabContainer.innerHTML = '';
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderAddOrder(props) {
         this.cabContainer.innerHTML = '';
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
     renderStatistics(props) {
         this.cabContainer.innerHTML = '';
-        this.fakeView(props); // DELETE
+        this.statusDetailsView(props); // DELETE
 
     }
 
