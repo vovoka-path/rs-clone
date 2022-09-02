@@ -147,6 +147,7 @@
             "path": "/photographer/incoming",
             "method": "renderIncoming",
             "statusesForOrders": ["acceptingPhotographer"],
+            "dates": ["incoming"],
             "statusButton": {
                 "accept": {
                     "ru": "Принять",
@@ -164,6 +165,7 @@
             "path": "/photographer/shooting",
             "method": "renderShooting",
             "statusesForOrders": ["shooting"],
+            "dates": ["incoming", "shooting"],
             "statusButton": {
                 "accept": {
                     "ru": "Передать обработчику",
@@ -186,6 +188,7 @@
                     "editing",
                     "sending"
                 ],
+            "dates": ["incoming", "shooting", "editing"],
             "statusButton": null
         },
         "completed": {
@@ -198,18 +201,21 @@
                     "sending", 
                     "completed"
                 ],
+            "dates": ["incoming", "shooting", "editing", "completed"],
             "statusButton": null
         },
         "canceled": {
             "path": "/photographer/canceled",
             "method": "renderCanceled",
             "statusesForOrders": ["canceled"],
+            "dates": ["incoming", "shooting", "canceled"],
             "statusButton": null
         },
         "feedbacks": {
             "path": "/photographer/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "shooting", "editing", "completed", "feedbacks"],
             "statusButton": null
         },
         "statistics": {
@@ -224,6 +230,7 @@
             "path": "/editor/incoming",
             "method": "renderIncoming",
             "statusesForOrders": ["acceptingEditor"],
+            "dates": ["incoming"],
             "statusButton": {
                 "accept": {
                     "ru": "Принять",
@@ -241,6 +248,7 @@
             "path": "/editor/editing",
             "method": "renderEditing",
             "statusesForOrders": ["editing"],
+            "dates": ["incoming", "editing"],
             "statusButton": {
                 "accept": {
                     "ru": "Обработано",
@@ -256,6 +264,7 @@
         "completed": {
             "path": "/editor/completed",
             "method": "renderCompleted",
+            "dates": ["incoming", "editing", "sending"],
             "statusesForOrders": 
                 [
                     "sending", 
@@ -267,6 +276,7 @@
             "path": "/editor/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "editing", "sending", "completed", "feedbacks"],
             "statusButton": null
         },
         "statistics": {
