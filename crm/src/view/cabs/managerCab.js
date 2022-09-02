@@ -3,8 +3,7 @@ import OrderInCab from '../../components/order/orderInCab.js';
 import PhotographerList from '../../components/photographerList/photographerList.js';
 import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 import Employees from '../../components/Employees/Employees.js';
-import Employee from '../../components/Employee/Employee.js';
-import EmployeeEdit from '../../components/Employee/EmployeeEdit/EmployeeEdit.js';
+import OrderCreate from '../../components/OrderCreate/OrderCreate.js';
 
 const role = 'manager';
 // const styles = {
@@ -81,7 +80,10 @@ class ManagerCab extends Cab{
 
     renderAddOrder(props) {
         this.cabContainer.innerHTML = '';
-        this.statusDetailsView(props); // DELETE
+
+        const addOrderView = new OrderCreate(this.cabContainer);
+
+        addOrderView.renderCreateView();
 
     }
 
