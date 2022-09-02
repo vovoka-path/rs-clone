@@ -1,3 +1,4 @@
+import orderKeysInList from '../../data/orderKeysInList.json' assert { type: "json" };
 import forbiddenOrderKeys from '../../data/forbiddenOrderKeys.json' assert { type: "json" };
 import { isShowOrderKey, getFormattedDate } from '../../utils/utils.js';
 
@@ -27,8 +28,14 @@ class OrderInList {
         
         // Отрисовываем все поля заказа - 
         // TODO: use CONFIG
+        // for ( let key in order) {
+        //     if ( isShowOrderKey(key, forbiddenOrderKeys[roleStatus][role]) ) {
+        //         orderItemsContainer.append(this.createOrderKeyElement(props, key))
+        //     }
+        // }
+        
         for ( let key in order) {
-            if ( isShowOrderKey(key, forbiddenOrderKeys[roleStatus][role]) ) {
+            if (this.isShowOrderKey(role, order.status, key)) {
                 orderItemsContainer.append(this.createOrderKeyElement(props, key))
             }
         }
@@ -43,6 +50,19 @@ class OrderInList {
         orderContainer.append(buttonOrder);
 
         return orderContainer;
+    }
+
+    isShowOrderKey(role, orderStatus, key) {
+        // console.log('# role, orderStatus, key = ', role, orderStatus, key);
+        const keyAllowedToShow = orderKeysInList[orderStatus][role];
+
+        if ( keyAllowedToShow.length !== 0 ) {
+            if ( (keyAllowedToShow.includes(key)) ) {
+                return true;
+            }
+        }
+    
+        return false;
     }
 
     createContainer(className) {
@@ -64,27 +84,50 @@ class OrderInList {
     // Отрисовываем один ключ заказа 
     // (возможно сделать отдельным общим компонентом для orderInList и orderInCab)
     createOrderKeyElement(props, key) {
-        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
-
+        const { role, roleStatus, orderStatuses, order, users, orderButtonListener, statusButtonListener } = props;
+        
+        const userText = {
+            city: 'Город',
+            route: 'Маршрут',
+            package_name: 'Пакет',
+            clientEmail: 'Почта',
+            clientMessage: 'Сообщение',
+            clientPhone: 'Телефон',
+            // status: '',
+            photographerId: 'Фотограф',
+            editorId: 'Обработчик',
+            photographerLink: '',
+            editorLink: '',
+        }
+        
         const OrderKeyElement = document.createElement('div');
         let orderKey = '';
         let orderValue = '';
 
         if (key === 'date') {
-            orderKey = key[roleStatus];
-            const orderDate = order[key][roleStatus];
-            orderValue = getFormattedDate(orderDate);
+            orderValue = '';
+            // console.log('# key, roleStatus = ', key, roleStatus);
+            // console.log('# key[roleStatus] = ', key[roleStatus]);
+            // orderKey = key[roleStatus];
+            // const orderDate = order[key][roleStatus];
+            // console.log('# orderDate = ', orderDate);
+            // orderValue = getFormattedDate(orderDate);
         } else if (key === 'status') {
             orderKey = key;
             orderValue = order[key];
             const backgroundColor = this.statusButtonColor[orderValue];
             OrderKeyElement.style.backgroundColor = backgroundColor;
+        } if (key === 'photographerId' || key === 'editorId') {
+            orderKey = key;
+            
+            const [ user ] = users.filter((user) => user._id === order[key]);
+            orderValue = `${userText[key]}: ${user.name}`;
         } else {
             orderKey = key;
-            orderValue = order[key];
+            orderValue = `${userText[key]}: ${order[key]}`;
         }
 
-        OrderKeyElement.className = `order_item order-item-list list-${orderKey}`;
+        OrderKeyElement.className = `order_item order-item-list list-${key}`;
         OrderKeyElement.innerText = orderValue;
 
         return OrderKeyElement;
