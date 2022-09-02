@@ -1,4 +1,3 @@
-// import domen from '../data/domen.json' assert { type: "json" };
 import { domen } from '../data/constants.js';
 
 class Api {
@@ -33,7 +32,6 @@ class Api {
 
     async updateOrder(data, token) {
         const authorization = `Bearer ${token}`;
-        // console.log('# data = ', data);
 
         return fetch(`${this.domen}/api/orders`, {
             method: 'PUT',
@@ -70,15 +68,6 @@ class Api {
     }
 
     async signIn(formData) {
-        // console.log('# API - formData = ', formData);
-        // console.log('# API - JSON.stringify(formData) = ', JSON.stringify(formData));
-
-        // return {
-        //     "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMDhiN2Y0ZTM5MWU1MTYxNTg3MzU3YSIsInJvbGUiOiJtYW5hZ2VyIiwiaWF0IjoxNjYxNTE2NDY1LCJleHAiOjE2NjE2MDI4NjV9.YuRY4Cx_LvFv7XlNqNx-NC5dKrATG5fl_OB3zvNCN9Y",
-        //     "username": "vovoka",
-        //     "role": "manager"
-        // };
-
         return fetch(`${this.domen}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -86,9 +75,6 @@ class Api {
         })
             .then(async(response) => {
                 const json = await response.json();
-                // const data = json.data;
-                // console.log('# API json = ', json);
-                // console.log('# API data = ', data.data);
                 return {
                     data: json,
                 }
@@ -97,14 +83,6 @@ class Api {
                 throw new Error(error);
             })
     }
-
-    // - Get users: Returns array with users.
-    // - Method *GET* 
-    // - URL *'/auth/users'*
-    // - HEADERS:
-    //     - *"Authorization": "Bearer <-YOU TOKEN->"* 
-    //     - *"Content-Type": "aplication/json"*
-    // - RETURN: *{token: String, username: String, role: String}* or *ERROR*
 
     async getUsers(token) {
         const authorization = `Bearer ${token}`;
@@ -145,13 +123,27 @@ class Api {
             })
     }
 
+    async sendEmail(token, mailData) {
+        const authorization = `Bearer ${token}`;
+
+        return fetch(`${this.domen}/mail/send`, {
+            method: 'POST',
+            headers: {
+                "Authorization": authorization,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(mailData),
+        })
+            .then(async(response) => {
+                return {
+                    data: await response.json(),
+                }
+            })
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
 }
 
 export default Api;
-
-// - Delete user: Delete specified user.
-//         - Method *DELETE* 
-//         - URL *'/auth/users/:id'*
-//         - HEADERS:
-//             - *"Authorization": "Bearer <-YOU TOKEN->"*
-//         - RETURN: *Delete user* or *ERROR*

@@ -91,6 +91,16 @@ class Controller {
         const users = await this.api.getUsers(token).then(json => json.data.users);
         this.model.users = users;
 
+        const mailData = {
+            clientEmail: 'vovoka@tut.by', 
+            title: 'CRM CYP', 
+            msg: `Тут текст письма 
+            
+            это вторая строчка`,
+        }
+        await this.sendEmail(mailData);
+        // console.log('# mail response = ', await this.sendEmail(mailData)); 
+
         return users;
     }
 
@@ -103,7 +113,7 @@ class Controller {
     async updateModelDataByNewRoleStatus(roleStatus) {
         // Запоминаем новый текущий статус работника в model 
         // значение передается из метода роутера (массив методов для каждого пути)
-        console.log('# 1 roleStatus = ', roleStatus);
+        // console.log('# 1 roleStatus = ', roleStatus);
         this.model.roleStatus = roleStatus;
         this.model.orders = await this.getOrderData();
         this.model.statuses = this.getOrderStatusesByRoleStatus();
@@ -117,7 +127,7 @@ class Controller {
     getOrderStatusesByRoleStatus() {
         const role = this.model.auth.role;
         const roleStatus = this.model.roleStatus;
-        console.log('# 2 role, roleStatus = ', role, roleStatus);
+        // console.log('# 2 role, roleStatus = ', role, roleStatus);
         const orderStatuses = cabViews[role][roleStatus].statusesForOrders;
         this.model.orderStatuses = orderStatuses;
     
@@ -143,6 +153,13 @@ class Controller {
         const [ orderData ] = orders.filter((order) => order._id === orderId);
     
         return orderData;
+    }
+
+    async sendEmail(mailData) {
+        console.log('# sendEmail = ', mailData);
+        const token = this.model.auth.token;
+        const response = await this.api.sendEmail(token, mailData);
+        console.log('# response = ', response);
     }
     
 }
