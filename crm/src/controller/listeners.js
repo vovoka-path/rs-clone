@@ -3,6 +3,7 @@ import Router from './router.js';
 import EmployeeListener from './employeeListener.js';
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 import menuData from '../data/menuData.json' assert { type: "json" };
+import emailSending from '../data/emailSending.json' assert { type: "json" };
 import orderStatusToRoleStatus from '../data/orderStatusToRoleStatus.json' assert { type: "json" };
 import { getStatuses, getOrdersByStatuses } from '../utils/utils.js';
 
@@ -90,7 +91,7 @@ class Listeners extends Router{
    }
 
     async createPropsByOrderId(orderId) {
-        this.controller.updateModelDataByOrderId(orderId);
+        await this.controller.updateModelDataByOrderId(orderId);
 
         const roleStatus = this.controller.model.roleStatus;
         let props = await this.createPropsByRoleStatus(roleStatus);
@@ -114,8 +115,9 @@ class Listeners extends Router{
         return async (event) => {
             // this = controller
             const orderId = event.target.id;
+            // console.log('# this.model.orderData = ', this.model.orderData);
             const props = await this.listeners.createPropsByOrderId(orderId);
-            
+            // console.log('# 8 props = ', props);
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.renderStatusView(props);
         }
@@ -126,7 +128,7 @@ class Listeners extends Router{
     }
 
     getRoleStatusFromOrderStatus(orderStatus, role) {
-        console.log('# 5 orderStatus, role = ', orderStatus, role);
+        // console.log('# 5 orderStatus, role = ', orderStatus, role);
         const roleStatus = orderStatusToRoleStatus[orderStatus][role];
 
         this.controller.model.roleStatus = roleStatus;
@@ -186,7 +188,7 @@ class Listeners extends Router{
                 }
             }
 
-            console.log('### orderData = ', orderData);
+            // console.log('### orderData = ', orderData);
 
             // Update order in Mongo
             await this.updateOrder(orderData);
@@ -205,6 +207,35 @@ class Listeners extends Router{
             const path = menuData[role][newOrderStatus].path;
             // console.log('# path = ', path);
             this.listeners.handleStatusButtonClick(path);
+
+            // Отправка писем emailSending
+            const emails = {
+                manager: 'vovoka.path@gmail.com',
+                photographer: 'vovoka@tut.by',
+                editor: 'jubka.sumka@gmail.com',
+            }
+            const order = this.model.orderData;
+            console.log('# 7 order = ', orderData);
+
+            // emailSending[newOrderStatus].forEach((role) => 
+            for (let [ key, value ] of Object.entries(emailSending[newOrderStatus])) {
+                const role = value;
+
+                console.log('# 8 key, value = ', key, value);
+
+                if (value) {
+                    const mailData = {
+                        clientEmail: emails[key], 
+                        title: `CYP: У клиента ${order.clientEmail} сменился статус на '${newOrderStatus}'!`, 
+                        msg: `Здравствуйте, ${key}!                             
+                        У клиента ${order.clientEmail} сменился статус на ${newOrderStatus}.`,
+                    }
+
+                    await this.sendEmail(mailData);
+                }
+            };
+
+            
         }
     }
 }
