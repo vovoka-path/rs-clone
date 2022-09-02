@@ -90,16 +90,18 @@ class Router {
         // заголовок DELETE ?
         const role = this.controller.model.auth.role;
         // const roleStatus = routes[role][path].status;
-        console.log('# role, path = ', role, path) //, ' -> roleStatus = ', roleStatus);
         let orderStatus = this.controller.model.orderStatus;
-
-
+        
+        
         if (orderStatusToRoleStatus[orderStatus][role] === 'none') {
             orderStatus = this.controller.model.startStatuses[role];
         }
+        
+        console.log('# role, path, orderStatus = ', role, path, orderStatus) //, ' -> roleStatus = ', roleStatus);
+        // const roleStatus = routes[role][path].status;
 
-        const roleStatus = routes[role][path].status;
-        this.controller.view.cab.header.innerText = menuData[role][roleStatus].ru;
+        this.controller.view.cab.header.innerText = menuData[role][orderStatus].ru;
+        // this.controller.view.cab.header.innerText = menuData[role][roleStatus].ru;
 
         return false;
     }
