@@ -14,7 +14,7 @@ class OrderInCab {
         this.orderCabContainer = createCustomElement('div', 'order-cab-container');
         this.orderItemsContainer = createCustomElement('div', 'order-cab-items-container');
         
-        console.log('# order = ', order);
+        // console.log('# order = ', order);
         // Отрисовываем все поля заказа
         for ( let key in order) {
             if (isShowOrderKey(role, order.status, key)) {
@@ -39,6 +39,7 @@ class OrderInCab {
         if (key === 'date') {
             const dates = order[key];
             const datesKeys = cabViews[role][roleStatus].dates;
+            // console.log('# datesKeys = ', datesKeys);
             
             orderValue = datesKeys.map((dateKey) => {
                 const date = dates[dateKey];
