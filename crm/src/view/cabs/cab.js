@@ -22,8 +22,8 @@ class Cab {
         this.statusButtons = [];
     }
 
-    // DELETE
-    statusDetailsView(props) {
+    // fake
+    renderStatusDataView(props) {
         // console.log('# props = ', props);
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
         this.changedElement = createCustomElement('div', 'fake');
