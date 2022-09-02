@@ -30,6 +30,32 @@ class Api {
         }
     }
 
+    // - Get Order: Returns json data specified order.
+    //     - Method *GET* 
+    //     - URL *'api/orders/:id'*
+    //     - HEADERS: 
+    //         - *"Authorization": "Bearer <-YOU TOKEN->"*
+    //         - *"Content-Type": "aplication/json"*
+    //     - RETURN: *Order* or *ERROR*
+
+    async getOrderById(id, token) {
+        const authorization = `Bearer ${token}`;
+
+        return fetch(`${this.domen}/api/orders/${id}`, {
+            method: 'GET',
+            headers: {
+                "Authorization": authorization,
+                'Content-Type': 'application/json' 
+            },
+        })
+            .then(async(response) => {
+                return await response.json();
+            })
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
     async updateOrder(data, token) {
         const authorization = `Bearer ${token}`;
 
@@ -135,9 +161,7 @@ class Api {
             body: JSON.stringify(mailData),
         })
             .then(async(response) => {
-                return {
-                    data: await response.json(),
-                }
+                return await response.json();
             })
             .catch(error => {
                 throw new Error(error);
