@@ -39,7 +39,7 @@ class Controller {
                 if (!order.editorId) {
                     const orderData = {
                         _id: order._id,
-                        editorId: order.editorId,
+                        editorId: editorId,
                     }
 
                     this.updateOrder(orderData);
@@ -56,6 +56,10 @@ class Controller {
         // TODO: проверять response
         this.model.orderStatus = orderData.status;
     }
+
+    
+
+
 
     async getUsersByRole(role) {
         // this.addUser();
@@ -91,14 +95,14 @@ class Controller {
         const users = await this.api.getUsers(token).then(json => json.data.users);
         this.model.users = users;
 
-        const mailData = {
-            clientEmail: 'vovoka@tut.by', 
-            title: 'CRM CYP', 
-            msg: `Тут текст письма 
+        // const mailData = {
+        //     clientEmail: 'vovoka@tut.by', 
+        //     title: 'CRM CYP', 
+        //     msg: `Тут текст письма 
             
-            это вторая строчка`,
-        }
-        await this.sendEmail(mailData);
+        //     это вторая строчка`,
+        // }
+        // await this.sendEmail(mailData);
         // console.log('# mail response = ', await this.sendEmail(mailData)); 
 
         return users;
@@ -119,9 +123,16 @@ class Controller {
         this.model.statuses = this.getOrderStatusesByRoleStatus();
     }
 
-    updateModelDataByOrderId(orderId) {
+    async updateModelDataByOrderId(orderId) {
         this.model.orderId = orderId;
-        this.model.orderData = this.getOrderDataByOrderId(orderId);
+        this.model.orderData = await this.getOrderByOrderId(orderId);
+    }
+
+    async getOrderByOrderId(orderId) {
+        const token = this.model.auth.token;
+        const orderData = await this.api.getOrderById(orderId, token);
+
+        return orderData;
     }
 
     getOrderStatusesByRoleStatus() {
@@ -147,13 +158,13 @@ class Controller {
         return ordersByRoleStatus;
     }
 
-    getOrderDataByOrderId(orderId) {
-        const orders = this.model.orders;
+    // getOrderByIdFromModel(orderId) {
+    //     const orders = this.model.orders;
 
-        const [ orderData ] = orders.filter((order) => order._id === orderId);
+    //     const [ orderData ] = orders.filter((order) => order._id === orderId);
     
-        return orderData;
-    }
+    //     return orderData;
+    // }
 
     async sendEmail(mailData) {
         console.log('# sendEmail = ', mailData);
