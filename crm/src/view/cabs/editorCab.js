@@ -18,26 +18,26 @@ class EditorCab extends Cab{
     // *** Cab Views ***
 
     renderIncoming(props) {
-        this.fakeView(props); // DELETE
+        this.renderStatusDataView(props); // DELETE
     }
 
     renderEditing(props) {
-        this.fakeView(props); // DELETE
+        this.renderStatusDataView(props); // DELETE
 
     }
 
     renderCompleted(props) {
-        this.fakeView(props); // DELETE
+        this.renderStatusDataView(props); // DELETE
 
     }
 
     renderFeedbacks(props) {
-        this.fakeView(props); // DELETE
+        this.renderStatusDataView(props); // DELETE
 
     }
 
     renderStatistics(props) {
-        this.fakeView(props); // DELETE
+        this.renderStatusDataView(props); // DELETE
 
     }
 }
