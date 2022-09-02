@@ -23,7 +23,7 @@ class Cab {
     }
 
     // DELETE
-    fakeView(props) {
+    statusDetailsView(props) {
         // console.log('# props = ', props);
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
         this.changedElement = createCustomElement('div', 'fake');
@@ -71,7 +71,8 @@ class Cab {
     render(props) {
         this.mainContainer.append(this.header);
         this.addMenu();
-        this.addFirstCabView(props);
+        // this.addFirstCabView(props);
+        this.renderOrderList(props);
         this.addMenuBtn();
         
 
@@ -97,16 +98,15 @@ class Cab {
     }
 
     // Показывает список входящих заказов, разный для каждой роли.
-    addFirstCabView(props) {
-        this.renderOrderList(props);
-        this.mainContainer.append(this.cabContainer);
-    }
+    // addFirstCabView(props) {
+    // }
 
     // Рендерит список заказов в зависимости от статуса 
     // после клика в меню или по умолчанию входящие
     renderOrderList(props) {
         this.cabContainer.innerHTML = '';
         this.cabContainer.append(this.ordersList.create(props));
+        this.mainContainer.append(this.cabContainer);
     }
 
     // Рисуем кабиент в зависимости от orderStatus
