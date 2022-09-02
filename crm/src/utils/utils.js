@@ -1,4 +1,5 @@
 import cabViews from '../data/cabViews.json' assert { type: "json" };
+import orderKeysInList from '../data/orderKeysInList.json' assert { type: "json" };
 
 export const createCustomElement = (tag = 'div', styles) => {
     // styles = 'class1 class2 class3'
@@ -17,15 +18,28 @@ export const setAttributesElement = (element, attributes) => {
 }
 
 // Определяет какие ключи заказа показывать для каждой роли + статуса
-export const isShowOrderKey = (key, forbiddenOrderKeys) => {
-    if ( forbiddenOrderKeys.length != 0 ) {
-        if ( (forbiddenOrderKeys.includes(key)) ) {
-            return false;
+export const isShowOrderKey = (role, orderStatus, key) => {
+    // console.log('# role, orderStatus, key = ', role, orderStatus, key);
+    const keyAllowedToShow = orderKeysInList[orderStatus][role];
+
+    if ( keyAllowedToShow.length !== 0 ) {
+        if ( (keyAllowedToShow.includes(key)) ) {
+            return true;
         }
     }
 
-    return true;
+    return false;
 }
+
+// export const isShowOrderKey = (key, forbiddenOrderKeys) => {
+//     if ( forbiddenOrderKeys.length != 0 ) {
+//         if ( (forbiddenOrderKeys.includes(key)) ) {
+//             return false;
+//         }
+//     }
+
+//     return true;
+// }
 // DELETE
 export const getStatuses = (role, roleStatus) => {
     const statuses = cabViews[role][roleStatus].statusesForOrders;

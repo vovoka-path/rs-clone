@@ -1,0 +1,40 @@
+{
+    "ru": {
+        "city": "Город",
+        "route": "Маршрут",
+        "package_name": "Пакет",
+        "clientEmail": "Почта",
+        "clientMessage": "Сообщение",
+        "clientPhone": "Телефон",
+        "date": {
+            "incoming": "Время заявки",
+            "acceptingPhotographer": "Фотограф назначен",
+            "shooting": "Фотограф принял",
+            "acceptingEditor": "Фотограф закончил",
+            "editing": "Обработчик принял",
+            "sending": "Обработчик закончил",
+            "completed": "Отправлено клиенту",
+            "canceled": "Время отмены",
+            "feedbacks": "Отзыв получен"
+        },
+        "status": "",
+        "photographerId": "Фотограф",
+        "editorId": "Обработчик",
+        "photographerLink": "",
+        "editorLink": ""
+    },
+    "en": {
+        "city": "Город",
+        "route": "Маршрут",
+        "package_name": "Пакет",
+        "clientEmail": "Почта",
+        "clientMessage": "Сообщение",
+        "clientPhone": "Телефон",
+        "date": "",
+        "status": "",
+        "photographerId": "Фотограф",
+        "editorId": "Обработчик",
+        "photographerLink": "",
+        "editorLink": ""
+    }
+}

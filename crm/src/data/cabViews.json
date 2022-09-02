@@ -4,6 +4,7 @@
             "path": "/manager/incoming",
             "method": "renderIncoming",
             "statusesForOrders": ["incoming"],
+            "dates": ["incoming"],
             "statusButton": {
                 "accept": {
                     "ru": "Назначить",
@@ -21,6 +22,7 @@
             "path": "/manager/accepting-photographer",
             "method": "renderAcceptingPhotographer",
             "statusesForOrders": ["acceptingPhotographer"],
+            "dates": ["incoming", "acceptingPhotographer"],
             "statusButton": {
                 "accept": {
                     "ru": null,
@@ -37,6 +39,7 @@
             "path": "/manager/shooting",
             "method": "renderShooting",
             "statusesForOrders": ["shooting"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting"],
             "statusButton": {
                 "accept": {
                     "ru": null,
@@ -53,6 +56,7 @@
             "path": "/manager/accepting-editor",
             "method": "renderAcceptingEditor",
             "statusesForOrders": ["acceptingEditor"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor"],
             "statusButton": {
                 "accept": {
                     "ru": null,
@@ -68,6 +72,7 @@
             "path": "/manager/editing",
             "method": "renderEditing",
             "statusesForOrders": ["editing"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing"],
             "statusButton": {
                 "accept": {
                     "ru": null,
@@ -83,6 +88,7 @@
             "path": "/manager/sending",
             "method": "renderSending",
             "statusesForOrders": ["sending"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending"],
             "statusButton": {
                 "accept": {
                     "ru": "Отправлено клиенту",
@@ -100,18 +106,21 @@
             "path": "/manager/completed",
             "method": "renderCompleted",
             "statusesForOrders": ["completed"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending", "completed"],
             "statusButton": null
         },
         "canceled": {
             "path": "/manager/canceled",
             "method": "renderCanceled",
             "statusesForOrders": ["canceled"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "canceled"],
             "statusButton": null
         },
         "feedbacks": {
             "path": "/manager/feedbacks",
             "method": "renderFeedbacks",
             "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending", "completed", "feedbacks"],
             "statusButton": null
         },
         "addOrder": {
