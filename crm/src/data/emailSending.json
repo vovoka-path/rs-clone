@@ -1,0 +1,47 @@
+{
+    "incoming": {
+        "manager": true,
+        "photographer": false,
+        "editor": false
+    },
+    "acceptingPhotographer": {
+        "manager": false,
+        "photographer": true,
+        "editor": false
+    },
+    "shooting": {
+        "manager": true,
+        "photographer": false,
+        "editor": false
+    },
+    "acceptingEditor": {
+        "manager": true,
+        "photographer": false,
+        "editor": true
+    },
+    "editing": {
+        "manager": true,
+        "photographer": false,
+        "editor": false
+    },
+    "sending": {
+        "manager": true,
+        "photographer": false,
+        "editor": false
+    },
+    "completed": {
+        "manager": true,
+        "photographer": true,
+        "editor": true
+    },
+    "canceled": {
+        "manager": true,
+        "photographer": false,
+        "editor": false
+    },
+    "feedbacks": {
+        "manager": true,
+        "photographer": true,
+        "editor": true
+    }
+}
