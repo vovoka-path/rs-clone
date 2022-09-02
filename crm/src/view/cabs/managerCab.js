@@ -2,6 +2,9 @@ import Cab from './cab.js';
 import OrderInCab from '../../components/order/orderInCab.js';
 import PhotographerList from '../../components/photographerList/photographerList.js';
 import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
+import Employees from '../../components/Employees/Employees.js';
+import Employee from '../../components/Employee/Employee.js';
+import EmployeeEdit from '../../components/Employee/EmployeeEdit/EmployeeEdit.js';
 
 const role = 'manager';
 // const styles = {
@@ -71,11 +74,13 @@ class ManagerCab extends Cab{
     }
 
     renderFeedbacks(props) {
+        this.cabContainer.innerHTML = '';
         this.fakeView(props); // DELETE
 
     }
 
     renderAddOrder(props) {
+        this.cabContainer.innerHTML = '';
         this.fakeView(props); // DELETE
 
     }
@@ -88,9 +93,14 @@ class ManagerCab extends Cab{
 
     renderEmployees(props) {
         this.cabContainer.innerHTML = '';
-        this.fakeView(props); // DELETE
-        console.log('# props = ', props);
+        const employees = new Employees(this.cabContainer);
 
+
+
+        const users = props.users;
+        employees.create(users);
+        // const employeesView = Employees.create(users);
+        // this.cabContainer.append(employeesView);
     }
 }
 

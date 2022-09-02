@@ -68,7 +68,7 @@ class Router {
             // console.log('# roleStatus = ', roleStatus);
             // console.log('# menuData = ', menuData);
             console.log(`# menuData[${role}][${orderStatus}] = `, menuData[role][orderStatus]);
-            this.controller.view.cab.ordersList.header.innerText = menuData[role][orderStatus].ru;
+            this.controller.view.cab.header.innerText = menuData[role][orderStatus].ru;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
             
             return false;
@@ -93,11 +93,13 @@ class Router {
         console.log('# role, path = ', role, path) //, ' -> roleStatus = ', roleStatus);
         let orderStatus = this.controller.model.orderStatus;
 
+
         if (orderStatusToRoleStatus[orderStatus][role] === 'none') {
             orderStatus = this.controller.model.startStatuses[role];
         }
 
-        this.controller.view.cab.ordersList.header.innerText = menuData[role][orderStatus].ru;
+        const roleStatus = routes[role][path].status;
+        this.controller.view.cab.header.innerText = menuData[role][roleStatus].ru;
 
         return false;
     }

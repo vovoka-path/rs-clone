@@ -24,7 +24,7 @@ body {
 }
 
 .cab-container {
-  padding: 15px;
+  padding: 50px 15px 100px;
   width: 100vw;
   height: 100vh;
   background-color: rgb(231, 241, 255);
@@ -32,7 +32,6 @@ body {
   font-family: "Oswald", sans-serif;
   font-weight: 300;
   overflow-y: auto;
-  padding-bottom: 50px;
 }
 
 .orders-container {
@@ -229,4 +228,22 @@ body {
 .form-description,
 .pure-input-1 {
   z-index: 10;
+}
+
+.cab__title {
+  position: absolute;
+  width: 100%;
+  margin: 0;
+  background-color: #167594;
+  text-align: center;
+  padding-top: 2px;
+  padding-bottom: 8px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 0px 2px 4px black;
+  z-index: 10;
+}
+
+.main-container {
+  background-color: rgb(231, 241, 255);
 }

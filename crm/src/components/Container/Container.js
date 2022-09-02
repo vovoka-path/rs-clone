@@ -1,8 +1,8 @@
 class Conatainer {
-    create(className, textContent = '') {
+    create(className, content = '') {
         const div = document.createElement('div');
         div.className = className;
-        div.innerText = textContent;
+        div.append(content);
 
         return div;
     }

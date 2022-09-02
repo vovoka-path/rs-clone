@@ -4,6 +4,7 @@ import { Menu } from '../../components/Menu/Menu.js';
 import OrdersList from '../../components/ordersList/ordersList.js';
 import StatusButton from '../../components/statusButton/statusButton.js';
 import { createCustomElement } from '../../utils/utils.js';
+import Header from '../../components/Header/Header.js';
     
 const styles = {
     mainContainer: 'main-container',
@@ -13,6 +14,7 @@ const styles = {
 class Cab {
     constructor(role) {
         this.role = role;
+        this.header = Header.create(2, "Входящие", 'cab__title')
         this.menu = new Menu(this.role);
         this.mainContainer = createCustomElement('main', styles.mainContainer);
         this.cabContainer = createCustomElement('div', styles.cabContainer);
@@ -67,9 +69,11 @@ class Cab {
     }
     
     render(props) {
+        this.mainContainer.append(this.header);
         this.addMenu();
         this.addFirstCabView(props);
         this.addMenuBtn();
+        
 
         return this.mainContainer;
     }

@@ -3,7 +3,7 @@ import OrderInList from '../order/orderInList.js';
 class OrdersList {
     constructor() {
         this.startStatus = 'Входящие';
-        this.header = this.createStatusHeader(this.startStatus);
+        // this.header = this.createStatusHeader(this.startStatus);
         this.ordersContainer = this.createOrdersContainer();
     }
 
@@ -13,7 +13,7 @@ class OrdersList {
 
         this.removeOrderList();
 
-        this.ordersContainer.append(this.header);
+        // this.ordersContainer.append(this.header);
         this.renderOrdersList(props);
 
         return this.ordersContainer;
@@ -26,12 +26,12 @@ class OrdersList {
         return ordersContainer;
     }
     
-    createStatusHeader(startStatus) {
-        const statusHeader = document.createElement('h3');
-        statusHeader.innerText = startStatus;
+    // createStatusHeader(startStatus) {
+    //     const statusHeader = document.createElement('h3');
+    //     statusHeader.innerText = startStatus;
         
-        return statusHeader;
-    }
+    //     return statusHeader;
+    // }
 
     renderOrdersList(props) {
         const { orders } = props;

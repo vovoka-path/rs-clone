@@ -62,7 +62,6 @@ class Listeners extends Router{
             this.controller.view.cab.renderOrderList(props);
         }
     }
-    
 
     async createPropsByRoleStatus(roleStatus) {
         await this.controller.updateModelDataByNewRoleStatus(roleStatus);
