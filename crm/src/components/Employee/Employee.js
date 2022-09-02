@@ -9,10 +9,11 @@ class Employee {
         this.cabContainer = cabContainer;
         this.employeeEdit = new EmployeeEdit(this.cabContainer);
     }
-    create(user) {
+    create(user, handler) {
         const niknameTitle = Header.create(3, user.username, 'user_title');
         const userContainer = Container.create('user', niknameTitle);
-        const changeBtn = Button.create('userChange-btn btn', 'Редактировать', 'changeUserBtn', this.employeeEdit.create);
+        const changeBtn = Button.create('userChange-btn btn', 'Редактировать', 'changeUserBtn', handler);
+        const deleteBtn = Button.create('userChange-btn btn', 'Удалить', 'deleteUserBtn', /* метод для удаления пользователя */);
 
         for(let prop in user) {
             if (prop === '__v' || prop === 'password') continue;
@@ -23,9 +24,7 @@ class Employee {
             const item = Paragraph.create(`user_${prop}`, user[prop]);
             userContainer.append(item);
         }
-        userContainer.append(changeBtn);
-        console.log(this.cabContainer)
-        this.employeeEdit.cabContainer = this.cabContainer;
+        userContainer.append(changeBtn, deleteBtn);
         return userContainer;
     }
 }
