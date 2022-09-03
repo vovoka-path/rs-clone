@@ -77,14 +77,6 @@ class Api {
             })
     }
 
-    // - Create Order: Creates a new order.
-    //     - Method *POST* 
-    //     - URL *'api/orders'*
-    //     - HEADERS: 
-    //         - *"Content-Type": "aplication/json"*
-    //     - BODY: *{city: String, route: String, package: String, clientEmail: String, clientMsg: String }*
-    //     - RETURN: *Order* or *ERROR*
-
     async createNewOrder(orderData) {
         return fetch(`${this.domen}/api/orders`, {
             method: 'POST',
@@ -145,6 +137,23 @@ class Api {
                     data: await response.json(),
                 }
             })
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
+    async updateUser(token, userData) {
+        const authorization = `Bearer ${token}`;
+
+        return fetch(`${this.domen}/auth/users`, {
+            method: 'PUT',
+            headers: { 
+                "Authorization": authorization,
+                'Content-Type': 'application/json' 
+            },
+            body: JSON.stringify(userData),
+        })
+            .then(async(response) => {await response.json()})
             .catch(error => {
                 throw new Error(error);
             })

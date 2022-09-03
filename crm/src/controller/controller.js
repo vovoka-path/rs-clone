@@ -139,6 +139,11 @@ class Controller {
         return users;
     }
 
+    async updateUser(userData) {
+        const token = this.model.auth.token;
+        const response = await this.api.updateUser(token, userData);
+    }
+
     async deleteUser(id) {
         const token = this.model.auth.token;
         const response = await this.api.deleteUser(token, id);

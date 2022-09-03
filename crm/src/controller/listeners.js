@@ -25,8 +25,12 @@ class Listeners extends Router{
         // console.log('# employeeEditListener = ', this.employeeEditListener);
         // this.employeeEditListener();
         this.btnSendListener = this.btnSendListenerNotBind.bind(this.controller);
+        this.btnCreateUserListener = this.btnCreateUserListenerNotBind.bind(this.controller);
+        this.btnEditUserListener = this.btnEditUserListenerNotBind.bind(this.controller);
+        this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
+        this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
     }
-
+    
     async signIn() {
         const view = this.controller.view;
 
@@ -92,6 +96,10 @@ class Listeners extends Router{
             // statusButtonListener: null, // добавляем после входа в конкретный заказ
             employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
             btnSendListener: this.btnSendListener, // Create new Order
+            btnCreateUserListener: this.btnCreateUserListener,
+            btnEditUserListener: this.btnEditUserListener,
+            btnDeleteUserListener: this.btnDeleteUserListener,
+            btnUpdateUserListener: this.btnUpdateUserListener,
         };
 
         return props;
@@ -175,9 +183,9 @@ class Listeners extends Router{
             };
 
             // --- Set new photographerId
+            const photographerId = event.target.parentElement.getAttribute('id');
+            
             if (role === 'manager' && roleStatus === 'incoming') {
-                const photographerId = event.target.parentElement.getAttribute('id');
-                
                 orderData = {
                     ...orderData,
                     photographerId: photographerId,
@@ -215,12 +223,11 @@ class Listeners extends Router{
             // Отправка писем emailSending
             const order = this.model.orderData;
             
-            // let emails = {};
-            // if (order.photographerId) emails.photographer = this.getUserById(order.photographerId);
-            // if (order.editorId) emails.editor = this.getUserById(order.editorId);
             const [ manager ] = await this.getUsersByRole('manager');
             const [ photographer ] = order.photographerId ? await this.getUserById(order.photographerId) : '';
             const [ editor ] = order.editorId ? await this.getUserById(order.editorId) : '';
+            // console.log('# photographerId = ', photographerId);
+            // console.log('# photographer = ', photographer);
             const emails = {
                 manager: manager.email,
                 photographer: photographer.email,
@@ -269,6 +276,57 @@ class Listeners extends Router{
         };
         
         this.createNewOrder(orderData);
+    }
+
+    btnCreateUserListenerNotBind() {
+        return async (event) => {
+            // this = controller
+
+            console.log('# btnCreateUserListener:');
+            console.log('# View CREATE USER (not found!)/ Must be created.');
+            // this.view.cab.employees.employee.EmployeeEdit;
+        }
+    }
+
+    btnEditUserListenerNotBind() {
+        return async (event) => {
+            // this = controller
+            const id = event.target.id;
+            const [ user ] = await this.getUserById(id);
+            
+            this.view.cab.employees.employee.employeeEdit.create(user);
+
+            console.log('# btnEditUserListener:');
+            console.log('# View EDIT USER id = ', id);
+            // console.log('# this.view.cab.employees.employee.employeeEdit = ', this.view.cab.employees.employee.employeeEdit);
+        }
+    }
+
+    btnDeleteUserListenerNotBind() {
+        return async (event) => {
+            // this = controller
+            const id = event.target.id;
+            // await this.deleteUser(id); // ОСТОРОЖНО !!!
+
+            // this.view.cab.employees.employee.EmployeeEdit;
+
+            console.log('# btnDeleteUserListener:');
+            console.log('# DELETE USER id = ', id);
+        }
+    }
+
+    btnUpdateUserListenerNotBind() {
+        return async (event) => {
+            // this = controller
+            const id = event.target.id;
+
+            // Нужен метод, который получает данные формы как ты написал в OrderCreate:
+
+            // await this.updateUser(userData)
+
+            console.log('# btnUpdateUserListener:');
+            console.log('# UPDATE USER id = ', id);
+        }
     }
 }
 

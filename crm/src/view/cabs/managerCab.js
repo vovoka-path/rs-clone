@@ -94,13 +94,13 @@ class ManagerCab extends Cab{
     }
 
     renderEmployees(props) {
+        // console.log('# props = ', props);
         this.cabContainer.innerHTML = '';
-        const employees = new Employees(this.cabContainer);
-
+        this.employees = new Employees(this.cabContainer, props);
 
 
         const users = props.users;
-        employees.create(users);
+        this.employees.create(users);
         // const employeesView = Employees.create(users);
         // this.cabContainer.append(employeesView);
     }
