@@ -1,0 +1,28 @@
+.order-cab-items-container {
+    margin-bottom: 20px ;
+    padding: 10px;
+    display: flex;
+    background-color: rgb(210, 255, 241);
+    box-shadow: 0px 0px 10px;
+    border-radius: 15px;
+    flex-direction: column;
+    gap: 15px;
+
+}
+
+.order-cab-items-container span {
+    font-weight: 700;
+}
+
+.order-email-button {
+    min-width: fit-content;
+    padding: 10px;
+    background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
+    border: none;
+    height: 35spx;
+    border-radius: 100px;
+    box-shadow: 0 0 5px grey;
+    color: white;
+    flex-shrink: 0;
+}
+

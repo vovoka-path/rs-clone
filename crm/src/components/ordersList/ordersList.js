@@ -1,4 +1,4 @@
-import OrderInList from '../order/orderInList.js';
+import OrderInList from '../order/orderInList/orderInList.js';
 
 class OrdersList {
     constructor() {

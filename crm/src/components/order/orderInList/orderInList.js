@@ -1,7 +1,7 @@
-import statusButtonColor from '../../data/statusButtonColor.json' assert { type: "json" };
-import orderKeysInList from '../../data/orderKeysInList.json' assert { type: "json" };
-import orderKeyTitles from '../../data/orderKeyTitles.json' assert { type: "json" };
-import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../utils/utils.js';
+import statusButtonColor from '../../../data/statusButtonColor.json' assert { type: "json" };
+import orderKeysInList from '../../../data/orderKeysInList.json' assert { type: "json" };
+import orderKeyTitles from '../../../data/orderKeyTitles.json' assert { type: "json" };
+import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../../utils/utils.js';
 
 // Универсальный список заказов для всех кабинетов
 // Зависит от props
@@ -39,7 +39,7 @@ class OrderInList {
 
     createButton(order) {
         const buttonOrder = document.createElement('button');
-        buttonOrder.className = 'btn-order';
+        buttonOrder.className = 'btn-order btn';
         buttonOrder.innerText = this.buttunText;
         buttonOrder.setAttribute('id', order._id);
 

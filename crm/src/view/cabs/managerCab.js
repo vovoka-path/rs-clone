@@ -1,5 +1,5 @@
 import Cab from './cab.js';
-import OrderInCab from '../../components/order/orderInCab.js';
+import OrderInCab from '../../components/order/orderInCab/orderInCab.js';
 import PhotographerList from '../../components/photographerList/photographerList.js';
 import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 import Employees from '../../components/Employees/Employees.js';

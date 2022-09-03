@@ -1,5 +1,5 @@
 import Cab from './cab.js';
-import OrderInCab from '../../components/order/orderInCab.js';
+import OrderInCab from '../../components/order/orderInCab/orderInCab.js';
 // import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 
 const role = 'photographer';
