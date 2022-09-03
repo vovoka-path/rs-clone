@@ -40,6 +40,8 @@ class PhotographerList {
                         photographerKey.innerText = value === 'доступен' ? "✅" : "⛔";
     
                         this.photographerContainer.append(photographerKey);
+                    } else if (key === 'email') {
+                        continue;
                     } else {
                         const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
 

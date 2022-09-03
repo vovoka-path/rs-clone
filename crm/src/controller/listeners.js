@@ -77,12 +77,14 @@ class Listeners extends Router{
         const users = this.controller.model.users;
         const orderStatuses = this.controller.model.statuses;
         const ordersByRoleStatus = this.controller.getOrdersByRoleStatus();
+        const allOrders = this.controller.model.allOrders;
         
         const props = {
             role: role,
             roleStatus: roleStatus,
             orderStatuses: orderStatuses,
             order: {},
+            allOrders: allOrders,
             orders: ordersByRoleStatus,
             users: users,
             orderButtonListener: this.orderButtonListener,

@@ -28,16 +28,15 @@ class Controller {
     
     async getOrderData(){
         const { token, role } = this.model.auth;
-        const orders = await this.api.getOrderData(token, role);
-
-        this.model.orders = orders;
+        const allOrders = await this.api.getOrderData(token, role);
+        
 
         // this.model.users = await this.getAllUsers();
         this.model.photographers = this.getUsersByRole('photographer');
 
+        // Присваиваем editorId, если его еще нет в заказе
         if (role === admin) {
-
-            orders.forEach((order) => {
+            allOrders.forEach((order) => {
                 if (!order.editorId) {
                     const orderData = {
                         _id: order._id,
@@ -49,7 +48,34 @@ class Controller {
             })
         }
 
-        return orders;
+        // this.model.allOrders = allOrders;
+
+        return allOrders;
+    }
+
+    async updateModelDataByNewRoleStatus(roleStatus) {
+        // Запоминаем новый текущий статус работника в model 
+        // значение передается из метода роутера (массив методов для каждого пути)
+        // console.log('# 1 roleStatus = ', roleStatus);
+        this.model.roleStatus = roleStatus;
+        this.model.statuses = this.getOrderStatusesByRoleStatus();
+        this.model.allOrders = await this.getOrderData();
+        this.model.orders = this.getOrdersByRoleStatus();
+    }
+
+    getOrdersByRoleStatus() {
+        const statuses = this.model.statuses;
+        const allOrders = this.model.allOrders;
+        let ordersByRoleStatus = [];
+    
+        statuses.forEach((status) => {
+            ordersByRoleStatus.push(...filterOrdersByStatus(allOrders, status));
+            // ordersByRoleStatus = [...ordersByRoleStatus, ...filterOrdersByStatus(orders, status)];
+        });
+
+        this.model.orders = ordersByRoleStatus;
+    
+        return ordersByRoleStatus;
     }
 
     async updateOrder(orderData) {
@@ -119,15 +145,6 @@ class Controller {
         // TODO: проверять response
     }
 
-    async updateModelDataByNewRoleStatus(roleStatus) {
-        // Запоминаем новый текущий статус работника в model 
-        // значение передается из метода роутера (массив методов для каждого пути)
-        // console.log('# 1 roleStatus = ', roleStatus);
-        this.model.roleStatus = roleStatus;
-        this.model.orders = await this.getOrderData();
-        this.model.statuses = this.getOrderStatusesByRoleStatus();
-    }
-
     async updateModelDataByOrderId(orderId) {
         this.model.orderId = orderId;
         this.model.orderData = await this.getOrderByOrderId(orderId);
@@ -150,20 +167,7 @@ class Controller {
         return orderStatuses;
     }
 
-    getOrdersByRoleStatus() {
-        const statuses = this.model.statuses;
-        const orders = this.model.orders;
-        let ordersByRoleStatus = [];
-    
-        statuses.forEach((status) => {
-            ordersByRoleStatus.push(...filterOrdersByStatus(orders, status));
-            // ordersByRoleStatus = [...ordersByRoleStatus, ...filterOrdersByStatus(orders, status)];
-        })
-    
-        return ordersByRoleStatus;
-    }
-
-    // getOrderByIdFromModel(orderId) {
+        // getOrderByIdFromModel(orderId) {
     //     const orders = this.model.orders;
 
     //     const [ orderData ] = orders.filter((order) => order._id === orderId);
