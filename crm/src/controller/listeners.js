@@ -218,20 +218,17 @@ class Listeners extends Router{
             console.log('# 7 order = ', orderData);
 
             // emailSending[newOrderStatus].forEach((role) => 
-            for (let [ key, value ] of Object.entries(emailSending[newOrderStatus])) {
-                const role = value;
-
-                console.log('# 8 key, value = ', key, value);
-
-                if (value) {
+            for (let [ role, isSending ] of Object.entries(emailSending[newOrderStatus])) {
+                if (isSending) {
                     const mailData = {
-                        clientEmail: emails[key], 
+                        clientEmail: emails[role], 
                         title: `CYP: У клиента ${order.clientEmail} сменился статус на '${newOrderStatus}'!`, 
-                        msg: `Здравствуйте, ${key}!                             
+                        msg: `Здравствуйте, ${role}!                             
                         У клиента ${order.clientEmail} сменился статус на ${newOrderStatus}.`,
                     }
-
-                    await this.sendEmail(mailData);
+                    
+                    console.log(`# Email sended to ${role}. У клиента ${order.clientEmail} сменился статус на ${newOrderStatus}.`);
+                    // await this.sendEmail(mailData);
                 }
             };
 
