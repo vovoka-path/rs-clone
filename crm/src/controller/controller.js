@@ -176,10 +176,17 @@ class Controller {
     // }
 
     async sendEmail(mailData) {
-        console.log('# sendEmail = ', mailData);
+        // console.log('# sendEmail = ', mailData);
         const token = this.model.auth.token;
         const response = await this.api.sendEmail(token, mailData);
-        console.log('# response = ', response);
+        console.log('# sendEmail: response = ', response);
+    }
+
+    async createNewOrder(orderData) {
+        const response = await this.api.createNewOrder(orderData);
+        console.log('# createNewOrder: response = ', response);
+        const roleStatus = this.model.roleStatus;
+        await this.updateModelDataByNewRoleStatus(roleStatus);
     }
     
 }

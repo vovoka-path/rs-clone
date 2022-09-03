@@ -77,6 +77,26 @@ class Api {
             })
     }
 
+    // - Create Order: Creates a new order.
+    //     - Method *POST* 
+    //     - URL *'api/orders'*
+    //     - HEADERS: 
+    //         - *"Content-Type": "aplication/json"*
+    //     - BODY: *{city: String, route: String, package: String, clientEmail: String, clientMsg: String }*
+    //     - RETURN: *Order* or *ERROR*
+
+    async createNewOrder(orderData) {
+        return fetch(`${this.domen}/api/orders`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(orderData),
+        })
+            .then(async(response) => {await response.json()})
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
     async signUp(formData) {
         return fetch(`${this.domen}/auth/registration`, {
             method: 'POST',

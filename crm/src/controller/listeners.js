@@ -24,6 +24,7 @@ class Listeners extends Router{
         this.employeeEditListener = this.employeeListener.editNotBind.bind(this.controller)
         // console.log('# employeeEditListener = ', this.employeeEditListener);
         // this.employeeEditListener();
+        this.btnSendListener = this.btnSendListenerNotBind.bind(this.controller);
     }
 
     async signIn() {
@@ -90,6 +91,7 @@ class Listeners extends Router{
             orderButtonListener: this.orderButtonListener,
             // statusButtonListener: null, // добавляем после входа в конкретный заказ
             employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
+            btnSendListener: this.btnSendListener, // Create new Order
         };
 
         return props;
@@ -142,12 +144,9 @@ class Listeners extends Router{
     }
 
     // createNewOrderDataAfterAction(action) {
-
     // }
 
     // createOrderDataByOrderStatus(newOrderStatus) {
-
-
     //     return orderData;
     // }
 
@@ -253,6 +252,23 @@ class Listeners extends Router{
 
             
         }
+    }
+
+    btnSendListenerNotBind() {
+        const orderData =  {};
+        const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
+        const date = Date.now();
+        inputs.forEach((el) => {
+            console.log('# el = ', el);
+            const curInput = document.querySelector(`#${el}`);
+            orderData[el] = curInput.value;
+            curInput.value ='';
+        });
+        orderData.date = {
+            incoming: date,
+        };
+        
+        this.createNewOrder(orderData);
     }
 }
 

@@ -9,11 +9,17 @@ class OrderCreate {
     constructor(cabContainer) {
         this.cabContainer = cabContainer;
     }
-    renderCreateView(){
+    renderCreateView(props){
         const newOrderContainer = Container.create('new-order__container');
         const labels = ['Город', 'Маршрут', 'Пакет', 'Email Клиента', 'Примечания'];
-        const inputs = ['city', 'route', 'packege_name', 'clientEmail', 'clientMessage'];
-        const btnSend = Button.create('create-oreder-btn', 'Создать заказ', 'createOrderBtn', this.createButtonSend);
+        const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
+        const { btnSendListener } = props;
+        const btnSend = Button.create(
+            'create-oreder-btn', 
+            'Создать заказ', 
+            'createOrderBtn', 
+            btnSendListener
+        );
         let input;
         let label;
         for(let i = 0; i < inputs.length; i++) {
@@ -38,22 +44,6 @@ class OrderCreate {
         }
         newOrderContainer.append(btnSend)
         this.cabContainer.append(newOrderContainer);
-    }
-
-    createButtonSend(){
-        const orderData =  {};
-        const inputs = ['city', 'route', 'packege_name', 'clientEmail', 'clientMessage'];
-        const date = Date.now();
-        inputs.forEach((el) => {
-            const curInput = document.querySelector(`#${el}`);
-            orderData[el] = curInput.value;
-            curInput.value ='';
-        });
-        orderData.date = {
-            incomingOrder: date,
-        };
-        
-        console.log(orderData);// заменить на return
     }
 }
 

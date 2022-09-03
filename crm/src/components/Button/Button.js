@@ -1,5 +1,12 @@
 class Button {
-    create(className, innerText, id, handler = () => {}, type = 'button', name = '', ) {
+    create(
+            className, 
+            innerText, 
+            id, 
+            handler = () => {}, 
+            type = 'button', 
+            name = '', 
+        ) {
         const btn = document.createElement('button');
         btn.className = className;
         btn.innerText = innerText;

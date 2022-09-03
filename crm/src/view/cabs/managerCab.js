@@ -83,7 +83,7 @@ class ManagerCab extends Cab{
 
         const addOrderView = new OrderCreate(this.cabContainer);
 
-        addOrderView.renderCreateView();
+        addOrderView.renderCreateView(props);
 
     }
 
