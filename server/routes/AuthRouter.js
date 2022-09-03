@@ -11,7 +11,7 @@ router.post('/registration', [
     check('password', 'Password must be longer than 6 characters').isLength({min: 6}),
 ], AuthController.registration);
 router.post('/login', AuthController.login);
-router.get('/users', [authMiddleware, roleMiddleware('manager')], AuthController.getUsers);
+router.get('/users', authMiddleware, AuthController.getUsers);
 router.put('/users', [authMiddleware, roleMiddleware('manager')], AuthController.updateUser);
 router.delete('/users/:id', [authMiddleware, roleMiddleware('manager')], AuthController.deleteUser);
 
