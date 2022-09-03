@@ -34,12 +34,22 @@ class PhotographerList {
             for (let [key, value] of Object.entries(photographer)) {
                 // TODO: replace keys in config
                 if (!['password', 'role', 'username', '__v', '_id'].includes(key)) {
-                    const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
+                    if (key === 'status') {
+                        const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
+                        
+                        photographerKey.innerText = value === 'доступен' ? "✅" : "⛔";
+    
+                        this.photographerContainer.append(photographerKey);
+                    } else {
+                        const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
 
-                    photographerKey.innerText = value;
+                        photographerKey.innerText = value;
+    
+                        this.photographerContainer.append(photographerKey);
+                    }
 
-                    this.photographerContainer.append(photographerKey);
                 }
+                
             }
 
             this.container.append(this.photographerContainer);

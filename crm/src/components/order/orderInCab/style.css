@@ -3,7 +3,7 @@
     padding: 10px;
     display: flex;
     background-color: rgb(210, 255, 241);
-    box-shadow: 0px 0px 10px;
+    box-shadow: 0 0 5px grey;
     border-radius: 15px;
     flex-direction: column;
     gap: 15px;
@@ -14,15 +14,49 @@
     font-weight: 700;
 }
 
-.order-email-button {
-    min-width: fit-content;
-    padding: 10px;
+.order-email-link {
+    padding-left: 5px;
+    color: inherit;
+}
+.cab-status{
+    background-color: crimson;
+    padding: 2px 4px;
+    text-align: center;
+    width: fit-content;
+    align-self: center;
+    border-radius: 5px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.photographer-list-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px
+}
+.photographer-container {
+    padding: 5px;
+    position: relative;
+    width: 100%;
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-weight: 700;
+    /* box-shadow: 0 0 10px black; */
+}
+.photographer-container button{
+    margin-top: 10px;
     background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
     border: none;
-    height: 35spx;
+    height: 30px;
     border-radius: 100px;
     box-shadow: 0 0 5px grey;
     color: white;
-    flex-shrink: 0;
 }
 
+.photographer-status {
+    position: absolute;
+    right: 0;
+    top: 0;
+}

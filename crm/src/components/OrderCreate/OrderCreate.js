@@ -20,6 +20,9 @@ class OrderCreate {
             if (labels[i] === 'Примечания') {
                 label = Label.create(inputs[i], labels[i]);
                 input = Textarea.create(`order__${inputs[i]}`, `${inputs[i]}`, labels[i]);
+            } else if (labels[i] === 'Город') {
+                label = Label.create(inputs[i], labels[i]);
+                input = Select.create(`order__${inputs[i]}`, `${inputs[i]}`, ['Прага', 'Париж', 'Рим', 'Венеция']);
             } else if (labels[i] === 'Маршрут') {
                 label = Label.create(inputs[i], labels[i]);
                 input = Select.create(`order__${inputs[i]}`, `${inputs[i]}`, ['Маршрут №1 - Старинная Прага', 'Маршрут №2 - Уютная Прага', 'Маршрут №3 - Сердце Праги']);

@@ -74,11 +74,14 @@ if (key === 'date') {
             });
         } else if (key === 'clientEmail') {
             const email = order[key];
-            const btn = createCustomElement('input', 'order-email-button btn');
-            btn.setAttribute('type', 'button');
-            btn.setAttribute('value', email);
-            btn.setAttribute('onclick', `window.location.assign("mailto:${email}");`);
-            this.orderKeyElement.append(btn);
+            const span = createCustomElement('span', 'order-email-span');
+            span.innerHTML = 'E-mail:';
+            const linkToMail = createCustomElement('a', 'order-email-link');
+            // btn.setAttribute('type', 'button');
+            linkToMail.innerHTML = `${email}`;
+            linkToMail.setAttribute('value', email);
+            linkToMail.setAttribute('href', `mailto:${email}`);
+            this.orderKeyElement.append(span, linkToMail);
         } else {
             this.orderKeyElement.className = `order_item order-item-cab cab-${key}`;
             this.orderKeyElement.innerHTML = orderValue; // Заменил innerText на innerHTML для того чтоб использовать теги в шаблонной строке

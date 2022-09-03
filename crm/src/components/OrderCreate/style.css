@@ -1,0 +1,33 @@
+.new-order__container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.order__city,
+.order__route,
+.order__packege_name,
+.order__clientEmail,
+.order__clientMessage {
+    padding: 5px;
+    border-radius: 10px;
+    border: none;
+}
+.order__clientMessage {
+    height: 120px;
+}
+.new-order__container label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.new-order__container button {
+    margin-top: 10px;
+    background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    box-shadow: 0 0 5px grey;
+    color: white;
+}
+
