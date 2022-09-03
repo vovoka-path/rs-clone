@@ -67,7 +67,7 @@ class Router {
             // console.log('# role = ', role);
             // console.log('# roleStatus = ', roleStatus);
             // console.log('# menuData = ', menuData);
-            console.log(`# menuData[${role}][${orderStatus}] = `, menuData[role][orderStatus]);
+            // console.log(`# menuData[${role}][${orderStatus}] = `, menuData[role][orderStatus]);
             this.controller.view.cab.header.innerText = menuData[role][orderStatus].ru;
             // view.cab.ordersList.header.innerText = url.pathname.split('/')[2];
             

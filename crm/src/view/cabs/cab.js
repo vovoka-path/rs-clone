@@ -35,7 +35,7 @@ class Cab {
         `;
             
         this.changedElement.append(title);
-        console.log('# ----------fakeView --- role = ', role, roleStatus);
+        // console.log('# ----------fakeView --- role = ', role, roleStatus);
         if (!(role === 'manager' && roleStatus === 'incoming')) {
             this.renderStatusButtons(props);
         }
