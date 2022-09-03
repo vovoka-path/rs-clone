@@ -15,8 +15,18 @@ export const mailSendler = async (order) => {
       В близжайшее время с вами свяжется фотограф, и вы сможете договориться о времени проведения съемки!
       `,
     };
+    const messageForManager = {
+      from: "lebedpavel.dev@mail.ru",
+      to: "vovoka.path@gmail.com",
+      subject: `Новый заказ ID-${order._id}`,
+      text: `
+      Трудяга, у нас новый заказ!
+      Необходимо назначить фотографа!
+      `,
+    };
     const status = await sendMail(message);
-    console.log(status);
+    const statusManagerMail = await sendMail(messageForManager);
+    console.log(status, statusManagerMail);
   } catch (error) {
     console.log(error);
   }
