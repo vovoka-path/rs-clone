@@ -97,7 +97,7 @@ class Router {
             orderStatus = this.controller.model.startStatuses[role];
         }
         
-        console.log('# role, path, orderStatus = ', role, path, orderStatus) //, ' -> roleStatus = ', roleStatus);
+        // console.log('# role, path, orderStatus = ', role, path, orderStatus) //, ' -> roleStatus = ', roleStatus);
         // const roleStatus = routes[role][path].status;
 
         this.controller.view.cab.header.innerText = menuData[role][orderStatus].ru;

@@ -32,8 +32,10 @@ class Controller {
 
         this.model.orders = orders;
 
+        // this.model.users = await this.getAllUsers();
+        this.model.photographers = this.getUsersByRole('photographer');
+
         if (role === admin) {
-            this.model.photographers = this.getUsersByRole('photographer');
 
             orders.forEach((order) => {
                 if (!order.editorId) {
@@ -57,10 +59,6 @@ class Controller {
         this.model.orderStatus = orderData.status;
     }
 
-    
-
-
-
     async getUsersByRole(role) {
         // this.addUser();
         const allUsers = await this.getAllUsers(); // Проверить: можно ли брать из model
@@ -70,6 +68,13 @@ class Controller {
         });
 
         return filteredUsers;
+    }
+
+    async getUserById(id) {
+        const allUsers = await this.getAllUsers();
+        const user = allUsers.filter((user) => user._id === id);
+
+        return user;
     }
 
     // username: {type: String, unique: true, required: true},

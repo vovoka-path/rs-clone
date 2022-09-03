@@ -4,9 +4,11 @@ import EmployeeListener from './employeeListener.js';
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 import menuData from '../data/menuData.json' assert { type: "json" };
 import emailSending from '../data/emailSending.json' assert { type: "json" };
+import titles from '../data/titles.json' assert { type: "json" };
 import orderStatusToRoleStatus from '../data/orderStatusToRoleStatus.json' assert { type: "json" };
 import { getStatuses, getOrdersByStatuses } from '../utils/utils.js';
 
+const lang = 'ru';
 class Listeners extends Router{
     constructor(controller) {
         super();
@@ -68,10 +70,11 @@ class Listeners extends Router{
         await this.controller.updateModelDataByNewRoleStatus(roleStatus);
         
         const role = this.controller.model.auth.role;
-        const users = (role === this.controller.model.admin) ? 
-            await this.controller.getAllUsers() 
-            : 
-            [];
+        // const users = (role === this.controller.model.admin) ? 
+        //     await this.controller.getAllUsers() 
+        //     : 
+        //     [];
+        const users = this.controller.model.users;
         const orderStatuses = this.controller.model.statuses;
         const ordersByRoleStatus = this.controller.getOrdersByRoleStatus();
         
@@ -209,25 +212,39 @@ class Listeners extends Router{
             this.listeners.handleStatusButtonClick(path);
 
             // Отправка писем emailSending
-            const emails = {
-                manager: 'vovoka.path@gmail.com',
-                photographer: 'vovoka@tut.by',
-                editor: 'jubka.sumka@gmail.com',
-            }
             const order = this.model.orderData;
-            console.log('# 7 order = ', orderData);
+            
+            // let emails = {};
+            // if (order.photographerId) emails.photographer = this.getUserById(order.photographerId);
+            // if (order.editorId) emails.editor = this.getUserById(order.editorId);
+            const [ manager ] = await this.getUsersByRole('manager');
+            const [ photographer ] = order.photographerId ? await this.getUserById(order.photographerId) : '';
+            const [ editor ] = order.editorId ? await this.getUserById(order.editorId) : '';
+            const emails = {
+                manager: manager.email,
+                photographer: photographer.email,
+                editor: editor.email,
+            };
+            const names = {
+                manager: manager.name,
+                photographer: photographer.name,
+                editor: editor.name,
+            };
+            const newRoleStatus = orderStatusToRoleStatus[newOrderStatus][role];
+
+            // console.log('# 7 newRoleStatus = ', newRoleStatus);
 
             // emailSending[newOrderStatus].forEach((role) => 
-            for (let [ role, isSending ] of Object.entries(emailSending[newOrderStatus])) {
+            for (let [ role, isSending ] of Object.entries(emailSending[newRoleStatus])) {
                 if (isSending) {
                     const mailData = {
                         clientEmail: emails[role], 
-                        title: `CYP: У клиента ${order.clientEmail} сменился статус на '${newOrderStatus}'!`, 
-                        msg: `Здравствуйте, ${role}!                             
-                        У клиента ${order.clientEmail} сменился статус на ${newOrderStatus}.`,
+                        title: `CYP: У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}"!`, 
+                        msg: `Здравствуйте, ${names[role]}!                             
+                        У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`,
                     }
                     
-                    console.log(`# Email sended to ${role}. У клиента ${order.clientEmail} сменился статус на ${newOrderStatus}.`);
+                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
                     // await this.sendEmail(mailData);
                 }
             };

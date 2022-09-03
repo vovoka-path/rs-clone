@@ -24,6 +24,7 @@ class Model {
             photographer: 'acceptingPhotographer',
             editor: 'acceptingEditor',
         };
+        // this.startRoleStatus = 'incoming';
     }
 
     setAuth(data) {
