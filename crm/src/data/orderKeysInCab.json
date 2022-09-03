@@ -21,6 +21,7 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
             "date",
             "status"
          ],
@@ -42,6 +43,7 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -53,6 +55,7 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -67,6 +70,8 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
+            "editorId",
             "date",
             "status",
             "photographerLink"
@@ -76,6 +81,7 @@
             "route",
             "package_name",
             "clientEmail",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -95,6 +101,8 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
+            "editorId",
             "date",
             "status",
             "photographerLink"
@@ -104,6 +112,7 @@
             "route",
             "package_name",
             "clientEmail",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -125,6 +134,8 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
+            "editorId",
             "date",
             "status",
             "photographerLink",
@@ -135,6 +146,7 @@
             "route",
             "package_name",
             "clientEmail",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -155,6 +167,8 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
+            "editorId",
             "date",
             "status",
             "photographerLink"
@@ -164,6 +178,7 @@
             "route",
             "package_name",
             "clientEmail",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -181,6 +196,7 @@
             "city",
             "route",
             "package_name",
+            "photographerId",
             "date",
             "status"
          ],
@@ -188,6 +204,7 @@
             "city",
             "route",
             "package_name",
+            "photographerId",
             "date",
             "status"
          ],
@@ -201,6 +218,8 @@
             "clientEmail",
             "clientMessage",
             "clientPhone",
+            "photographerId",
+            "editorId",
             "date",
             "status",
             "photographerLink"
@@ -210,6 +229,7 @@
             "route",
             "package_name",
             "clientEmail",
+            "photographerId",
             "date",
             "status",
             "photographerLink"
@@ -217,6 +237,7 @@
         "editor": [ 
             "city",
             "package_name",
+            "editorId",
             "date",
             "status",
             "editorLink"
