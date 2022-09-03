@@ -1,3 +1,4 @@
+import orderKeysInCab from '../../data/orderKeysInCab.json' assert { type: "json" };
 import statusButtonColor from '../../data/statusButtonColor.json' assert { type: "json" };
 import orderKeyTitles from '../../data/orderKeyTitles.json' assert { type: "json" };
 import cabViews from '../../data/cabViews.json' assert { type: "json" };
@@ -14,10 +15,12 @@ class OrderInCab {
         this.orderCabContainer = createCustomElement('div', 'order-cab-container');
         this.orderItemsContainer = createCustomElement('div', 'order-cab-items-container');
         
-        // console.log('# order = ', order);
         // Отрисовываем все поля заказа
+        const keyAllowedToShow = orderKeysInCab[order.status][role];
+
         for ( let key in order) {
-            if (isShowOrderKey(role, order.status, key)) {
+
+            if (isShowOrderKey(keyAllowedToShow, key)) {
                 this.renderOrderKeyElement(props, key);
             }
         }
@@ -36,7 +39,7 @@ class OrderInCab {
         let orderKey = '';
         let orderValue = '';
 
-        if (key === 'date') {
+if (key === 'date') {
             const dates = order[key];
             const datesKeys = cabViews[role][roleStatus].dates;
             // console.log('# datesKeys = ', datesKeys);

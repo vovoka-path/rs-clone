@@ -17,8 +17,10 @@ class OrderInList {
         this.orderItemsContainer = createCustomElement('div', 'order-items-container');
         
         // Отрисовываем все поля заказа
+        const keyAllowedToShow = orderKeysInList[order.status][role];
+
         for ( let key in order) {
-            if (isShowOrderKey(role, order.status, key)) {
+            if (isShowOrderKey(keyAllowedToShow, key)) {
                 this.renderOrderKeyElement(props, key);
             }
         }
@@ -58,7 +60,6 @@ class OrderInList {
             const date = dates[roleStatus];
             orderValue = getFormattedDate(date);
         } else if (key === 'status') {
-            console.log('# status = ', order[key]);
             orderKey = key;
             orderValue = order[key];
             const backgroundColor = statusButtonColor[orderValue];
