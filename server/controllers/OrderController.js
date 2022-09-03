@@ -1,12 +1,14 @@
 import OrderService from '../services/OrderService.js';
 import jwt from 'jsonwebtoken';
 import config from '../config.js';
+import { mailSendler } from '../helpers/mailSendler.js';
 
 const {secretKey} = config; 
 class OrderController {
     async create(req, res) {
         try {
             const order = await OrderService.create(req.body);
+            await mailSendler(order);//добавить функцию которая отправляет клиенту на почту уведомление об успешном заказе
             res.json(order);
         } catch(err) {
             res.status(500).json(err);
