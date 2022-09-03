@@ -57,6 +57,7 @@ if (key === 'date') {
         } else if (key === 'photographerId' || key === 'editorId') {
             orderKey = key;
             const [ user ] = users.filter((user) => user._id === order[key]);
+            console.log('# key, users = ', key, users);
             orderValue = `<span>${orderKeyTitles[lang][key]}</span>: ${user.name}`;
         } else {
             orderKey = key;
