@@ -1,5 +1,6 @@
 import { editorId } from '../data/constants.js';
 import Router from './router.js';
+import CompletedEmail from '../components/CompletedEmail/CompletedEmail.js';
 import EmployeeListener from './employeeListener.js';
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 import menuData from '../data/menuData.json' assert { type: "json" };
@@ -30,8 +31,11 @@ class Listeners extends Router{
         this.btnEditUserListener = this.btnEditUserListenerNotBind.bind(this.controller);
         this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
         this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
+        this.btnAddLinkListener = this.btnAddLinkListenerNotBind.bind(this.controller);
+        this.btnBackListener = this.btnBackListenerNotBind.bind(this.controller);
+        this.btnAddMessageListener = this.btnAddMessageListenerNotBind.bind(this.controller);
     }
-    
+
     async signIn() {
         const view = this.controller.view;
 
@@ -84,17 +88,21 @@ class Listeners extends Router{
         const orderStatuses = this.controller.model.statuses;
         const ordersByRoleStatus = this.controller.getOrdersByRoleStatus();
         const allOrders = this.controller.model.allOrders;
-        
+
         const props = {
             role: role,
             roleStatus: roleStatus,
             orderStatuses: orderStatuses,
             order: {},
+            employees: {
+                photographer: {},
+                editor: {},
+            },
             allOrders: allOrders,
             orders: ordersByRoleStatus,
             users: users,
             orderButtonListener: this.orderButtonListener,
-            // statusButtonListener: null, // добавляем после входа в конкретный заказ
+            statusButtonListener: () => {}, // добавляем после входа в конкретный заказ
             employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
             btnRegistrationUserListener: this.btnRegistrationUserListener,
             btnSendListener: this.btnSendListener, // Create new Order
@@ -102,6 +110,9 @@ class Listeners extends Router{
             btnEditUserListener: this.btnEditUserListener,
             btnDeleteUserListener: this.btnDeleteUserListener,
             btnUpdateUserListener: this.btnUpdateUserListener,
+            btnAddLinkListener: this.btnAddLinkListener,
+            btnBackListener: this.btnBackListener,
+            btnAddMessageListener: this.btnAddMessageListener,
         };
 
         return props;
@@ -112,15 +123,17 @@ class Listeners extends Router{
 
         const roleStatus = this.controller.model.roleStatus;
         let props = await this.createPropsByRoleStatus(roleStatus);
-
-        // const { orders } = props;
-        // const [ currentOrder ] = orders.filter((order) => {
-        //     return order._id === orderId;
-        // });
+        const order = this.controller.model.orderData;
+        const [ photographer ] = order.photographerId ? await this.controller.getUserById(order.photographerId) : [{}];
+        const [ editor ] = order.editorId ? await this.controller.getUserById(order.editorId) : [{}];
 
         props = {
             ...props,
-            order: this.controller.model.orderData,
+            order: order,
+            employees: {
+                photographer: photographer,
+                editor: editor,
+            },
             statusButtonListener: this.statusButtonListener,
         }
         
@@ -130,11 +143,18 @@ class Listeners extends Router{
     // обработчик кнопки списка заказов "Посмотреть"
     orderButtonListenerNotBind() {
         return async (event) => {
-            // this = controller
-            const orderId = event.target.id;
-            // console.log('# this.model.orderData = ', this.model.orderData);
+            // let elem;
+
+            // console.log('# event.target = ', event.target);
+            // if (event.target.tagName = 'div') {
+            //     elem = event.target.querySelector('.btn-order');
+            // } else {
+            //     elem = event.target;
+            // }
+
+            const orderId = event.currentTarget.id;
             const props = await this.listeners.createPropsByOrderId(orderId);
-            // console.log('# 8 props = ', props);
+
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.renderStatusView(props);
         }
@@ -145,7 +165,6 @@ class Listeners extends Router{
     }
 
     getRoleStatusFromOrderStatus(orderStatus, role) {
-        // console.log('# 5 orderStatus, role = ', orderStatus, role);
         const roleStatus = orderStatusToRoleStatus[orderStatus][role];
 
         this.controller.model.roleStatus = roleStatus;
@@ -254,12 +273,20 @@ class Listeners extends Router{
                         У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`,
                     }
                     
-                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
                     // await this.sendEmail(mailData);
+
+                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
                 }
             };
 
-            
+            if (newOrderStatus === 'completed') {
+                const mailData = CompletedEmail.create(order);
+
+                // await this.sendEmail(mailData);
+
+                console.log(`# Клиент ${mailData.clientEmail} получил письмо со ссылкой ${order.editorLink} на обработанные фотографии. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
+
+            }
         }
     }
 
@@ -330,7 +357,6 @@ class Listeners extends Router{
     btnUpdateUserListenerNotBind() {
         return async (event) => {
             const user = this.model.user;
-            ;
 
             const userData =  {
                 _id: user._id,
@@ -345,6 +371,106 @@ class Listeners extends Router{
 
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.employees.create(this.model.users);
+        }
+    }
+
+    btnAddLinkListenerNotBind() {
+        return async (event) => {
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+
+            const formData = {
+                photographer: {
+                    inputs: 'photographerLink',
+                },
+                editor: {
+                    inputs: 'editorLink',
+                }, 
+            }
+
+            const orderData =  {
+                _id: orderId,
+            };
+            const inputs = [formData[role].inputs];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#add-link-${el}`);
+                orderData[el] = curInput.value;
+            });
+
+            await this.updateOrder(orderData);
+
+            const props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    btnAddMessageListenerNotBind() {
+        return async (event) => {
+            // event.preventDefault();
+
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+            let props = await this.listeners.createPropsByOrderId(orderId);
+
+            const formData = {
+                manager: {
+                    labels: 'Комментарий для фотографа',
+                    header: 'Комментарии от обработчика',
+                    inputs: 'comments',
+                    from: 'manager',
+                    to: 'photographer',
+                }, 
+                photographer: {
+                    labels: 'Комментарий для обработчика',
+                    header: 'Комментарии от менеджера',
+                    inputs: 'comments',
+                    from: 'photographer',
+                    to: 'editor',
+                },
+                editor: {
+                    labels: 'Комментарий для менеджера',
+                    header: 'Комментарии от фотографа',
+                    inputs: 'comments',
+                    from: 'editor',
+                    to: 'manager',
+                }, 
+            }
+
+            const curInput = document.querySelector(`#add-message`);
+
+            const order = this.model.orderData;
+            const comments = order.comments;
+            const message = curInput.value;
+
+            const comment = {
+                from: formData[role].from,
+                to: formData[role].to,
+                message: message,
+            };
+
+            comments.push(comment);
+
+            const orderData =  {
+                _id: orderId,
+                comments: comments,
+            };
+
+            await this.updateOrder(orderData);
+            
+            props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    btnBackListenerNotBind() {
+        return async (event) => {
+            const roleStatus = this.model.roleStatus;
+
+            const props = await this.listeners.createPropsByRoleStatus(roleStatus);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderOrderList(props);
         }
     }
 }

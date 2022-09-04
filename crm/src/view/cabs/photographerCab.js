@@ -1,5 +1,7 @@
 import Cab from './cab.js';
 import OrderInCab from '../../components/order/orderInCab/orderInCab.js';
+import AddLink from '../../components/AddLink/AddLink.js';
+import AddMessage from '../../components/AddMessage/AddMessage.js';
 // import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 
 const role = 'photographer';
@@ -15,39 +17,44 @@ class PhotographerCab extends Cab{
         this.cabContainer.append(this.orderCabContainer);
     }
     
-    // *** Cab Views ***
+    // *** Cab statusOrder Views ***
 
     renderIncoming(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
     }
 
     renderShooting(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.addLink = new AddLink(props);
+        this.cabContainer.append(this.addLink.create());
+        this.addMessage = new AddMessage(props).create();
+        this.cabContainer.append(this.addMessage);
     }
 
     renderEditing(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.addLink = new AddLink(props);
+        this.cabContainer.append(this.addLink.create());
+        this.renderStatusButtons(props);
 
     }
 
     renderCompleted(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
 
     }
 
     renderCanceled(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
 
     }
 
     renderFeedbacks(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
 
     }
 
     renderStatistics(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
 
     }
 }

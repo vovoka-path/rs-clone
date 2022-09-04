@@ -1,4 +1,6 @@
 import OrderInList from '../order/orderInList/orderInList.js';
+import Paragraph from '../Paragraph/Paragraph.js';
+import Button from '../Button/Button.js';
 
 class OrdersList {
     constructor() {
@@ -9,7 +11,7 @@ class OrdersList {
 
     // Заказы в зависимости от роли
     create(props) {
-        const { role, roleStatus, orderStatus, order, orders, orderButtonListener } = props;
+        const { role, roleStatus, orderStatus, order, orders } = props;
 
         this.removeOrderList();
 
@@ -29,12 +31,25 @@ class OrdersList {
     renderOrdersList(props) {
         const { orders } = props;
 
-        // Показываем заказы только c текущим статусом
-        orders.forEach((order) => {
-            const orderContainer = OrderInList.create({ ...props, order: order });
+        if (this.isEmpty(orders)) {
+            this.renderEmpty();
+        } else {
+            // Показываем заказы только c текущим статусом
+            orders.forEach((order) => {
+                const orderContainer = OrderInList.create({ ...props, order: order });
 
-            this.ordersContainer.append(orderContainer);
-        });
+                this.ordersContainer.append(orderContainer);
+            });
+        }
+    }
+
+    renderEmpty() {
+        const content = 'Заказы не найдены!';
+        this.ordersContainer.append(Paragraph.create('empty', content));
+    }
+
+    isEmpty(orders) {
+        return !orders.length;
     }
 
     removeOrderList() {

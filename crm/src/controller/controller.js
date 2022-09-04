@@ -103,24 +103,6 @@ class Controller {
         return user;
     }
 
-    // username: {type: String, unique: true, required: true},
-    // password: {type: String, required: true},
-    // status: {type: String},
-    // name: {type: String},
-    // role: {type: String, ref: 'Role'}
-    async addUser() {
-        // role: 'manager' || 'photographer' || 'editor'
-        const formData = {
-            username: 'nataly',
-            password: 'qweasdzxcqweasdzxc',
-            status: 'доступен',
-            name: 'Наташа Королева',
-            role: 'editor',
-        }
-
-        await this.api.signUp(formData);
-    }
-
     async getAllUsers() {
         const token = this.model.auth.token;
         const users = await this.api.getUsers(token).then(json => json.data.users);
@@ -179,14 +161,6 @@ class Controller {
         return orderStatuses;
     }
 
-        // getOrderByIdFromModel(orderId) {
-    //     const orders = this.model.orders;
-
-    //     const [ orderData ] = orders.filter((order) => order._id === orderId);
-    
-    //     return orderData;
-    // }
-
     async sendEmail(mailData) {
         // console.log('# sendEmail = ', mailData);
         const token = this.model.auth.token;
@@ -204,3 +178,29 @@ class Controller {
 }
 
 export default Controller;
+
+    // username: {type: String, unique: true, required: true},
+    // password: {type: String, required: true},
+    // status: {type: String},
+    // name: {type: String},
+    // role: {type: String, ref: 'Role'}
+    // async addUser() {
+    //     // role: 'manager' || 'photographer' || 'editor'
+    //     const formData = {
+    //         username: 'nataly',
+    //         password: 'qweasdzxcqweasdzxc',
+    //         status: 'доступен',
+    //         name: 'Наташа Королева',
+    //         role: 'editor',
+    //     }
+
+    //     await this.api.signUp(formData);
+    // }
+
+        // getOrderByIdFromModel(orderId) {
+    //     const orders = this.model.orders;
+
+    //     const [ orderData ] = orders.filter((order) => order._id === orderId);
+    
+    //     return orderData;
+    // }

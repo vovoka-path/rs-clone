@@ -23,49 +23,45 @@ class Cab {
     }
 
     // fake
-    renderStatusDataView(props) {
-        // console.log('# props = ', props);
-        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
-        this.changedElement = createCustomElement('div', 'fake');
-        const title = createCustomElement('h4');
+    // renderStatusButtons(props) {
+    //     const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
+        
+    //     this.statusButtonsContainer = createCustomElement('div', 'fake');
 
-        title.innerText = `
-            ${role} - Кабинет
-            ${roleStatus} - статус у ${role} (отобразить тут нужные блоки)
-        `;
-            
-        this.changedElement.append(title);
-        // console.log('# ----------fakeView --- role = ', role, roleStatus);
-        if (!(role === 'manager' && roleStatus === 'incoming')) {
-            this.renderStatusButtons(props);
-        }
-
-        this.cabContainer.append(this.changedElement);
-    }
+    //     if (!(role === 'manager' && roleStatus === 'incoming')) {
+    //         this.renderStatusButtons(props);
+    //     }
+    // }
 
     renderStatusButtons(props) {
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
         const lang = 'ru';
         const statusButtonTexts = cabViews[role][roleStatus].statusButton;
 
-        for (let key in statusButtonTexts) {
-            const statusButtonText = statusButtonTexts[key][lang];
+        this.statusButtonsContainer = createCustomElement('div', 'status-button-container');
 
-            if (statusButtonText !== null) {
-                // console.log('# statusButtonText = ', statusButtonText);
-                const btnProps = {
-                    statusButtonText: statusButtonText,
-                    action: key,
+        if (!(role === 'manager' && roleStatus === 'incoming')) {
+            for (let key in statusButtonTexts) {
+                const statusButtonText = statusButtonTexts[key][lang];
+
+                if (statusButtonText !== null) {
+                    // console.log('# statusButtonText = ', statusButtonText);
+                    const btnProps = {
+                        statusButtonText: statusButtonText,
+                        action: key,
+                    }
+                    this.statusButton = new StatusButton().create(btnProps);
+                    this.statusButtons.push(this.statusButton);
+
+                    // Вешаем обработчик
+                    this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
+                    
+                    this.statusButtonsContainer.append(this.statusButton);
                 }
-                this.statusButton = new StatusButton().create(btnProps);
-                this.statusButtons.push(this.statusButton);
-
-                // Вешаем обработчик
-                this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
-                
-                this.changedElement.append(this.statusButton);
             }
         }
+
+        this.cabContainer.append(this.statusButtonsContainer);
     }
     
     render(props) {
@@ -125,7 +121,7 @@ class Cab {
 
         return this.container;
     }
-    
+
     removeOrderList() {
         this.cabContainer.innerHTML = '';
     }
