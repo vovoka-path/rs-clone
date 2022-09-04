@@ -45,13 +45,54 @@
                 </ul>
                 <a class="header-tel" href="tel:+7(800) 800 10 10">+7(800) 800 10 10</a>
             </div>
-            <div class="header-wrapper item">
-                <h1 class="header-title">Закажите фотосессию своей мечты.</h1>
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Забронировать</button>
+            <div class="header-wrapper-items">
+                <h1 class="header-title">Закажите фотосессию в Праге!</h1>
+                <div class="header-wrapper item">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Заполнить форму</button>
+                    <a type="button" class="btn btn-primary quiz-start" href="#quiz" id="btn-quize">Пройти квиз</a>
+                </div>
             </div>
         </div>
     </header> 
     <main class="main">
+
+        <div class="popap-fixed-overlay none" id="popap-fixed-overlay">
+            <div class="quize-modal">
+                <div class="quize-conteiner">
+                    <a name="quiz"></a>
+                    <div class="center">
+                        <div class="main-quize" id="quiz">
+                            <div class="main-quize-value" id="main-quize-value"></div>
+                            <div class="quiz-header" id="quiz-header">
+                                <h2 class="quiz-title">Загружаем вопрос....</h2>
+                            </div>
+                
+                            <ul class="quiz-list" id="quiz-list">
+                                <li>
+                                    <label>
+                                        <input type="radio" class="answer" name="answer">
+                                        <span>Ответ...</span>
+                                    </label>
+                                </li>
+                                <li>
+                                    <label>
+                                        <input type="radio" class="answer" name="answer">
+                                        <span>Ответ...</span>
+                                    </label>
+                                </li>
+                            </ul>
+                
+                            <div class="quiz-submit-conteiner">
+                                <button class="quiz-submit submit btn btn-primary quiz-start" id="quiz-submit">Ответить</button>
+                                <div class="quiz-message" id="message"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <input value="Прага" id="cityQuize" style="display: none;">
+                </div>
+            </div>
+        </div>
+        
         <div class="main-routes center">
             <a name="photoshoot"></a>
             <h1 class="routes-title">Фотосессии</h1>
@@ -177,38 +218,27 @@
             <div class="center center-prices">
                 <a name="prices"></a>
                 <h1 class="prices-title">Цены на услуги</h1>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">Тариф "Мини"</th>
-                        <th scope="col">Тариф "Cтандарт"</th>
-                        <th scope="col">Тариф "Элита"</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th scope="row">Время</th>
-                        <td>1 час</td>
-                        <td>1,5 часа</td>
-                        <td>2,5 часа</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">К-во фото</th>
-                        <td>25</td>
-                        <td>50</td>
-                        <td>100</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Цена</th>
-                        <td>70$</td>
-                        <td>100$</td>
-                        <td>160$</td>
-                    </tr>
-                    </tbody>
-                </table>
+
+                <dev class="main-prices-conteiner">
+                    <dev class="prices-mini">
+                        <h4 class="prices-titles">Мини - 70€</h4>
+                        <p class="prices-rate">1 час | 25 фото</p> 
+                        <p class="prices-description">Экспресс-вариант. Вы получите фотографии на фоне основных достопримечательностей по маршруту.</p> 
+                    </dev>    
+                    <dev class="prices-standart">
+                        <h4 class="prices-titles">Стандарт - 100€</h4>
+                        <p class="prices-rate">1,5 час | 50 фото</p> 
+                        <p class="prices-description">Больше ракурсов, больше интересных мест по маршруту. Сохраните память о поездке в Венецию ярко!</p> 
+                    </dev>    
+                    <dev class="price-elite">
+                        <h4 class="prices-titles">Элит - 160€</h4>
+                        <p class="prices-rate">2,5 час | 100 фото</p> 
+                        <p class="prices-description">Идеально для свадебных съемок. Можно объединить 2 маршрута вместе или добавить свои локации.</p> 
+                    </dev>    
+                </dev>
+                
                 <div class="center-button">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Забронировать</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Заполнить форму</button>
                 </div>
                 
             </div>
@@ -243,7 +273,7 @@
                             <textarea class="form-control" rows="8" id="message" placeholder="Ваше имя, дата съемки, контактные данные для связи, количество человек и пожелания"></textarea>
                         </div>
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary length" id="submit" data-bs-dismiss="modal">Забронировать</button>
+                            <button type="submit" class="btn btn-primary" id="submit" data-bs-dismiss="modal">Забронировать</button>
                             <a id="form"></a>
                         </div>
                         <div class="info container"></div>

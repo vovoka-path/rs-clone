@@ -6,3 +6,8 @@ export interface Order {
   clientMessage: string,
   date: { incoming: number } 
 }
+
+export interface Question {
+  question: string;
+  answers: string[];
+}
