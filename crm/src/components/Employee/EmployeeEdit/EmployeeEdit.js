@@ -16,8 +16,8 @@ class EmployeeEdit {
 
         const userEdit = Container.create('user-edit__container');
         const userEditBtn = Button.create('user-edit__btn', 'Сохранить изменения', user._id, btnUpdateUserListener());
-        const labels = ['Имя пользователя', 'Роль', 'E-mail', 'Полное имя'];
-        const inputs = ['username', 'role', 'email', 'name'];
+        const labels = ['Имя пользователя', 'Роль', 'status', 'E-mail', 'Полное имя'];
+        const inputs = ['username', 'role', 'email', 'status', 'name'];
 
         labels.forEach((item, i) => {
             if (item === 'Роль') {
