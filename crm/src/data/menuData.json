@@ -75,7 +75,7 @@
         "acceptingEditor": {
             "roleStatus": "editing",
             "path": "/photographer/editing",
-            "ru": "У обработчика"
+            "ru": "Обработчик принимает"
         },
         "editing": {
             "roleStatus": "editing",
