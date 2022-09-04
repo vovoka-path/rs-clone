@@ -293,11 +293,12 @@ class Listeners extends Router{
             // this = controller
             const id = event.target.id;
             const [ user ] = await this.getUserById(id);
+            this.model.user = user;
             
             this.view.cab.employees.employee.employeeEdit.create(user);
 
-            console.log('# btnEditUserListener:');
-            console.log('# View EDIT USER id = ', id);
+            // console.log('# btnEditUserListener:');
+            // console.log('# View EDIT USER id = ', id);
             // console.log('# this.view.cab.employees.employee.employeeEdit = ', this.view.cab.employees.employee.employeeEdit);
         }
     }
@@ -318,14 +319,26 @@ class Listeners extends Router{
     btnUpdateUserListenerNotBind() {
         return async (event) => {
             // this = controller
-            const id = event.target.id;
+            // const id = event.target.id;
+            const user = this.model.user;
+            ;
 
-            // Нужен метод, который получает данные формы как ты написал в OrderCreate:
+            const userData =  {
+                _id: user._id,
+            };
+            const inputs = ['username', 'role', 'email', 'name'];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#userEdit-${el}`);
+                userData[el] = curInput.value;
+            });
+    
+            // console.log("UPDATE=", userData);
 
-            // await this.updateUser(userData)
+            await this.updateUser(userData);
+            await this.getAllUsers();
 
-            console.log('# btnUpdateUserListener:');
-            console.log('# UPDATE USER id = ', id);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
         }
     }
 }

@@ -12,14 +12,12 @@ class EmployeeEdit {
     }
     create(user) {
         this.cabContainer.innerHTML = '';
-        // this.cabContainer.innerHTML = 'View EmployeeEdit. USER id = ' + user._id; // заменить на: this.cabContainer.innerHTML = '';
-        // console.log('# create(user) = ', user);
-        const { btnUpdateUserListener } = this.props; // обновит данные пользователя по id кнопки = 630e16043f4dd1fd2ac94429
+        const { btnUpdateUserListener } = this.props;
 
         const userEdit = Container.create('user-edit__container');
-        const userEditBtn = Button.create('user-edit__btn', 'Сохранить изменения', 'userEditBtn', this.createUpdateData(user));
-        const labels = ['Имя пользователя', 'Пароль', 'Роль', 'E-mail', 'Полное имя'];
-        const inputs = ['username', 'password', 'role', 'email', 'name'];
+        const userEditBtn = Button.create('user-edit__btn', 'Сохранить изменения', user._id, btnUpdateUserListener());
+        const labels = ['Имя пользователя', 'Роль', 'E-mail', 'Полное имя'];
+        const inputs = ['username', 'role', 'email', 'name'];
 
         labels.forEach((item, i) => {
             const label = Label.create(`userEdit-${inputs[i]}`, item);
@@ -33,38 +31,6 @@ class EmployeeEdit {
 
         this.cabContainer.append(userEdit);
     }
-
-    createUpdateData(user) {
-        return () => {
-            const userData =  {
-                _id: user._id,
-            };
-            const inputs = ['username', 'password', 'role', 'email', 'name'];
-            inputs.forEach((el) => {
-                const curInput = document.querySelector(`#userEdit-${el}`);
-                userData[el] = curInput.value;
-            });
-    
-            console.log(userData);
-        }
-
-    }
 }
 
 export default EmployeeEdit;
-
-// Нужен метод, который получает данные формы как ты написал в OrderCreate:
-// Я его заберу в listeners
-
-// const orderData =  {};
-//         const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
-//         const date = Date.now();
-//         inputs.forEach((el) => {
-//             console.log('# el = ', el);
-//             const curInput = document.querySelector(`#${el}`);
-//             orderData[el] = curInput.value;
-//             curInput.value ='';
-//         });
-//         orderData.date = {
-//             incoming: date,
-//         };

@@ -18,6 +18,7 @@ class Model {
         this.orderStatuses = [];
         this.orders = [];
         this.users = [];
+        this.user = {};
         // TODO
         this.startStatuses = {
             manager: 'incoming',
