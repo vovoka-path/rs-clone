@@ -17,8 +17,9 @@ class EmployeeCreate {
 
         const userCreate = Container.create('user-create__container');
         const userCreateBtn = Button.create('user-create__btn', 'Создать пользователя', 'userCreateBtn', btnCreateUserListener());
-        const labels = ['Имя пользователя', 'Пароль', 'Роль', 'E-mail', 'Полное имя'];
-        const inputs = ['username', 'password', 'role', 'email', 'name'];
+        const labels = ['Имя пользователя', 'Пароль', 'Роль', 'Статус', 'E-mail', 'Полное имя'];
+        const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
+
 
         labels.forEach((item, i) => {
             if (item === 'Роль') {

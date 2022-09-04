@@ -4,9 +4,11 @@ import PhotographerList from '../../components/photographerList/photographerList
 import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 import Employees from '../../components/Employees/Employees.js';
 import OrderCreate from '../../components/OrderCreate/OrderCreate.js';
+import Statistics from '../../components/Statistics/Statistics.js';
 import SubCab from '../../components/SubCab/SubCab.js';
 import AddLink from '../../components/AddLink/AddLink.js';
 import AddMessage from '../../components/AddMessage/AddMessage.js';
+
 
 const role = 'manager';
 // const styles = {
@@ -92,7 +94,10 @@ class ManagerCab extends Cab{
 
     renderStatistics(props) {
         this.cabContainer.innerHTML = '';
-        this.renderStatusButtons(props); // DELETE
+
+        
+        const statsView = new Statistics(props, this.cabContainer);
+        statsView.create();
 
     }
 

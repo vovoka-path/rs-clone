@@ -252,3 +252,8 @@ body {
 .main-container {
   background-color: rgb(231, 241, 255);
 }
+
+.allOrders__chart {
+  background-color: #a9e9e252;
+  border-radius: 20px;
+}
