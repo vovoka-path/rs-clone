@@ -141,8 +141,16 @@ class Listeners extends Router{
     // обработчик кнопки списка заказов "Посмотреть"
     orderButtonListenerNotBind() {
         return async (event) => {
-            // this = controller
-            const orderId = event.target.id;
+            // let elem;
+
+            // console.log('# event.target = ', event.target);
+            // if (event.target.tagName = 'div') {
+            //     elem = event.target.querySelector('.btn-order');
+            // } else {
+            //     elem = event.target;
+            // }
+
+            const orderId = event.currentTarget.id;
             const props = await this.listeners.createPropsByOrderId(orderId);
 
             this.view.cab.cabContainer.innerHTML = '';

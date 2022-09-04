@@ -15,6 +15,10 @@ class OrderInList {
         const { role, roleStatus, orderStatuses, order, orders, orderButtonListener } = props;
 
         this.orderContainer = createCustomElement('div', 'order-container');
+        this.orderContainer.setAttribute('id', order._id);
+
+        this.orderContainer.addEventListener('click', orderButtonListener());
+
         this.orderItemsContainer = createCustomElement('div', 'order-items-container');
 
         // Отрисовываем все поля заказа
@@ -31,7 +35,7 @@ class OrderInList {
         const buttonOrder = this.createButton(order);
 
         // Вешаем обработчик
-        buttonOrder.addEventListener('click', orderButtonListener());
+        // buttonOrder.addEventListener('click', orderButtonListener());
         
         this.orderContainer.append(buttonOrder);
 
@@ -42,7 +46,7 @@ class OrderInList {
         const buttonOrder = document.createElement('button');
         buttonOrder.className = 'btn-order btn';
         buttonOrder.innerText = this.buttunText;
-        buttonOrder.setAttribute('id', order._id);
+        // buttonOrder.setAttribute('id', order._id);
 
         return buttonOrder;
     }
