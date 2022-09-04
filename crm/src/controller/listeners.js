@@ -33,8 +33,9 @@ class Listeners extends Router{
         this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
         this.btnAddLinkListener = this.btnAddLinkListenerNotBind.bind(this.controller);
         this.btnBackListener = this.btnBackListenerNotBind.bind(this.controller);
+        this.btnAddMessageListener = this.btnAddMessageListenerNotBind.bind(this.controller);
     }
-    btnBackListener
+
     async signIn() {
         const view = this.controller.view;
 
@@ -111,6 +112,7 @@ class Listeners extends Router{
             btnUpdateUserListener: this.btnUpdateUserListener,
             btnAddLinkListener: this.btnAddLinkListener,
             btnBackListener: this.btnBackListener,
+            btnAddMessageListener: this.btnAddMessageListener,
         };
 
         return props;
@@ -398,6 +400,65 @@ class Listeners extends Router{
             await this.updateOrder(orderData);
 
             const props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    btnAddMessageListenerNotBind() {
+        return async (event) => {
+            // event.preventDefault();
+
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+            let props = await this.listeners.createPropsByOrderId(orderId);
+
+            const formData = {
+                manager: {
+                    labels: 'Комментарий для фотографа',
+                    header: 'Комментарии от обработчика',
+                    inputs: 'comments',
+                    from: 'manager',
+                    to: 'photographer',
+                }, 
+                photographer: {
+                    labels: 'Комментарий для обработчика',
+                    header: 'Комментарии от менеджера',
+                    inputs: 'comments',
+                    from: 'photographer',
+                    to: 'editor',
+                },
+                editor: {
+                    labels: 'Комментарий для менеджера',
+                    header: 'Комментарии от фотографа',
+                    inputs: 'comments',
+                    from: 'editor',
+                    to: 'manager',
+                }, 
+            }
+
+            const curInput = document.querySelector(`#add-message`);
+
+            const order = this.model.orderData;
+            const comments = order.comments;
+            const message = curInput.value;
+
+            const comment = {
+                from: formData[role].from,
+                to: formData[role].to,
+                message: message,
+            };
+
+            comments.push(comment);
+
+            const orderData =  {
+                _id: orderId,
+                comments: comments,
+            };
+
+            await this.updateOrder(orderData);
+            
+            props = await this.listeners.createPropsByOrderId(orderId);
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.renderStatusView(props);
         }

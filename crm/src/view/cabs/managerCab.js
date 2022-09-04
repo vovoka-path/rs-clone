@@ -6,6 +6,7 @@ import Employees from '../../components/Employees/Employees.js';
 import OrderCreate from '../../components/OrderCreate/OrderCreate.js';
 import SubCab from '../../components/SubCab/SubCab.js';
 import AddLink from '../../components/AddLink/AddLink.js';
+import AddMessage from '../../components/AddMessage/AddMessage.js';
 
 const role = 'manager';
 // const styles = {
@@ -30,6 +31,8 @@ class ManagerCab extends Cab{
         this.list = this.photographerList.create(props);
         this.cabInfo.append(this.list);
         this.cabContainer.append(this.cabInfo);
+        this.addMessage = new AddMessage(props).create();
+        this.cabContainer.append(this.addMessage);
     }
 
     renderAcceptingPhotographer(props) {
@@ -83,11 +86,8 @@ class ManagerCab extends Cab{
 
     renderAddOrder(props) {
         this.cabContainer.innerHTML = '';
-
         const addOrderView = new OrderCreate(this.cabContainer);
-
         addOrderView.renderCreateView(props);
-
     }
 
     renderStatistics(props) {
