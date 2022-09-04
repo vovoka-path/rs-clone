@@ -5,6 +5,7 @@ import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 import Employees from '../../components/Employees/Employees.js';
 import OrderCreate from '../../components/OrderCreate/OrderCreate.js';
 import SubCab from '../../components/SubCab/SubCab.js';
+import AddLink from '../../components/AddLink/AddLink.js';
 
 const role = 'manager';
 // const styles = {

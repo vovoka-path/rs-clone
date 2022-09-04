@@ -31,6 +31,7 @@ class Listeners extends Router{
         this.btnEditUserListener = this.btnEditUserListenerNotBind.bind(this.controller);
         this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
         this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
+        this.btnAddLinkListener = this.btnAddLinkListenerNotBind.bind(this.controller);
     }
     
     async signIn() {
@@ -107,6 +108,7 @@ class Listeners extends Router{
             btnEditUserListener: this.btnEditUserListener,
             btnDeleteUserListener: this.btnDeleteUserListener,
             btnUpdateUserListener: this.btnUpdateUserListener,
+            btnAddLinkListener: this.btnAddLinkListener,
         };
 
         return props;
@@ -343,7 +345,6 @@ class Listeners extends Router{
     btnUpdateUserListenerNotBind() {
         return async (event) => {
             const user = this.model.user;
-            ;
 
             const userData =  {
                 _id: user._id,
@@ -360,6 +361,38 @@ class Listeners extends Router{
             this.view.cab.employees.create(this.model.users);
         }
     }
+
+    btnAddLinkListenerNotBind() {
+        return async (event) => {
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+
+            const formData = {
+                photographer: {
+                    inputs: 'photographerLink',
+                },
+                editor: {
+                    inputs: 'editorLink',
+                }, 
+            }
+
+            const orderData =  {
+                _id: orderId,
+            };
+            const inputs = [formData[role].inputs];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#add-link-${el}`);
+                orderData[el] = curInput.value;
+            });
+
+            await this.updateOrder(orderData);
+
+            const props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
 }
 
 export default Listeners;
