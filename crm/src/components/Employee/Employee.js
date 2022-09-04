@@ -3,11 +3,13 @@ import Header from '../Header/Header.js';
 import Container from '../Container/Container.js';
 import Paragraph from '../Paragraph/Paragraph.js';
 import EmployeeEdit from '../Employee/EmployeeEdit/EmployeeEdit.js';
+import EmployeeCreate from './EmployeeCreate/EmployeeCreate.js';
 
 class Employee {
     constructor(cabContainer, props) {
         this.cabContainer = cabContainer;
         this.employeeEdit = new EmployeeEdit(this.cabContainer, props);
+        this.employeeCreate = new EmployeeCreate(this.cabContainer, props);
         this.props = props;
     }
     create(user) {

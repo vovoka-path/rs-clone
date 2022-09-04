@@ -281,7 +281,7 @@ class Listeners extends Router{
     btnCreateUserListenerNotBind() {
         return async (event) => {
             // this = controller
-
+            this.view.cab.employees.employee.employeeCreate.create();
             console.log('# btnCreateUserListener:');
             console.log('# View CREATE USER (not found!)/ Must be created.');
             // this.view.cab.employees.employee.EmployeeEdit;
