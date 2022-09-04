@@ -11,7 +11,7 @@ class OrderInList {
     }
 
     create(props) {
-        const { role, roleStatus, orderStatuses, order, orderButtonListener } = props;
+        const { role, roleStatus, orderStatuses, order, orders, orderButtonListener } = props;
 
         this.orderContainer = createCustomElement('div', 'order-container');
         this.orderItemsContainer = createCustomElement('div', 'order-items-container');

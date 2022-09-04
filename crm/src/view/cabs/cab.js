@@ -121,7 +121,7 @@ class Cab {
 
         return this.container;
     }
-    
+
     removeOrderList() {
         this.cabContainer.innerHTML = '';
     }
