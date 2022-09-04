@@ -139,14 +139,21 @@ class Controller {
         return users;
     }
 
+    async registrationUser(userData) {
+        const response = await this.api.registrationUser(userData);
+        await this.getAllUsers();
+    }
+
     async updateUser(userData) {
         const token = this.model.auth.token;
         const response = await this.api.updateUser(token, userData);
+        await this.getAllUsers();
     }
 
     async deleteUser(id) {
         const token = this.model.auth.token;
         const response = await this.api.deleteUser(token, id);
+        await this.getAllUsers();
         // TODO: проверять response
     }
 

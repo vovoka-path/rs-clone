@@ -25,6 +25,7 @@ class Listeners extends Router{
         // console.log('# employeeEditListener = ', this.employeeEditListener);
         // this.employeeEditListener();
         this.btnSendListener = this.btnSendListenerNotBind.bind(this.controller);
+        this.btnRegistrationUserListener = this.btnRegistrationUserListenerNotBind.bind(this.controller);
         this.btnCreateUserListener = this.btnCreateUserListenerNotBind.bind(this.controller);
         this.btnEditUserListener = this.btnEditUserListenerNotBind.bind(this.controller);
         this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
@@ -95,6 +96,7 @@ class Listeners extends Router{
             orderButtonListener: this.orderButtonListener,
             // statusButtonListener: null, // добавляем после входа в конкретный заказ
             employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
+            btnRegistrationUserListener: this.btnRegistrationUserListener,
             btnSendListener: this.btnSendListener, // Create new Order
             btnCreateUserListener: this.btnCreateUserListener,
             btnEditUserListener: this.btnEditUserListener,
@@ -278,48 +280,55 @@ class Listeners extends Router{
         this.createNewOrder(orderData);
     }
 
+    btnRegistrationUserListenerNotBind() {
+        return async (event) => {
+            this.view.cab.employees.employee.employeeCreate.create();
+        }
+    }
+
     btnCreateUserListenerNotBind() {
         return async (event) => {
-            // this = controller
-            this.view.cab.employees.employee.employeeCreate.create();
             console.log('# btnCreateUserListener:');
-            console.log('# View CREATE USER (not found!)/ Must be created.');
-            // this.view.cab.employees.employee.EmployeeEdit;
+
+            const userData =  {};
+            const inputs = ['username', 'password', 'role', 'email', 'name'];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#userCreate-${el}`);
+                userData[el] = curInput.value;
+                console.log('# curInput = ', curInput.value, el);
+            });
+
+            // console.log(userData);
+
+            await this.registrationUser(userData);
+            
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
         }
     }
 
     btnEditUserListenerNotBind() {
         return async (event) => {
-            // this = controller
             const id = event.target.id;
             const [ user ] = await this.getUserById(id);
             this.model.user = user;
             
             this.view.cab.employees.employee.employeeEdit.create(user);
-
-            // console.log('# btnEditUserListener:');
-            // console.log('# View EDIT USER id = ', id);
-            // console.log('# this.view.cab.employees.employee.employeeEdit = ', this.view.cab.employees.employee.employeeEdit);
         }
     }
 
     btnDeleteUserListenerNotBind() {
         return async (event) => {
-            // this = controller
             const id = event.target.id;
-            // await this.deleteUser(id); // ОСТОРОЖНО !!!
+            await this.deleteUser(id); // ОСТОРОЖНО !!!
 
-            // this.view.cab.employees.employee.EmployeeEdit;
-
-            console.log('# btnDeleteUserListener:');
-            console.log('# DELETE USER id = ', id);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
         }
     }
 
     btnUpdateUserListenerNotBind() {
         return async (event) => {
-            // this = controller
-            // const id = event.target.id;
             const user = this.model.user;
             ;
 
@@ -331,11 +340,8 @@ class Listeners extends Router{
                 const curInput = document.querySelector(`#userEdit-${el}`);
                 userData[el] = curInput.value;
             });
-    
-            // console.log("UPDATE=", userData);
 
             await this.updateUser(userData);
-            await this.getAllUsers();
 
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.employees.create(this.model.users);

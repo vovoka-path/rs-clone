@@ -20,7 +20,7 @@ class Employees {
             'users_btn btn', 
             'Регистрация сотрудника', 
             'createUserBtn',
-            this.props.btnCreateUserListener()
+            this.props.btnRegistrationUserListener()
         );
 
         this.cabContainer.append(usersContainer, btnCreateUser);

@@ -16,7 +16,7 @@ class EmployeeCreate {
         const { btnCreateUserListener } = this.props; // обновит данные пользователя по id кнопки = 630e16043f4dd1fd2ac94429
 
         const userCreate = Container.create('user-create__container');
-        const userCreateBtn = Button.create('user-create__btn', 'Создать пользователя', 'userCreateBtn', this.createRegistrationData);
+        const userCreateBtn = Button.create('user-create__btn', 'Создать пользователя', 'userCreateBtn', btnCreateUserListener());
         const labels = ['Имя пользователя', 'Пароль', 'Роль', 'E-mail', 'Полное имя'];
         const inputs = ['username', 'password', 'role', 'email', 'name'];
 
@@ -39,16 +39,16 @@ class EmployeeCreate {
         this.cabContainer.append(userCreate);
     }
 
-    createRegistrationData() {
-        const userData =  {};
-        const inputs = ['username', 'password', 'role', 'email', 'name'];
-        inputs.forEach((el) => {
-            const curInput = document.querySelector(`#userCreate-${el}`);
-            userData[el] = curInput.value;
-        });
+    // createRegistrationData() {
+    //     const userData =  {};
+    //     const inputs = ['username', 'password', 'role', 'email', 'name'];
+    //     inputs.forEach((el) => {
+    //         const curInput = document.querySelector(`#userCreate-${el}`);
+    //         userData[el] = curInput.value;
+    //     });
 
-        console.log(userData);
-    }
+    //     console.log(userData);
+    // }
 }
 
 export default EmployeeCreate;

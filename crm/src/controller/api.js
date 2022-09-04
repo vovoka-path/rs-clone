@@ -142,6 +142,26 @@ class Api {
             })
     }
 
+    // - Registration: Returns message successfully registered.
+    // - Method *POST* 
+    // - URL *'/auth/registration'*
+    // - HEADERS: 
+    //     - *"Content-Type": "aplication/json"*
+    // - BODY: *{username: String, password: String, role: 'manager' || 'photographer' || 'editor'}*
+    // - RETURN: *Message* or *ERROR*
+
+    async registrationUser(userData) {
+        return fetch(`${this.domen}/auth/registration`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData),
+        })
+            .then(async(response) => {await response.json()})
+            .catch(error => {
+                throw new Error(error);
+            })
+    }
+
     async updateUser(token, userData) {
         const authorization = `Bearer ${token}`;
 
