@@ -1,5 +1,6 @@
 import { editorId } from '../data/constants.js';
 import Router from './router.js';
+import CompletedEmail from '../components/CompletedEmail/CompletedEmail.js';
 import EmployeeListener from './employeeListener.js';
 import cabViews from '../data/cabViews.json' assert { type: "json" };
 import menuData from '../data/menuData.json' assert { type: "json" };
@@ -258,12 +259,20 @@ class Listeners extends Router{
                         У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`,
                     }
                     
-                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
                     // await this.sendEmail(mailData);
+
+                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
                 }
             };
 
-            
+            if (newOrderStatus === 'completed') {
+                const mailData = CompletedEmail.create(order);
+
+                // await this.sendEmail(mailData);
+
+                console.log(`# Клиент ${mailData.clientEmail} получил письмо со ссылкой ${order.editorLink} на обработанные фотографии. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
+
+            }
         }
     }
 
