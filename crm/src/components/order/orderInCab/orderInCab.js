@@ -4,6 +4,7 @@ import statusButtonColor from '../../../data/statusButtonColor.json' assert { ty
 import orderKeyTitles from '../../../data/orderKeyTitles.json' assert { type: "json" };
 import cabViews from '../../../data/cabViews.json' assert { type: "json" };
 import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../../utils/utils.js';
+import Button from '../../Button/Button.js';
 
 // View заказа когда зашел в заказ (в любом кабинете)
 class OrderInCab {
@@ -11,11 +12,15 @@ class OrderInCab {
     }
 
     render(props) {
-        const { role, roleStatus, orderStatuses, order, orders, orderButtonListener, statusButtonListener } = props;
+        const { role, roleStatus, orderStatuses, order, orders, btnBackListener } = props;
 
         this.orderCabContainer = createCustomElement('div', 'order-cab-container');
         this.orderItemsContainer = createCustomElement('div', 'order-cab-items-container');
         
+        // Button BACK
+        const backBtn = Button.create('back__btn', 'Вернуться к списку заказов', order._id, btnBackListener());
+        this.orderCabContainer.append(backBtn);
+
         // Отрисовываем все поля заказа
         const keyAllowedToShow = orderKeysInCab[order.status][role];
 

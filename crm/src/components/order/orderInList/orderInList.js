@@ -2,6 +2,7 @@ import statusButtonColor from '../../../data/statusButtonColor.json' assert { ty
 import orderKeysInList from '../../../data/orderKeysInList.json' assert { type: "json" };
 import orderKeyTitles from '../../../data/orderKeyTitles.json' assert { type: "json" };
 import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../../utils/utils.js';
+import Button from '../../Button/Button.js';
 
 // Универсальный список заказов для всех кабинетов
 // Зависит от props
@@ -15,7 +16,7 @@ class OrderInList {
 
         this.orderContainer = createCustomElement('div', 'order-container');
         this.orderItemsContainer = createCustomElement('div', 'order-items-container');
-        
+
         // Отрисовываем все поля заказа
         const keyAllowedToShow = orderKeysInList[order.status][role];
 

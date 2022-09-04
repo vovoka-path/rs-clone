@@ -32,8 +32,9 @@ class Listeners extends Router{
         this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
         this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
         this.btnAddLinkListener = this.btnAddLinkListenerNotBind.bind(this.controller);
+        this.btnBackListener = this.btnBackListenerNotBind.bind(this.controller);
     }
-    
+    btnBackListener
     async signIn() {
         const view = this.controller.view;
 
@@ -109,6 +110,7 @@ class Listeners extends Router{
             btnDeleteUserListener: this.btnDeleteUserListener,
             btnUpdateUserListener: this.btnUpdateUserListener,
             btnAddLinkListener: this.btnAddLinkListener,
+            btnBackListener: this.btnBackListener,
         };
 
         return props;
@@ -393,6 +395,15 @@ class Listeners extends Router{
         }
     }
 
+    btnBackListenerNotBind() {
+        return async (event) => {
+            const roleStatus = this.model.roleStatus;
+
+            const props = await this.listeners.createPropsByRoleStatus(roleStatus);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderOrderList(props);
+        }
+    }
 }
 
 export default Listeners;
