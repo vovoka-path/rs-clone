@@ -84,17 +84,21 @@ class Listeners extends Router{
         const orderStatuses = this.controller.model.statuses;
         const ordersByRoleStatus = this.controller.getOrdersByRoleStatus();
         const allOrders = this.controller.model.allOrders;
-        
+
         const props = {
             role: role,
             roleStatus: roleStatus,
             orderStatuses: orderStatuses,
             order: {},
+            employees: {
+                photographer: {},
+                editor: {},
+            },
             allOrders: allOrders,
             orders: ordersByRoleStatus,
             users: users,
             orderButtonListener: this.orderButtonListener,
-            // statusButtonListener: null, // добавляем после входа в конкретный заказ
+            statusButtonListener: () => {}, // добавляем после входа в конкретный заказ
             employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
             btnRegistrationUserListener: this.btnRegistrationUserListener,
             btnSendListener: this.btnSendListener, // Create new Order
@@ -112,15 +116,17 @@ class Listeners extends Router{
 
         const roleStatus = this.controller.model.roleStatus;
         let props = await this.createPropsByRoleStatus(roleStatus);
-
-        // const { orders } = props;
-        // const [ currentOrder ] = orders.filter((order) => {
-        //     return order._id === orderId;
-        // });
+        const order = this.controller.model.orderData;
+        const [ photographer ] = order.photographerId ? await this.controller.getUserById(order.photographerId) : [{}];
+        const [ editor ] = order.editorId ? await this.controller.getUserById(order.editorId) : [{}];
 
         props = {
             ...props,
-            order: this.controller.model.orderData,
+            order: order,
+            employees: {
+                photographer: photographer,
+                editor: editor,
+            },
             statusButtonListener: this.statusButtonListener,
         }
         
@@ -132,9 +138,8 @@ class Listeners extends Router{
         return async (event) => {
             // this = controller
             const orderId = event.target.id;
-            // console.log('# this.model.orderData = ', this.model.orderData);
             const props = await this.listeners.createPropsByOrderId(orderId);
-            // console.log('# 8 props = ', props);
+
             this.view.cab.cabContainer.innerHTML = '';
             this.view.cab.renderStatusView(props);
         }
@@ -145,7 +150,6 @@ class Listeners extends Router{
     }
 
     getRoleStatusFromOrderStatus(orderStatus, role) {
-        // console.log('# 5 orderStatus, role = ', orderStatus, role);
         const roleStatus = orderStatusToRoleStatus[orderStatus][role];
 
         this.controller.model.roleStatus = roleStatus;

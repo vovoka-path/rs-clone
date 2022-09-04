@@ -4,6 +4,7 @@ import PhotographerList from '../../components/photographerList/photographerList
 import { createCustomElement, setAttributesElement} from '../../utils/utils.js';
 import Employees from '../../components/Employees/Employees.js';
 import OrderCreate from '../../components/OrderCreate/OrderCreate.js';
+import SubCab from '../../components/SubCab/SubCab.js';
 
 const role = 'manager';
 // const styles = {
@@ -22,59 +23,60 @@ class ManagerCab extends Cab{
         this.cabContainer.append(this.orderCabContainer);
     }
     
-    // *** Cab Views ***
-
     renderIncoming(props) {
-        // this.fakeView(props); // DELETE
-        this.changedElement = createCustomElement('div', 'cab-incoming');
-
+        this.cabInfo = createCustomElement('div', 'cab-incoming');
         this.photographerList = new PhotographerList();
-        // console.log('# this.photographerList = ', this.photographerList);
-        // console.log('# this.photographerList.create = ', this.photographerList.create);
         this.list = this.photographerList.create(props);
-        // console.log('# this.list  = ', this.list);
-        this.changedElement.append(this.list);
-        this.cabContainer.append(this.changedElement);
+        this.cabInfo.append(this.list);
+        this.cabContainer.append(this.cabInfo);
     }
 
     renderAcceptingPhotographer(props) {
-        this.renderStatusDataView(props); // DELETE
-        
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderShooting(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderAcceptingEditor(props) {
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
 
     }
 
     renderEditing(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderSending(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderCompleted(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderCanceled(props) {
-        this.renderStatusDataView(props); // DELETE
-
+        this.renderStatusButtons(props);
+        this.subCab = new SubCab(props);
+        this.cabContainer.append(this.subCab.create());
     }
 
     renderFeedbacks(props) {
         this.cabContainer.innerHTML = '';
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props);
 
     }
 
@@ -89,7 +91,7 @@ class ManagerCab extends Cab{
 
     renderStatistics(props) {
         this.cabContainer.innerHTML = '';
-        this.renderStatusDataView(props); // DELETE
+        this.renderStatusButtons(props); // DELETE
 
     }
 

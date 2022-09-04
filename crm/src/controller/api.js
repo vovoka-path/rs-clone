@@ -89,21 +89,21 @@ class Api {
             })
     }
 
-    async signUp(formData) {
-        return fetch(`${this.domen}/auth/registration`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(formData),
-        })
-            .then(async(response) => {
-                return {
-                    data: await response.json(),
-                }
-            })
-            .catch(error => {
-                throw new Error(error);
-            })
-    }
+    // async signUp(formData) {
+    //     return fetch(`${this.domen}/auth/registration`, {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify(formData),
+    //     })
+    //         .then(async(response) => {
+    //             return {
+    //                 data: await response.json(),
+    //             }
+    //         })
+    //         .catch(error => {
+    //             throw new Error(error);
+    //         })
+    // }
 
     async signIn(formData) {
         return fetch(`${this.domen}/auth/login`, {
@@ -141,14 +141,6 @@ class Api {
                 throw new Error(error);
             })
     }
-
-    // - Registration: Returns message successfully registered.
-    // - Method *POST* 
-    // - URL *'/auth/registration'*
-    // - HEADERS: 
-    //     - *"Content-Type": "aplication/json"*
-    // - BODY: *{username: String, password: String, role: 'manager' || 'photographer' || 'editor'}*
-    // - RETURN: *Message* or *ERROR*
 
     async registrationUser(userData) {
         return fetch(`${this.domen}/auth/registration`, {
