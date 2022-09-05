@@ -17,14 +17,14 @@ class EmployeeCreate {
 
         const userCreate = Container.create('user-create__container');
         const userCreateBtn = Button.create('user-create__btn', 'Создать пользователя', 'userCreateBtn', btnCreateUserListener());
-        const labels = ['Имя пользователя', 'Пароль', 'Роль', 'Статус', 'E-mail', 'Полное имя'];
+        const labels = ['Логин', 'Пароль', 'Роль', 'Статус', 'E-mail', 'Полное имя'];
         const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
 
 
         labels.forEach((item, i) => {
             if (item === 'Роль') {
                 const label = Label.create(`userCreate-${inputs[i]}`, item);
-                const input = Select.create(`user-create__item`, `userCreate-${inputs[i]}`, ['manager','photographer','editor']);
+                const input = Select.create(`user-create__item`, `userCreate-${inputs[i]}`, ['photographer','editor','manager']);
                 label.append(input);
                 userCreate.append(label);
             } else {

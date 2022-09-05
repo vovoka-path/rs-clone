@@ -22,7 +22,7 @@ class EmployeeEdit {
         labels.forEach((item, i) => {
             if (item === 'Роль') {
                 const label = Label.create(`userEdit-${inputs[i]}`, item);
-                const input = Select.create(`user-edit__item`,  `userEdit-${inputs[i]}`, ['manager','photographer','editor']);
+                const input = Select.create(`user-edit__item`,  `userEdit-${inputs[i]}`, ['photographer','editor','manager'], user.role);
                 label.append(input);
     
                 userEdit.append(label);
