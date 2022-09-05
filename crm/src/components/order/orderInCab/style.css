@@ -7,7 +7,6 @@
     border-radius: 15px;
     flex-direction: column;
     gap: 15px;
-
 }
 
 .order-cab-items-container span {
@@ -77,6 +76,11 @@
     flex-direction: column;
     gap: 10px;
     
+}
+
+button.btn-disabled{
+    opacity: 0.2;
+    cursor: not-allowed;
 }
 
 .add-message__item {
