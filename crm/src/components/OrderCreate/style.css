@@ -1,7 +1,9 @@
 .new-order__container {
-    max-width: 400px;
+    min-width: 290px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
 }
 .order__city,
@@ -33,3 +35,9 @@
     color: white;
 }
 
+@media screen and (min-width: 766px) {
+    .new-order__container {
+        margin: 0 auto;
+        width:400px
+    }
+}

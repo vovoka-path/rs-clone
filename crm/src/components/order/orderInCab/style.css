@@ -49,6 +49,8 @@
 .back__btn,
 .add-message__btn,
 .status-button-container button{
+    align-self: center;
+    width: 90%;
     margin-top: 10px;
     background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
     border: none;
@@ -56,6 +58,8 @@
     border-radius: 100px;
     box-shadow: 0 0 5px grey;
     color: white;
+    cursor: pointer;
+    transform: scale(1.1);
 }
 
 .photographer-status {
@@ -87,4 +91,9 @@
 
 .status-button-container button {
     padding: 0  15px;
+}
+
+.order-cab-container {
+    display: flex;
+    flex-direction: column;
 }

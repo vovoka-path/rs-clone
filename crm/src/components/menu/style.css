@@ -1,0 +1,118 @@
+.menu-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 0;
+    top: -2000px;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #167293 0%, #0ca896 100%);
+    transition: 1s;
+    z-index: 20;
+  }
+  
+  .menu-toggle {
+    top: 0;
+  }
+  
+  .menu-items {
+    position: relative;
+    width: 80%;
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    overflow-y: auto;
+  }
+  
+  .menu-close {
+    position: absolute;
+    content: "";
+    margin: 5px 0 0 5px;
+    width: 30px;
+    height: 30px;
+    top: 0;
+    left: 0;
+    z-index: 100;
+  }
+  
+  .menu-block {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #167594;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0px -2px 8px black;
+    z-index: 20;
+  }
+  
+  .menu-btn {
+    position: absolute;
+    top: -30px;
+    left: calc(50% - 30px);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #0ca896;
+    background-image: url("../../public/menu.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-size: 60%;
+    background-position: center;
+    box-shadow: 0px -2px 4px black;
+    z-index: 20;
+    transition: all ease 0.5s;
+}
+
+.menu-btn:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+  
+  .menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 110px;
+    height: 110px;
+    border: 3px solid white;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+    font-family: "Oswald", sans-serif;
+    transition: all ease 0.5s;
+  }
+  .menu-item:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+  }
+  
+  .menu-img {
+    width: 50px;
+  }
+  
+  .menu-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+  }
+  
+  
+@media screen and (min-width: 760px) {
+    
+    .menu-items {
+        align-items: center;
+        justify-content: center;
+        height: 50%;
+    }
+}
