@@ -1,0 +1,144 @@
+{
+    "items": [
+        "notAcceptingDuration",
+        "acceptingDuration",
+        "accepted",
+        "workingDuration"
+    ],
+    "ru": {
+        "notAcceptingDuration": "Принимает заказ в течение {time}",
+        "acceptingDuration": "Заказ принят в течение {time}",
+        "accepted": "Заказ принят в работу {time}",
+        "workingDuration": "Работа выполнена в течение {time}"
+    },
+    "en": {
+        "notAcceptingDuration": "Принимает заказ в течение {time}",
+        "acceptingDuration": "Заказ принят в течение {time}",
+        "accepted": "Заказ принят в работу {accepted}",
+        "workingDuration": "Работа выполнена в течение {time}"
+    },
+    "incoming": {
+        "photographer": {
+            "container": false
+        },
+        "editor": {
+            "container": false
+        }
+    },
+    "acceptingPhotographer": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": true,
+            "accepted": false,
+            "acceptingDuration": false,
+            "workingDuration": false
+        },
+        "editor": {
+            "container": false
+        }
+    },
+    "shooting": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": false
+        },
+        "editor": {
+            "container": false
+        }
+    },
+    "acceptingEditor": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        },
+        "editor": {
+            "container": true,
+            "notAcceptingDuration": true,
+            "accepted": false,
+            "acceptingDuration": false,
+            "workingDuration": false
+        }
+    },
+    "editing": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        },
+        "editor": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": false
+        }
+    },
+    "sending": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        },
+        "editor": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        }
+    },
+    "completed": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        },
+        "editor": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        }
+    },
+    "canceled": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": false
+        },
+        "editor": {
+            "container": false
+        }
+    },
+    "feedbacks": {
+        "photographer": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        },
+        "editor": {
+            "container": true,
+            "notAcceptingDuration": false,
+            "accepted": true,
+            "acceptingDuration": true,
+            "workingDuration": true
+        }
+    }
+}

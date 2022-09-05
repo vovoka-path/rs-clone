@@ -2,5 +2,8 @@
 Photo agency CRM
 
 Contains:
-Webpage
+
+1. Webpage
+2. CRM
+3. Server
 

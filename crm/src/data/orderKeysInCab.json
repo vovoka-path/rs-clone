@@ -1,0 +1,246 @@
+{
+    "incoming": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "date",
+            "status"
+         ],
+        "photographer": [],
+        "editor": []
+    },
+    "acceptingPhotographer": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientMessage",
+            "date",
+            "status"
+         ],
+        "editor": []
+    },
+    "shooting": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": []
+    },
+    "acceptingEditor": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "editorId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    },
+    "editing": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "editorId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status",
+            "photographerLink",
+            "editorLink"
+         ]
+    },
+    "sending": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "editorId",
+            "date",
+            "status",
+            "photographerLink",
+            "editorLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status",
+            "editorLink"
+         ]
+    },
+    "completed": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "editorId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status",
+            "editorLink"
+         ]
+    },
+    "canceled": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "editor": []
+    },
+    "feedbacks": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "clientMessage",
+            "clientPhone",
+            "photographerId",
+            "editorId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status",
+            "photographerLink"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "editorId",
+            "date",
+            "status",
+            "editorLink"
+         ]
+    }
+}

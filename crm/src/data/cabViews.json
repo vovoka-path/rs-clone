@@ -1,0 +1,326 @@
+{
+    "notOrderStatus": ["addOrder", "statistics", "employees", "exit"],
+    "manager": {
+        "incoming": {
+            "path": "/manager/incoming",
+            "method": "renderIncoming",
+            "statusesForOrders": ["incoming"],
+            "dates": ["incoming"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Передать фотографу",
+                    "en": "",
+                    "newOrderStatus": "acceptingPhotographer"
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null,
+                    "newOrderStatus": null
+                }
+            }
+        },
+        "acceptingPhotographer": {
+            "path": "/manager/accepting-photographer",
+            "method": "renderAcceptingPhotographer",
+            "statusesForOrders": ["acceptingPhotographer"],
+            "dates": ["incoming", "acceptingPhotographer"],
+            "statusButton": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": "",
+                    "newOrderStatus": "incoming"
+                }
+            }
+        },
+        "shooting": {
+            "path": "/manager/shooting",
+            "method": "renderShooting",
+            "statusesForOrders": ["shooting"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting"],
+            "statusButton": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": "Отменить",
+                    "en": "",
+                    "newOrderStatus": "incoming"
+                }
+            }
+        },
+        "acceptingEditor": {
+            "path": "/manager/accepting-editor",
+            "method": "renderAcceptingEditor",
+            "statusesForOrders": ["acceptingEditor"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor"],
+            "statusButton": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "editing": {
+            "path": "/manager/editing",
+            "method": "renderEditing",
+            "statusesForOrders": ["editing"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing"],
+            "statusButton": {
+                "accept": {
+                    "ru": null,
+                    "en": null
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "sending": {
+            "path": "/manager/sending",
+            "method": "renderSending",
+            "statusesForOrders": ["sending"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Отправить клиенту",
+                    "en": "",
+                    "newOrderStatus": "completed"
+                },
+                "cancel": {
+                    "ru": "Обработчику исправить",
+                    "en": "",
+                    "newOrderStatus": "editing"
+                }
+            }
+        },
+        "completed": {
+            "path": "/manager/completed",
+            "method": "renderCompleted",
+            "statusesForOrders": ["completed"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending", "completed"],
+            "statusButton": null
+        },
+        "canceled": {
+            "path": "/manager/canceled",
+            "method": "renderCanceled",
+            "statusesForOrders": ["canceled"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "canceled"],
+            "statusButton": null
+        },
+        "feedbacks": {
+            "path": "/manager/feedbacks",
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending", "completed", "feedbacks"],
+            "statusButton": null
+        },
+        "addOrder": {
+            "path": "/manager/add-order",
+            "method": "renderAddOrder",
+            "statusesForOrders": ["addOrder"],
+            "statusButton": null
+        },
+        "statistics": {
+            "path": "/manager/statistics",
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButton": null
+        },
+        "employees": {
+            "path": "/manager/employees",
+            "method": "renderEmployees",
+            "statusesForOrders": ["employees"],
+            "statusButton": null
+        },
+        "exit": {
+            "path": "/manager/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
+            "statusButton": null
+        }
+    },
+    "photographer": {
+        "incoming": {
+            "path": "/photographer/incoming",
+            "method": "renderIncoming",
+            "statusesForOrders": ["acceptingPhotographer"],
+            "dates": ["incoming"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Принять",
+                    "en": "",
+                    "newOrderStatus": "shooting"
+                },
+                "cancel": {
+                    "ru": "Отказаться",
+                    "en": "",
+                    "newOrderStatus": "incoming"
+                }
+            }
+        },
+        "shooting": {
+            "path": "/photographer/shooting",
+            "method": "renderShooting",
+            "statusesForOrders": ["shooting"],
+            "dates": ["incoming", "shooting"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Передать обработчику",
+                    "en": "",
+                    "newOrderStatus": "acceptingEditor"
+                },
+                "cancel": {
+                    "ru": "Клиент отменил",
+                    "en": "",
+                    "newOrderStatus": "canceled"
+                }
+            }
+        },
+        "acceptingEditor": {
+            "path": "/photographer/acceptingEditor",
+            "method": "renderAcceptingEditor",
+            "statusesForOrders":
+                [
+                    "acceptingEditor"
+                ],
+            "dates": ["incoming", "shooting", "acceptingEditor"],
+            "statusButton": null
+        },
+        "editing": {
+            "path": "/photographer/editing",
+            "method": "renderEditing",
+            "statusesForOrders":
+                [
+                    "editing",
+                    "sending"
+                ],
+            "dates": ["incoming", "shooting", "editing"],
+            "statusButton": null
+        },
+        "completed": {
+            "path": "/photographer/completed",
+            "method": "renderCompleted",
+            "statusesForOrders":
+                [
+                    "acceptingEditor",
+                    "editing",
+                    "sending", 
+                    "completed"
+                ],
+            "dates": ["incoming", "shooting", "editing", "completed"],
+            "statusButton": null
+        },
+        "canceled": {
+            "path": "/photographer/canceled",
+            "method": "renderCanceled",
+            "statusesForOrders": ["canceled"],
+            "dates": ["incoming", "shooting", "canceled"],
+            "statusButton": null
+        },
+        "feedbacks": {
+            "path": "/photographer/feedbacks",
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "shooting", "editing", "completed", "feedbacks"],
+            "statusButton": null
+        },
+        "statistics": {
+            "path": "/photographer/statistics",
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButton": null
+        },
+        "exit": {
+            "path": "/photographer/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
+            "statusButton": null
+        }
+    },
+    "editor": {
+        "incoming": {
+            "path": "/editor/incoming",
+            "method": "renderIncoming",
+            "statusesForOrders": ["acceptingEditor"],
+            "dates": ["incoming"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Принять",
+                    "en": "",
+                    "newOrderStatus": "editing"
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null,
+                    "newOrderStatus": null
+                }
+            }
+        },
+        "editing": {
+            "path": "/editor/editing",
+            "method": "renderEditing",
+            "statusesForOrders": ["editing"],
+            "dates": ["incoming", "editing"],
+            "statusButton": {
+                "accept": {
+                    "ru": "Обработано",
+                    "en": "",
+                    "newOrderStatus": "sending"
+                },
+                "cancel": {
+                    "ru": null,
+                    "en": null
+                }
+            }
+        },
+        "sending": {
+            "path": "/editor/sending",
+            "method": "renderCompleted",
+            "dates": ["incoming", "editing", "sending"],
+            "statusesForOrders": 
+                [
+                    "sending"
+                ],
+            "statusButton": null
+        },
+        "completed": {
+            "path": "/editor/completed",
+            "method": "renderCompleted",
+            "dates": ["incoming", "editing", "sending", "completed"],
+            "statusesForOrders": 
+                [
+                    "completed"
+                ],
+            "statusButton": null
+        },
+        "feedbacks": {
+            "path": "/editor/feedbacks",
+            "method": "renderFeedbacks",
+            "statusesForOrders": ["feedbacks"],
+            "dates": ["incoming", "editing", "sending", "completed", "feedbacks"],
+            "statusButton": null
+        },
+        "statistics": {
+            "path": "/editor/statistics",
+            "method": "renderStatistics",
+            "statusesForOrders": ["statistics"],
+            "statusButton": null
+        },
+        "exit": {
+            "path": "/editor/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
+            "statusButton": null
+        }
+    }
+}
