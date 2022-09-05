@@ -10,12 +10,36 @@ class Controller {
         this.model = model;
         this.api = new Api();
         this.listeners = new Listeners(this);
+        this.start = this.startNotBind.bind(this);
     }
 
-    start() {
-        this.view.renderSignIn();
+    async startNotBind() {
+        if (await this.checkLocalStorage()) {
+            this.view.renderSignIn();
+            this.listeners.signIn();
+        } else {
+            this.listeners.signInToken();
+        }
+
         this.listeners.bindHandlers(this);
-        this.listeners.signIn();
+    }
+
+    async checkLocalStorage() {
+        let isTokenExpires = true;
+        const authData = localStorage.getItem('signup');
+
+        if (authData) {
+            const signUpData = JSON.parse(localStorage.getItem('signup'));
+            this.model.setAuth(signUpData);
+            
+            const res = await this.getOrderData();
+            
+            if (Array.isArray(res)) {
+                isTokenExpires = false;
+            }
+        }
+
+        return isTokenExpires;
     }
 
     async getRole(formData) {

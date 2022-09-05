@@ -48,7 +48,9 @@ class Listeners extends Router{
             }
             
             const json = await this.controller.getRole(formData);
-            const { role } = json;
+            const { role, token, username } = json;
+
+            localStorage.setItem('signup', JSON.stringify(json));
 
             // const startStatus = this.controller.model.startStatuses[role];
             const roleStatus = 'incoming';
@@ -62,12 +64,25 @@ class Listeners extends Router{
         }, true);
     }
 
+    async signInToken() {
+        const { role, token, username } = this.controller.model.auth;
+        
+        const roleStatus = 'incoming';
+
+        const props = await this.createPropsByRoleStatus(roleStatus);
+        
+        // Рисуем кабинет со списком входящих заказов
+        this.controller.view.renderCab(props);
+        // Вешаем на меню обработчики
+        this.routingMenu(role);
+    }
+
     // обработчик кликов по меню
     async handleMenuClick(roleStatus) {
         // console.log('# handleMenuClick: roleStatus= ', roleStatus);
         const props = await this.createPropsByRoleStatus(roleStatus);
 
-        if (['addOrder', 'statistics', 'employees'].includes(roleStatus)) {
+        if (cabViews.notOrderStatus.includes(roleStatus)) {
             const { role } = props;
             const methodName = cabViews[role][roleStatus].method;
             this.controller.view.cab[methodName](props);
@@ -113,6 +128,8 @@ class Listeners extends Router{
             btnAddLinkListener: this.btnAddLinkListener,
             btnBackListener: this.btnBackListener,
             btnAddMessageListener: this.btnAddMessageListener,
+            // signIn: this.signIn,
+            start: this.controller.start,
         };
 
         return props;
@@ -292,7 +309,7 @@ class Listeners extends Router{
 
     btnSendListenerNotBind() {
         const orderData =  {};
-        const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
+        const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
         const date = Date.now();
         inputs.forEach((el) => {
             console.log('# el = ', el);
@@ -318,7 +335,7 @@ class Listeners extends Router{
             console.log('# btnCreateUserListener:');
 
             const userData =  {};
-            const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
+            const inputs = ['username', 'password', 'role', 'email', 'name'];
             inputs.forEach((el) => {
                 const curInput = document.querySelector(`#userCreate-${el}`);
                 userData[el] = curInput.value;
@@ -366,7 +383,7 @@ class Listeners extends Router{
                 const curInput = document.querySelector(`#userEdit-${el}`);
                 userData[el] = curInput.value;
             });
-            
+
             await this.updateUser(userData);
 
             this.view.cab.cabContainer.innerHTML = '';

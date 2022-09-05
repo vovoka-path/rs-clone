@@ -1,4 +1,5 @@
 {
+    "notOrderStatus": ["addOrder", "statistics", "employees", "exit"],
     "manager": {
         "incoming": {
             "path": "/manager/incoming",
@@ -140,6 +141,12 @@
             "method": "renderEmployees",
             "statusesForOrders": ["employees"],
             "statusButton": null
+        },
+        "exit": {
+            "path": "/manager/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
+            "statusButton": null
         }
     },
     "photographer": {
@@ -232,6 +239,12 @@
             "method": "renderStatistics",
             "statusesForOrders": ["statistics"],
             "statusButton": null
+        },
+        "exit": {
+            "path": "/photographer/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
+            "statusButton": null
         }
     },
     "editor": {
@@ -292,6 +305,12 @@
             "path": "/editor/statistics",
             "method": "renderStatistics",
             "statusesForOrders": ["statistics"],
+            "statusButton": null
+        },
+        "exit": {
+            "path": "/editor/exit",
+            "method": "renderExit",
+            "statusesForOrders": ["exit"],
             "statusButton": null
         }
     }

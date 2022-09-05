@@ -50,6 +50,10 @@
         "/manager/employees": {
             "status": "employees",
             "statusesForOrders": ["employees"]
+        },
+        "/manager/exit": {
+            "status": "exit",
+            "statusesForOrders": ["exit"]
         }
     },
     "photographer": {
@@ -101,6 +105,10 @@
         "/photographer/statistics": {
             "status": "statistics",
             "statusesForOrders": ["statistics"]
+        },
+        "/photographer/exit": {
+            "status": "exit",
+            "statusesForOrders": ["exit"]
         }
     },
     "editor": {
@@ -127,6 +135,10 @@
         "/editor/statistics": {
             "status": "statistics",
             "statusesForOrders": ["statistics"]
+        },
+        "/editor/exit": {
+            "status": "exit",
+            "statusesForOrders": ["exit"]
         }
     }
 }

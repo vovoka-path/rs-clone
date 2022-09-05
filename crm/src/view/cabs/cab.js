@@ -125,6 +125,12 @@ class Cab {
     removeOrderList() {
         this.cabContainer.innerHTML = '';
     }
+
+    renderExit(props) {
+        localStorage.setItem('signup', '');
+        document.getElementById('app').innerHTML = '';
+        props.start();
+    }
 }
 
 export default Cab;

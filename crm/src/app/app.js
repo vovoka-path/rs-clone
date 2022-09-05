@@ -8,8 +8,8 @@ class App {
         this.controller = new Controller(new View(), new Model());
     }
 
-    start() {
-        this.controller.start();
+    async start() {
+        await this.controller.start();
     }
 }
 

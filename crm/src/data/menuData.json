@@ -59,6 +59,11 @@
             "roleStatus": null,
             "path": "/manager/employees",
             "ru": "Сотрудники"
+        },
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/manager/exit",
+            "ru": "Выйти"
         }
     },
     "photographer": {
@@ -97,10 +102,10 @@
             "path": "/photographer/feedbacks",
             "ru": "Отзывы"
         },
-        "statistics": {
-            "roleStatus": null,
-            "path": "/photographer/statistics",
-            "ru": "Статистика"
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/photographer/exit",
+            "ru": "Выйти"
         }
     },
     "editor": {
@@ -124,10 +129,10 @@
             "path": "/editor/feedbacks",
             "ru": "Отзывы"
         },
-        "statistics": {
-            "roleStatus": null,
-            "path": "/editor/statistics",
-            "ru": "Статистика"
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/editor/exit",
+            "ru": "Выйти"
         }
     },
     "signin": "Войти"
