@@ -1,0 +1,43 @@
+.new-order__container {
+    min-width: 290px;
+    max-width: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+}
+.order__city,
+.order__route,
+.order__package_name,
+.order__clientEmail,
+.order__clientMessage {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 0 0 10px rgba(22, 116, 148, 0.301);
+}
+
+.order__clientMessage {
+    height: 120px;
+}
+.new-order__container label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.new-order__container button {
+    margin-top: 10px;
+    background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    box-shadow: 0 0 5px grey;
+    color: white;
+}
+
+@media screen and (min-width: 766px) {
+    .new-order__container {
+        margin: 0 auto;
+        width:400px
+    }
+}

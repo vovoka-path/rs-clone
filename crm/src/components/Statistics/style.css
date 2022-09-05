@@ -1,0 +1,38 @@
+.chartDate__filter {
+    max-width: 300px;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 0 0 10px rgba(22, 116, 148, 0.301);
+}
+
+.allOrdersChart__container,
+.canceledOrdersChart__container,
+.famouseRoutesChart__container,
+.famousePackageChart__container,
+.bestPhotographerChart__container{
+    
+    margin: 0 auto;
+    width: 90%;
+    margin-bottom: 20px;
+}
+
+@media screen and (min-width: 769px) {
+    .canceledOrdersChart__container,
+    .famouseRoutesChart__container,
+    .famousePackageChart__container,
+    .bestPhotographerChart__container{
+        width: 50%; 
+    }
+}
+
+
+.allOrders__chart,
+.canceledOrders__chart,
+.famouseRoutes__chart,
+.famousePackage__chart,
+.bestPhotographer__chart {
+    padding: 10px;
+    background-color: #a9e9e252;
+    border-radius: 20px;
+  }

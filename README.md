@@ -1,5 +1,14 @@
+Contains:
+
+1. Webpage
+2. CRM
+3. Server
+
+
+
 # CRM Photo-agancy API
 Api for "CRM Photo-agancy".
+
 
 ## Setup and Running
 
@@ -143,3 +152,5 @@ Api for "CRM Photo-agancy".
         - BODY
             - *{ clientEmail: String, title: String, msg: String }*
         - RETURN: *status* or *ERROR*
+
+

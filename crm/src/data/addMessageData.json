@@ -1,0 +1,39 @@
+{
+    "manager": {
+        "inputs": "comments",
+        "commentBlocks": [
+            {
+                "from": "manager",
+                "to": "photographer",
+                "header": "Комментарии для фотографа:",
+                "label": "Комментарий для фотографа"
+            }
+        ]
+    },
+    "photographer": {
+        "inputs": "comments",
+        "commentBlocks": [
+            {
+                "from": "manager",
+                "to": "photographer",
+                "header": "Комментарии от фотографа"
+            },
+            {
+                "from": "photographer",
+                "to": "editor",
+                "header": "Комментарии для обработчика:",
+                "label": "Комментарий для обработчика"
+            }
+        ]
+    },
+    "editor": {
+        "inputs": "comments",
+        "commentBlocks": [
+            {
+                "from": "photographer",
+                "to": "editor",
+                "header": "Комментарии от фотографа:"
+            }
+        ]
+    }
+}
