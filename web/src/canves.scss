@@ -1,0 +1,55 @@
+
+@keyframes draw-line {
+    0% {
+        stroke-dashoffset: 400;
+        animation-timing-function: ease-in;
+    }
+    20% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: 0;
+        animation-timing-function: ease-out;
+    }
+    75% {
+        stroke-dashoffset: -400;
+    }
+    100% {
+        stroke-dashoffset: -400;
+    }
+}
+
+
+.lines-example {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    width: 100%;
+    text-align: center;
+    
+    > .text {
+        font-family: 'Festive', cursive;
+        font-size: 10vmin;
+    }
+    
+    > .line {
+        display: block;
+        position: absolute;
+        top: -50%;
+        left: 50%;
+        transform: translateX(-50%);
+        height: 200%;
+        width: 100%;
+        max-width: 150vmin;
+        animation: draw-line 5s linear infinite;
+    }
+    
+    > .line.-top {
+        z-index: 1;
+    }
+    
+    > .line.-bottom {
+        z-index: -1;
+    }
+}
