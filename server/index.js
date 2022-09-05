@@ -5,7 +5,7 @@ import ApiRouter from './routes/ApiRouter.js';
 import MailRouter from './routes/MailRouter.js';
 import cors from 'cors';
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 80;
 const DB_URL = "mongodb+srv://pavel:pavel1303@cluster0.ss3deuf.mongodb.net/Photo-agancy?retryWrites=true&w=majority";
 const jsonParser = express.json()
 const app = express();
