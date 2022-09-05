@@ -29,12 +29,12 @@ class ManagerCab extends Cab{
     
     renderIncoming(props) {
         this.cabInfo = createCustomElement('div', 'cab-incoming');
+        this.addMessage = new AddMessage(props).create();
+        this.cabContainer.append(this.addMessage);
         this.photographerList = new PhotographerList();
         this.list = this.photographerList.create(props);
         this.cabInfo.append(this.list);
         this.cabContainer.append(this.cabInfo);
-        this.addMessage = new AddMessage(props).create();
-        this.cabContainer.append(this.addMessage);
     }
 
     renderAcceptingPhotographer(props) {

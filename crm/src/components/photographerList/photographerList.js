@@ -1,6 +1,7 @@
 import StatusButton from '../statusButton/statusButton.js';
 import { createCustomElement, setAttributesElement } from '../../utils/utils.js';
 import cabViews from '../../data/cabViews.json' assert { type: "json" };
+import Header from "../Header/Header.js";
 
 const styles = {
     container: 'photographer-list-container',
@@ -18,6 +19,8 @@ class PhotographerList {
     create(props) {
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener, users } = props;
         const photographers = users.filter((user) => user.role === 'photographer');
+        const header = Header.create(3, 'Фотографы', 'header-photographers');
+        this.container.append(header);
 
         photographers.forEach((photographer) => {
             this.renderPhotographerContainer(photographer);
