@@ -309,7 +309,7 @@ class Listeners extends Router{
 
     btnSendListenerNotBind() {
         const orderData =  {};
-        const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
+        const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
         const date = Date.now();
         inputs.forEach((el) => {
             console.log('# el = ', el);
@@ -335,14 +335,12 @@ class Listeners extends Router{
             console.log('# btnCreateUserListener:');
 
             const userData =  {};
-            const inputs = ['username', 'password', 'role', 'email', 'name'];
+            const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
             inputs.forEach((el) => {
                 const curInput = document.querySelector(`#userCreate-${el}`);
                 userData[el] = curInput.value;
                 console.log('# curInput = ', curInput.value, el);
             });
-
-            // console.log(userData);
 
             await this.registrationUser(userData);
             
@@ -378,7 +376,7 @@ class Listeners extends Router{
             const userData =  {
                 _id: user._id,
             };
-            const inputs = ['username', 'role', 'email', 'name'];
+            const inputs = ['username', 'role', 'status', 'email', 'name'];
             inputs.forEach((el) => {
                 const curInput = document.querySelector(`#userEdit-${el}`);
                 userData[el] = curInput.value;
