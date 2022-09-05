@@ -189,7 +189,7 @@ class Controller {
         // console.log('# sendEmail = ', mailData);
         const token = this.model.auth.token;
         const response = await this.api.sendEmail(token, mailData);
-        console.log('# sendEmail: response = ', response);
+        console.log('# API - sendEmail: response = ', response.response);
     }
 
     async createNewOrder(orderData) {
