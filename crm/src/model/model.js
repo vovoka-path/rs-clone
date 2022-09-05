@@ -19,7 +19,6 @@ class Model {
         this.orders = [];
         this.users = [];
         this.user = {};
-        // TODO
         this.startStatuses = {
             manager: 'incoming',
             photographer: 'acceptingPhotographer',
@@ -38,22 +37,3 @@ class Model {
 }
 
 export default Model;
-
-// ------------------------- archive -----------------------------
-
-    // getStartPageData() {
-    //     // const data = await api;//request to our server;
-    //     const data = {
-    //         role: 'signin',
-    //     };
-
-    //     return data;
-    // }
-
-    // setRole(password) {
-    //     console.log('# password = ', password);
-    //     // const role = await api with password;//request to our server;
-    //     const role = 'manager';
-
-    //     this.role = role;
-    // }

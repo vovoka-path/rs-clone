@@ -30,14 +30,6 @@ class Api {
         }
     }
 
-    // - Get Order: Returns json data specified order.
-    //     - Method *GET* 
-    //     - URL *'api/orders/:id'*
-    //     - HEADERS: 
-    //         - *"Authorization": "Bearer <-YOU TOKEN->"*
-    //         - *"Content-Type": "aplication/json"*
-    //     - RETURN: *Order* or *ERROR*
-
     async getOrderById(id, token) {
         const authorization = `Bearer ${token}`;
 
@@ -88,22 +80,6 @@ class Api {
                 throw new Error(error);
             })
     }
-
-    // async signUp(formData) {
-    //     return fetch(`${this.domen}/auth/registration`, {
-    //         method: 'POST',
-    //         headers: { 'Content-Type': 'application/json' },
-    //         body: JSON.stringify(formData),
-    //     })
-    //         .then(async(response) => {
-    //             return {
-    //                 data: await response.json(),
-    //             }
-    //         })
-    //         .catch(error => {
-    //             throw new Error(error);
-    //         })
-    // }
 
     async signIn(formData) {
         return fetch(`${this.domen}/auth/login`, {
