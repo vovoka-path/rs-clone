@@ -1,4 +1,6 @@
 .user-create__container {
+    min-width: 290px;
+    max-width: 450px;
     display: flex;
     flex-direction: column;
     gap: 15px;
@@ -25,4 +27,12 @@
     border-radius: 100px;
     box-shadow: 0 0 5px grey;
     color: white;
+}
+
+
+@media screen and (min-width: 766px) {
+    .user-create__container {
+        margin: 0 auto;
+        width:400px
+    }
 }

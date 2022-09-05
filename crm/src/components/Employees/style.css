@@ -5,7 +5,9 @@
 }
 
 .user {
+    position: relative;
     width: 290px;
+    height: 280px;
     display: flex;
     flex-direction: column;
     background: linear-gradient(180deg, #167293 0%, #0ca896 100%);
@@ -13,9 +15,16 @@
     padding: 10px;
     border-radius: 15px;
     box-shadow: 3px 4px 10px #000000;
-    justify-content: center;
+    justify-content: start;
     align-items: flex-start;
+    transition: all ease 0.5s;
 }
+
+.user:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
 
 .user_role::before {
     margin-right: 5px;
@@ -60,6 +69,9 @@ margin: 0;
 }
 
 .user__btn-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
     padding: 10px;
     width: 100%;
     display: flex;
@@ -69,10 +81,12 @@ margin: 0;
 .users_btn {
     order: -1;
     width: 100%;
-    margin: 10px 0 20px;
+    max-width: 400px;
+    margin: 0 auto;
+    margin-bottom: 20px;
     background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
     border: none;
-    height: 30px;
+    height: 40px;
     border-radius: 100px;
     box-shadow: 0 0 5px grey;
     color: white;
@@ -81,4 +95,16 @@ margin: 0;
 .cab-container {
     display: flex; 
     flex-direction: column;
+}
+
+
+@media screen and (min-width: 767px) {
+    
+    .users-container {
+
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+    }
 }
