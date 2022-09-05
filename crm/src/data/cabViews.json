@@ -92,7 +92,7 @@
             "dates": ["incoming", "acceptingPhotographer", "shooting", "acceptingEditor", "editing", "sending"],
             "statusButton": {
                 "accept": {
-                    "ru": "Отправлено клиенту",
+                    "ru": "Отправить клиенту",
                     "en": "",
                     "newOrderStatus": "completed"
                 },
@@ -283,13 +283,22 @@
                 }
             }
         },
-        "completed": {
-            "path": "/editor/completed",
+        "sending": {
+            "path": "/editor/sending",
             "method": "renderCompleted",
             "dates": ["incoming", "editing", "sending"],
             "statusesForOrders": 
                 [
-                    "sending", 
+                    "sending"
+                ],
+            "statusButton": null
+        },
+        "completed": {
+            "path": "/editor/completed",
+            "method": "renderCompleted",
+            "dates": ["incoming", "editing", "sending", "completed"],
+            "statusesForOrders": 
+                [
                     "completed"
                 ],
             "statusButton": null

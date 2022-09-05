@@ -120,6 +120,11 @@
             "ru": "Текущие"
         },
         "sending": {
+            "roleStatus": "sending",
+            "path": "/editor/sending",
+            "ru": "На проверке"
+        },
+        "completed": {
             "roleStatus": "completed",
             "path": "/editor/completed",
             "ru": "Завершенные"

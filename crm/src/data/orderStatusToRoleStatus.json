@@ -27,7 +27,7 @@
     "sending": {
         "manager": "sending",
         "photographer": "editing",
-        "editor": "completed"
+        "editor": "sending"
     },
     "completed": {
         "manager": "completed",

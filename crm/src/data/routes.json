@@ -121,10 +121,15 @@
             "status": "editing",
             "statusesForOrders": ["editing"]
         },
+        "/editor/sending": {
+            "status": "sending",
+            "statusesForOrders": [
+                "sending"
+            ]
+        },
         "/editor/completed": {
             "status": "completed",
             "statusesForOrders": [
-                "sending", 
                 "completed"
             ]
         },
