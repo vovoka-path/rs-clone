@@ -1,0 +1,84 @@
+.users-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.user {
+    width: 290px;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(180deg, #167293 0%, #0ca896 100%);
+    color: white;
+    padding: 10px;
+    border-radius: 15px;
+    box-shadow: 3px 4px 10px #000000;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.user_role::before {
+    margin-right: 5px;
+    content: 'Роль: ';
+    font-weight: 700;
+}
+
+.user_email::before {
+    margin-right: 5px;
+    content: 'E-mail: ';
+    font-weight: 700;
+}
+.user_name::before {
+    margin-right: 5px;
+    content: 'Полное имя: ';
+    font-weight: 700;
+}
+.user_status::before {
+    margin-right: 5px;
+    content: 'Статус: ';
+    font-weight: 700;
+}
+
+.user p{
+padding: 10px;
+margin: 0;
+}
+
+.user_title {
+    text-transform: uppercase;
+}
+
+.btn {
+    width: 120px;
+    background-color: rgb(231, 241, 255);
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    box-shadow: 0 0 20px #167594;
+    color: #167594;
+    flex-shrink: 0;
+}
+
+.user__btn-container {
+    padding: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.users_btn {
+    order: -1;
+    width: 100%;
+    margin: 10px 0 20px;
+    background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    box-shadow: 0 0 5px grey;
+    color: white;
+}
+
+.cab-container {
+    display: flex; 
+    flex-direction: column;
+}

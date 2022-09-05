@@ -318,7 +318,7 @@ class Listeners extends Router{
             console.log('# btnCreateUserListener:');
 
             const userData =  {};
-            const inputs = ['username', 'password', 'role', 'email', 'name'];
+            const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
             inputs.forEach((el) => {
                 const curInput = document.querySelector(`#userCreate-${el}`);
                 userData[el] = curInput.value;
@@ -366,7 +366,7 @@ class Listeners extends Router{
                 const curInput = document.querySelector(`#userEdit-${el}`);
                 userData[el] = curInput.value;
             });
-
+            
             await this.updateUser(userData);
 
             this.view.cab.cabContainer.innerHTML = '';

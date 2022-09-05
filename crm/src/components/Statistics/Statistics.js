@@ -107,7 +107,7 @@ class Statistics{
         const allOrdersChartContainer = Container.create('allOrdersChart__container', Header.create(2, 'Помесячная статистика выполненных заказов', 'chart-title'));
 
         const years = {};
-        
+
         this.orders.forEach((order) => {
             if(!years[order.date.incoming.getFullYear()]){
                 years[order.date.incoming.getFullYear()] = {};
@@ -188,9 +188,9 @@ class Statistics{
      createFamouseRoutesChart(){
         const famouseRoutesChartContainer = Container.create('famouseRoutesChart__container', Header.create(2, 'Популярность маршрутов', 'chart-title'));
 
-        const routeOne = this.orders.filter((order) => order.route === 'Маршрут №1 - Старинная Прага').length;
-        const routeTwo = this.orders.filter((order) => order.route === 'Маршрут №2 - Уютная Прага').length;
-        const routeThree = this.orders.filter((order) => order.route === 'Маршрут №3 - Сердце Праги').length;
+        const routeOne = this.orders.filter((order) => order.route === '№1 - Старинная Прага').length;
+        const routeTwo = this.orders.filter((order) => order.route === '№2 - Уютная Прага').length;
+        const routeThree = this.orders.filter((order) => order.route === '№3 - Сердце Праги').length;
 
         const canvas = document.createElement('canvas');
         canvas.className = 'famouseRoutes__chart';
@@ -209,9 +209,9 @@ class Statistics{
                     ]
                 }],
                 labels: [
-                    'Маршрут №1 - Старинная Прага',
-                    'Маршрут №2 - Уютная Прага',
-                    'Маршрут №3 - Сердце Праги'
+                    '№1 - Старинная Прага',
+                    '№2 - Уютная Прага',
+                    '№3 - Сердце Праги'
                 ],
                 
             }
@@ -224,9 +224,9 @@ class Statistics{
      createFamousePackageChart() {
         const famousePackageChartContainer = Container.create('famousePackageChart__container', Header.create(2, 'Популярность пакетов', 'chart-title'));
         
-        const routeOne = this.orders.filter((order) => order.packege_name === 'Тариф Мини').length;
-        const routeTwo = this.orders.filter((order) => order.packege_name === 'Тариф Стандарт').length;
-        const routeThree = this.orders.filter((order) => order.packege_name === 'Тариф Элит').length;
+        const routeOne = this.orders.filter((order) => order.packege_name === 'Мини (1 ч · 25 фото · 70€)').length;
+        const routeTwo = this.orders.filter((order) => order.packege_name === 'Стандарт (1,5 ч · 50 фото · 100€)').length;
+        const routeThree = this.orders.filter((order) => order.packege_name === 'Элит (2,5 ч · 100 фото · 160€)').length;
 
         const canvas = document.createElement('canvas');
         canvas.className = 'famousePackage__chart';
@@ -244,7 +244,7 @@ class Statistics{
                         'rgb(243, 71, 252)',
                     ]
                 }],
-                labels: ['Тариф Мини', 'Тариф Стандарт', 'Тариф Элит'],
+                labels: ['Мини (1 ч · 25 фото · 70€)', 'Стандарт (1,5 ч · 50 фото · 100€)', 'Элит (2,5 ч · 100 фото · 160€)'],
                 
             }
         });
@@ -255,9 +255,9 @@ class Statistics{
 
      createBestPhotographerChart(){
         const bestPhotographerChartContainer = Container.create('bestPhotographerChart__container', Header.create(2, 'Распределенние заказов по фотографам', 'chart-title'));
-        ['Андрей Фомин', 'Вася Пупкин', 'Александр Кузьмин', 'Валерий Миладзе'];
-        const photographerOne = this.orders.filter((order) => order.photographer === 'Андрей Фомин').length;
-        const photographerTwo = this.orders.filter((order) => order.photographer === 'Вася Пупкин').length;
+        ['Александр Иванов', 'Егор Мальцев', 'Александр Кузьмин', 'Валерий Миладзе'];
+        const photographerOne = this.orders.filter((order) => order.photographer === 'Александр Иванов').length;
+        const photographerTwo = this.orders.filter((order) => order.photographer === 'Егор Мальцев').length;
         const photographerThree = this.orders.filter((order) => order.photographer === 'Александр Кузьмин').length;
         const photographerFour = this.orders.filter((order) => order.photographer === 'Валерий Миладзе').length;
 
@@ -281,7 +281,7 @@ class Statistics{
                     ],
                     
                 }],
-                labels: ['Андрей Фомин', 'Вася Пупкин', 'Александр Кузьмин', 'Валерий Миладзе'],
+                labels: ['Александр Иванов', 'Егор Мальцев', 'Александр Кузьмин', 'Валерий Миладзе'],
                 
             }
         });

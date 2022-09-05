@@ -15,6 +15,7 @@ class Employee {
     create(user) {
         const niknameTitle = Header.create(3, user.username, 'user_title');
         const userContainer = Container.create('user', niknameTitle);
+        const btnContainer = Container.create('user__btn-container');
         const changeBtn = Button.create(
             'userChange-btn btn', 
             'Редактировать', 
@@ -31,7 +32,7 @@ class Employee {
         // const deleteBtn = Button.create('userChange-btn btn', 'Удалить', 'deleteUserBtn', /* метод для удаления пользователя */);
 
         for(let prop in user) {
-            if (prop === '__v' || prop === 'password') continue;
+            if (prop === '__v' || prop === 'password' || prop === 'username') continue;
             if (prop === '_id') {
                 userContainer.id = user[prop];
                 continue;
@@ -39,7 +40,8 @@ class Employee {
             const item = Paragraph.create(`user_${prop}`, user[prop]);
             userContainer.append(item);
         }
-        userContainer.append(changeBtn, deleteBtn);
+        btnContainer.append(changeBtn, deleteBtn)
+        userContainer.append(btnContainer);
         return userContainer;
     }
 

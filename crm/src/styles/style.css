@@ -1,5 +1,9 @@
 @import url('../components/order/orderInCab/style.css');
 @import url('../components/OrderCreate/style.css');
+@import url('../components/Employee/EmployeeCreate/style.css');
+@import url('../components/Employee/EmployeeEdit/style.css');
+@import url('../components/Employees/style.css');
+@import url('../components/Statistics/style.css');
 
 * {
   box-sizing: border-box;
