@@ -12,54 +12,7 @@ export const getFormattedDate = (dateString) => {
     return orderValue;
 }
 
-export const timeMethods = {
-    notAcceptingDuration: (role, dates) => {
-        let duration = 0;
-        if (role === 'photographer') {
-            duration = Date.now() - new Date(dates.acceptingPhotographer);
-        } else if (role === 'editor') {
-            duration = Date.now() - new Date(dates.acceptingEditor);
-        }
-
-        let time = parseMillisecondsIntoReadableTime(duration);
-        
-        return time;
-    },
-    accepted: (role, dates) => {
-        if (role === 'photographer') {
-            return getFormattedDate(dates.shooting)
-        } else if (role === 'editor') {
-            return getFormattedDate(dates.editing)
-        }
-        return 'недавно';
-    },
-    acceptingDuration: (role, dates) => {
-        let duration = 0;
-        if (role === 'photographer') {
-            duration = new Date(dates.shooting) - new Date(dates.acceptingPhotographer);
-        } else if (role === 'editor') {
-            duration = new Date(dates.editing) - new Date(dates.acceptingEditor);
-        }
-
-        let time = parseMillisecondsIntoReadableTime(duration);
-        
-        return time;
-    },
-    workingDuration: (role, dates) => {
-        let duration = 0;
-        if (role === 'photographer') {
-            duration = new Date(dates.acceptingEditor) - new Date(dates.shooting);
-        } else if (role === 'editor') {
-            duration = new Date(dates.sending) - new Date(dates.editing);
-        }
-
-        let time = parseMillisecondsIntoReadableTime(duration);
-        
-        return time;
-    },
-}
-
-function parseMillisecondsIntoReadableTime(milliseconds){
+const parseMillisecondsIntoReadableTime = (milliseconds) => {
     var hours = milliseconds / (1000*60*60);
     var absoluteHours = Math.floor(hours);
     var h = absoluteHours;
@@ -113,6 +66,53 @@ function parseMillisecondsIntoReadableTime(milliseconds){
     return res;
 }
 
+export const timeMethods = {
+    notAcceptingDuration: (role, dates) => {
+        let duration = 0;
+        if (role === 'photographer') {
+            duration = Date.now() - new Date(dates.acceptingPhotographer);
+        } else if (role === 'editor') {
+            duration = Date.now() - new Date(dates.acceptingEditor);
+        }
+
+        let time = parseMillisecondsIntoReadableTime(duration);
+        
+        return time;
+    },
+    accepted: (role, dates) => {
+        if (role === 'photographer') {
+            return getFormattedDate(dates.shooting)
+        } else if (role === 'editor') {
+            return getFormattedDate(dates.editing)
+        }
+        return 'недавно';
+    },
+    acceptingDuration: (role, dates) => {
+        let duration = 0;
+        if (role === 'photographer') {
+            duration = new Date(dates.shooting) - new Date(dates.acceptingPhotographer);
+        } else if (role === 'editor') {
+            duration = new Date(dates.editing) - new Date(dates.acceptingEditor);
+        }
+
+        let time = parseMillisecondsIntoReadableTime(duration);
+        
+        return time;
+    },
+    workingDuration: (role, dates) => {
+        let duration = 0;
+        if (role === 'photographer') {
+            duration = new Date(dates.acceptingEditor) - new Date(dates.shooting);
+        } else if (role === 'editor') {
+            duration = new Date(dates.sending) - new Date(dates.editing);
+        }
+
+        let time = parseMillisecondsIntoReadableTime(duration);
+        
+        return time;
+    },
+}
+
 export const createCustomElement = (tag = 'div', styles) => {
     // styles = 'class1 class2 class3'
     const element = document.createElement(tag);
@@ -140,15 +140,6 @@ export const isShowOrderKey = (keyAllowedToShow, key) => {
     return false;
 }
 
-// export const isShowOrderKey = (key, forbiddenOrderKeys) => {
-//     if ( forbiddenOrderKeys.length != 0 ) {
-//         if ( (forbiddenOrderKeys.includes(key)) ) {
-//             return false;
-//         }
-//     }
-
-//     return true;
-// }
 // DELETE
 export const getStatuses = (role, roleStatus) => {
     const statuses = cabViews[role][roleStatus].statusesForOrders;
@@ -178,16 +169,6 @@ export const filterOrdersByStatus = (orders, status) => {
     });
 
     return filteredOrders;
-}
-
-
-export const getFormattedDate = (dateString) => {
-    const statusDate = new Date(dateString);
-    const localStatusDate = statusDate.toLocaleDateString('ru-RU');
-    const statusTime = statusDate.toTimeString().slice(0, 5);
-    const orderValue = `${localStatusDate}, ${statusTime}`;
-
-    return orderValue;
 }
 
 export function randomDate(start, end) {
@@ -229,4 +210,3 @@ export const createOrders = (counts) => {
      }
      return orders;
 }
-
