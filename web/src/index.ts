@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 import './index.scss';
 import './reset.css';
@@ -51,7 +54,7 @@ button.addEventListener('click', async (e) => {
 
 async function postOrder(data: Order): Promise<void> {
   try {
-    await fetch('http://localhost:5000/api/orders', {
+    await fetch('https://tranquil-tundra-93773.herokuapp.com/api/orders', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -123,9 +126,9 @@ function showQuestion() {
 }
 
 function checkAnswer() {
-  console.log('checkAnswer started');
+  //console.log('checkAnswer started');
   
-  const message = document.querySelector('#message') as HTMLElement;
+  const message = document.querySelector('#message1') as HTMLElement;
   const checkedRadio = listContainer.querySelector('input[type="radio"]:checked') as HTMLInputElement;
   message.innerHTML = '';
   
@@ -136,8 +139,8 @@ function checkAnswer() {
     return;
   }
 
-  const userAnswer = parseInt(checkedRadio.value);
-  console.log('userAnswer =', userAnswer);
+  //const userAnswer = parseInt(checkedRadio.value);
+  //console.log('userAnswer =', userAnswer);
 
   if (questionIndex !== questions.length - 1) {
 
@@ -183,7 +186,7 @@ function checkAnswer() {
       }
     }
 
-    console.log('Это НЕ последний вопрос');
+    //console.log('Это НЕ последний вопрос');
     questionIndex++;
     clearPage();
     showQuestion();
@@ -197,7 +200,7 @@ function checkAnswer() {
       }
     }
 
-    console.log('Это последний вопрос');
+    //console.log('Это последний вопрос');
     clearPage();
     showResults();
   }
@@ -207,8 +210,8 @@ clearPage();
 showQuestion();
 
 function showResults(): void {
-  console.log('showResults started');
-  console.log('score маршрутов', route1, route2, route3, min, standart);
+  //console.log('showResults started');
+  //console.log('score маршрутов', route1, route2, route3, min, standart);
   let message = '';
   let package1 = '';
   let description = '';
@@ -251,7 +254,7 @@ function showResults(): void {
   `;
   
   const maxRoute = Math.max(route1, route2, route3);
-  console.log(maxRoute);
+  //console.log(maxRoute);
   
   if (maxRoute === route1 && min === 1) {
     message = 'Маршрут №1 - Старинная Прага';
@@ -350,7 +353,7 @@ function showResults(): void {
     };
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     postOrder(order);
-    console.log(order);
+    //console.log(order);
     popap.classList.add('none');
     
   });
