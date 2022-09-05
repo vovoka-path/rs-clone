@@ -17,16 +17,15 @@ class PhotographerList {
     }
 
     create(props) {
-        const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener, users } = props;
+        const { users } = props;
         const photographers = users.filter((user) => user.role === 'photographer');
         const header = Header.create(3, 'Фотографы', 'header-photographers');
         this.container.append(header);
 
         photographers.forEach((photographer) => {
             this.renderPhotographerContainer(photographer);
-            this.renderStatusButtons(this.container.photographerContainer, props);
+            this.renderStatusButtons(photographer, props);
         });
-        
 
         return this.container;
     }
@@ -34,41 +33,38 @@ class PhotographerList {
     renderPhotographerContainer(photographer) {
         this.photographerContainer = createCustomElement('div', styles.photographerContainer);
 
-            for (let [key, value] of Object.entries(photographer)) {
-                // TODO: replace keys in config
-                if (!['password', 'role', 'username', '__v', '_id'].includes(key)) {
-                    if (key === 'status') {
-                        const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
-                        
-                        photographerKey.innerText = value === 'доступен' ? "✅" : "⛔";
-    
-                        this.photographerContainer.append(photographerKey);
-                    } else if (key === 'email') {
-                        continue;
-                    } else {
-                        const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
+        for (let [key, value] of Object.entries(photographer)) {
+            if (!['password', 'role', 'username', '__v', '_id'].includes(key)) {
+                if (key === 'status') {
+                    const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
+                    
+                    photographerKey.innerText = value === 'доступен' ? "✅" : "⛔";
 
-                        photographerKey.innerText = value;
-    
-                        this.photographerContainer.append(photographerKey);
-                    }
+                    this.photographerContainer.append(photographerKey);
+                } else if (key === 'email') {
+                    continue;
+                } else {
+                    const photographerKey = createCustomElement('div', `${styles.photographerKey} photographer-${key}`);
 
+                    photographerKey.innerText = value;
+
+                    this.photographerContainer.append(photographerKey);
                 }
-                
             }
+        }
 
-            this.container.append(this.photographerContainer);
+        this.container.append(this.photographerContainer);
 
-            setAttributesElement(this.photographerContainer, {
-                'name': photographer.name,
-                'status': photographer.status,
-                'id': photographer._id,
-            })
+        setAttributesElement(this.photographerContainer, {
+            'name': photographer.name,
+            'status': photographer.status,
+            'id': photographer._id,
+        })
 
-            return 
+        return 
     }
 
-    renderStatusButtons(photographerContainer, props) {
+    renderStatusButtons(photographer, props) {
         const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener, users } = props;
         const lang = 'ru';
         const statusButtonTexts = cabViews[role][roleStatus].statusButton;
@@ -86,7 +82,11 @@ class PhotographerList {
                 this.statusButtons.push(this.statusButton);
 
                 // Вешаем обработчик
-                this.statusButton.addEventListener('click', statusButtonListener()); // TODO listener
+                if (photographer.status === 'доступен') {
+                    this.statusButton.addEventListener('click', statusButtonListener());
+                } else {
+                    this.statusButton.classList.add('btn-disabled');
+                }
                 
                 this.photographerContainer.append(this.statusButton);
             }
