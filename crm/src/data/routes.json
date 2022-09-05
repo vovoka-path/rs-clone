@@ -64,6 +64,13 @@
             "status": "shooting",
             "statusesForOrders": ["shooting"]
         },
+        "/photographer/acceptingEditor": {
+            "status": "acceptingEditor",
+            "statusesForOrders":
+                [
+                    "acceptingEditor"
+                ]
+        },
         "/photographer/editing": {
             "status": "editing",
             "statusesForOrders":

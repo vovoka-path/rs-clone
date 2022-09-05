@@ -3,6 +3,7 @@ import orderKeysInCab from '../../../data/orderKeysInCab.json' assert { type: "j
 import statusButtonColor from '../../../data/statusButtonColor.json' assert { type: "json" };
 import orderKeyTitles from '../../../data/orderKeyTitles.json' assert { type: "json" };
 import cabViews from '../../../data/cabViews.json' assert { type: "json" };
+import titles from '../../../data/titles.json' assert { type: "json" };
 import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../../utils/utils.js';
 import Button from '../../Button/Button.js';
 
@@ -81,12 +82,22 @@ if (key === 'date') {
             const email = order[key];
             const span = createCustomElement('span', 'order-email-span');
             span.innerHTML = 'E-mail:';
-            const linkToMail = createCustomElement('a', 'order-email-link');
+            const linkToMail = createCustomElement('a', 'order-link order-email-link');
             // btn.setAttribute('type', 'button');
             linkToMail.innerHTML = `${email}`;
             linkToMail.setAttribute('value', email);
             linkToMail.setAttribute('href', `mailto:${email}`);
             this.orderKeyElement.append(span, linkToMail);
+        } else if (key === 'photographerLink' || key === 'editorLink') {
+                const link = order[key];
+                // console.log('# link = ', link);
+                const span = createCustomElement('span', 'order-${key}-span');
+                span.innerHTML = `${titles[key].ru}:`;
+                const linkElement = createCustomElement('a', `order-link order-email-link order-${key}-link`);
+                linkElement.innerHTML = 'ссылка';
+                linkElement.setAttribute('value', link);
+                linkElement.setAttribute('href', `${link}`);
+                this.orderKeyElement.append(span, linkElement);
         } else {
             this.orderKeyElement.className = `order_item order-item-cab cab-${key}`;
             this.orderKeyElement.innerHTML = orderValue; // Заменил innerText на innerHTML для того чтоб использовать теги в шаблонной строке

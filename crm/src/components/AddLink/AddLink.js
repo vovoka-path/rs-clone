@@ -31,6 +31,7 @@ class AddLink {
         labels.forEach((item, i) => {
             const label = Label.create(`add-link-${inputs[i]}`, item);
             const input = Input.create(`add-link__item`, 'text', order[inputs[i]], `add-link-${inputs[i]}`, order[inputs[i]]);
+            // console.log('# order[inputs[i] = ', order[inputs[i]], inputs[i]);
             if (!order[inputs[i]]) input.value = ''; // 'Тут должна быть ссылка';
             label.append(input);
             

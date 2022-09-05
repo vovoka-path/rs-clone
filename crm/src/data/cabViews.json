@@ -7,7 +7,7 @@
             "dates": ["incoming"],
             "statusButton": {
                 "accept": {
-                    "ru": "Назначить",
+                    "ru": "Передать фотографу",
                     "en": "",
                     "newOrderStatus": "acceptingPhotographer"
                 },
@@ -179,12 +179,21 @@
                 }
             }
         },
+        "acceptingEditor": {
+            "path": "/photographer/acceptingEditor",
+            "method": "renderAcceptingEditor",
+            "statusesForOrders":
+                [
+                    "acceptingEditor"
+                ],
+            "dates": ["incoming", "shooting", "acceptingEditor"],
+            "statusButton": null
+        },
         "editing": {
             "path": "/photographer/editing",
             "method": "renderEditing",
             "statusesForOrders":
                 [
-                    "acceptingEditor",
                     "editing",
                     "sending"
                 ],

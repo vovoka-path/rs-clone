@@ -31,11 +31,16 @@ class PhotographerCab extends Cab{
         this.cabContainer.append(this.addMessage);
     }
 
-    renderEditing(props) {
+    renderAcceptingEditor(props) {
+        this.renderStatusButtons(props);
         this.addLink = new AddLink(props);
         this.cabContainer.append(this.addLink.create());
-        this.renderStatusButtons(props);
+    }
 
+    renderEditing(props) {
+        this.renderStatusButtons(props);
+        this.addLink = new AddLink(props);
+        this.cabContainer.append(this.addLink.create());
     }
 
     renderCompleted(props) {

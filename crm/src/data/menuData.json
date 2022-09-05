@@ -73,8 +73,8 @@
             "ru": "Текущие"
         },
         "acceptingEditor": {
-            "roleStatus": "editing",
-            "path": "/photographer/editing",
+            "roleStatus": "acceptingEditor",
+            "path": "/photographer/acceptingEditor",
             "ru": "Обработчик принимает"
         },
         "editing": {

@@ -53,20 +53,30 @@ class AddMessage {
 
         this.addMessageContainer.append(addMessageBtn);
 
-        console.log('# order.comments.length = ', order.comments.length);
-        if (order.comments.length !== 0) {
+        if (order.comments.length !== 0 && order.status !== 'incoming') {
             const messagesContainer = Container.create('messages__container');
             const header = Header.create(4, `${formData[role].header}`, 'header-from');
             messagesContainer.append(header);
 
-            order.comments.forEach((comment) => {
-                console.log('# comment.from, role = ', comment.from, role);
+            const comments = order.comments
+            for (let i = comments.length - 1; i >= 0; i--) {
+                // console.log('# comment.from, role = ', comment.from, role);
+                const comment = comments[i];
+                // console.log('# comment = ', comment);
                 if (comment.from = role) {
-                    const content = comment.message;
+                    const content = `#${i}: ${comment.message}`;
                     const msgContainer = Paragraph.create('message', content)
                     messagesContainer.append(msgContainer);
                 }
-            });
+            }
+            // order.comments.forEach((comment) => {
+            //     console.log('# comment.from, role = ', comment.from, role);
+            //     if (comment.from = role) {
+            //         const content = comment.message;
+            //         const msgContainer = Paragraph.create('message', content)
+            //         messagesContainer.append(msgContainer);
+            //     }
+            // });
 
             this.addMessageContainer.append(messagesContainer);
         }
