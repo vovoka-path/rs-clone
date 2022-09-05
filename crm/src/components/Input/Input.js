@@ -1,5 +1,5 @@
 class Input {
-    create(className, type, value, id, placeholder) {
+    create(className, type, value, id, placeholder = '') {
         const input = document.createElement('input');
         input.className = className;
         input.type = type;

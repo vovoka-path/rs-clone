@@ -2,7 +2,6 @@ import Label from "../Label/Label.js";
 import Input from "../Input/Input.js";
 import Button from "../Button/Button.js";
 import Container from "../Container/Container.js";
-import Select from '../Select/Select.js';
 
 const formData = {
     photographer: {
@@ -30,11 +29,16 @@ class AddLink {
 
         labels.forEach((item, i) => {
             const label = Label.create(`add-link-${inputs[i]}`, item);
-            const input = Input.create(`add-link__item`, 'text', order[inputs[i]], `add-link-${inputs[i]}`, order[inputs[i]]);
-            // console.log('# order[inputs[i] = ', order[inputs[i]], inputs[i]);
-            if (!order[inputs[i]]) input.value = ''; // 'Тут должна быть ссылка';
+            const input = Input.create(
+                `add-link__item`, 
+                'text', order[inputs[i]], 
+                `add-link-${inputs[i]}`, 
+                order[inputs[i]]
+            );
+
+            if (!order[inputs[i]]) input.value = '';
+
             label.append(input);
-            
             addLinkContainer.append(label);
         });
 
