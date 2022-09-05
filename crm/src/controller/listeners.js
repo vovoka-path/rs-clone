@@ -248,13 +248,12 @@ class Listeners extends Router{
 
             for (let [ role, isSending ] of Object.entries(emailSending[newRoleStatus])) {
                 if (isSending) {
-                    console.log('# role, newOrderStatus = ', role, newOrderStatus);
                     const mailData = {
                         clientEmail: emails[role], 
                         title: `
                         CYP: У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}"!`, 
-                        msg: `
-                        Здравствуйте, ${names[role]}!.`,
+                        msg: `У ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".
+                        `,
                     }
                     
                     await this.sendEmail(mailData);
@@ -268,7 +267,7 @@ class Listeners extends Router{
 
                 await this.sendEmail(mailData);
 
-                console.log(`# Клиент ${mailData.clientEmail} получил письмо со ссылкой ${order.editorLink} на обработанные фотографии. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
+                console.log(`# ${mailData.clientEmail} получил письмо со ссылкой ${order.editorLink} на обработанные фотографии. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
 
             }
         }
@@ -306,7 +305,7 @@ class Listeners extends Router{
             inputs.forEach((el) => {
                 const curInput = document.querySelector(`#userCreate-${el}`);
                 userData[el] = curInput.value;
-                console.log('# curInput = ', curInput.value, el);
+                // console.log('# curInput = ', curInput.value, el);
             });
 
             await this.registrationUser(userData);

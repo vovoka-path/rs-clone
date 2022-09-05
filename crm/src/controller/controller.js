@@ -194,7 +194,6 @@ class Controller {
 
     async createNewOrder(orderData) {
         const response = await this.api.createNewOrder(orderData);
-        console.log('# createNewOrder: response = ', response);
         const roleStatus = this.model.roleStatus;
         await this.updateModelDataByNewRoleStatus(roleStatus);
     }
