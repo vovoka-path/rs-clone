@@ -1,0 +1,62 @@
+{
+    "incoming": {
+        "manager": "incoming",
+        "photographer": "none",
+        "editor": "none"
+    },
+    "acceptingPhotographer": {
+        "manager": "acceptingPhotographer",
+        "photographer": "incoming",
+        "editor": "none"
+    },
+    "shooting": {
+        "manager": "shooting",
+        "photographer": "shooting",
+        "editor": "none"
+    },
+    "acceptingEditor": {
+        "manager": "acceptingEditor",
+        "photographer": "editing",
+        "editor": "acceptingEditor"
+    },
+    "editing": {
+        "manager": "editing",
+        "photographer": "editing",
+        "editor": "editing"
+    },
+    "sending": {
+        "manager": "sending",
+        "photographer": "editing",
+        "editor": "sending"
+    },
+    "completed": {
+        "manager": "completed",
+        "photographer": "completed",
+        "editor": "completed"
+    },
+    "canceled": {
+        "manager": "canceled",
+        "photographer": "canceled",
+        "editor": "none"
+    },
+    "feedbacks": {
+        "manager": "feedbacks",
+        "photographer": "feedbacks",
+        "editor": "feedbacks"
+    },
+    "addOrder": {
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
+    },
+    "statistics": {
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
+    },
+    "employees": {
+        "manager": "none",
+        "photographer": "none",
+        "editor": "none"
+    }
+}

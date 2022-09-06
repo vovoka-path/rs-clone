@@ -1,0 +1,194 @@
+{
+    "incoming": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "date",
+            "status"
+         ],
+        "photographer": [],
+        "editor": []
+    },
+    "acceptingPhotographer": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": []
+    },
+    "shooting": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "date",
+            "status"
+         ],
+        "editor": []
+    },
+    "acceptingEditor": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "editorId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    },
+    "editing": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "editorId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    },
+    "sending": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "editorId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    },
+    "completed": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "editorId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    },
+    "canceled": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "photographerId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": []
+    },
+    "feedbacks": {
+        "manager": [ 
+            "city",
+            "route",
+            "package_name",
+            "clientEmail",
+            "photographerId",
+            "editorId",
+            "date",
+            "status"
+         ],
+        "photographer": [ 
+            "city",
+            "route",
+            "package_name",
+            "date",
+            "status"
+         ],
+        "editor": [ 
+            "city",
+            "package_name",
+            "date",
+            "status"
+         ]
+    }
+}

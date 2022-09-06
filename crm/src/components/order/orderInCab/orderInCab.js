@@ -1,0 +1,137 @@
+
+import orderKeysInCab from '../../../data/orderKeysInCab.json' assert { type: "json" };
+import statusButtonColor from '../../../data/statusButtonColor.json' assert { type: "json" };
+import orderKeyTitles from '../../../data/orderKeyTitles.json' assert { type: "json" };
+import cabViews from '../../../data/cabViews.json' assert { type: "json" };
+import titles from '../../../data/titles.json' assert { type: "json" };
+import { isShowOrderKey, getFormattedDate, createCustomElement } from '../../../utils/utils.js';
+import Button from '../../Button/Button.js';
+
+// View заказа когда зашел в заказ (в любом кабинете)
+class OrderInCab {
+    constructor() {
+    }
+
+    render(props) {
+        const { role, roleStatus, orderStatuses, order, orders, btnBackListener } = props;
+
+        this.orderCabContainer = createCustomElement('div', 'order-cab-container');
+        this.orderItemsContainer = createCustomElement('div', 'order-cab-items-container');
+        
+        // Button BACK
+        const backBtn = Button.create('back__btn', 'Вернуться к списку заказов', order._id, btnBackListener());
+        this.orderCabContainer.append(backBtn);
+
+        // Отрисовываем все поля заказа
+        const keyAllowedToShow = orderKeysInCab[order.status][role];
+
+        for ( let key in order) {
+
+            if (isShowOrderKey(keyAllowedToShow, key)) {
+                this.renderOrderKeyElement(props, key);
+            }
+        }
+
+        this.orderCabContainer.append(this.orderItemsContainer);
+
+        return this.orderCabContainer;
+    }
+
+    // Один ключ заказа
+    renderOrderKeyElement(props, key) {
+        const { role, roleStatus, orderStatuses, order, users, orderButtonListener, statusButtonListener } = props;
+        
+        const lang = 'ru';
+        this.orderKeyElement = document.createElement('div');
+        let orderKey = '';
+        let orderValue = '';
+
+if (key === 'date') {
+            const dates = order[key];
+            const datesKeys = cabViews[role][roleStatus].dates;
+            // console.log('# datesKeys = ', datesKeys);
+            
+            orderValue = datesKeys.map((dateKey) => {
+                const date = dates[dateKey];
+                return `<span>${orderKeyTitles.ru.date[dateKey]}:</span> ${getFormattedDate(date)}`;
+            });
+        } else if (key === 'status') {
+            orderKey = key;
+            orderValue = order[key];
+            const backgroundColor = statusButtonColor[orderValue];
+            this.orderKeyElement.style.backgroundColor = backgroundColor;
+        } else if (key === 'photographerId' || key === 'editorId') {
+            orderKey = key;
+            const [ user ] = users.filter((user) => user._id === order[key]);
+            // console.log('# key, users = ', key, users);
+            orderValue = `<span>${orderKeyTitles[lang][key]}</span>: ${user.name}`;
+        } else {
+            orderKey = key;
+            orderValue = `<span>${orderKeyTitles[lang][key]}</span>: ${order[key]}`;
+        }
+
+        if (Array.isArray(orderValue)) {
+            orderValue.forEach((value) => {
+                const orderKeyElement = createCustomElement('div', `order_item order-item-cab cab-${key}`);
+                // OrderDateKeyElement.className = `order_item order-item-list list-${key}`;
+                orderKeyElement.innerHTML = value; // Заменил innerText на innerHTML для того чтоб использовать теги в шаблонной строке
+
+                this.orderItemsContainer.append(orderKeyElement);
+            });
+        } else if (key === 'clientEmail') {
+            const email = order[key];
+            const span = createCustomElement('span', 'order-email-span');
+            span.innerHTML = 'E-mail:';
+            const linkToMail = createCustomElement('a', 'order-link order-email-link');
+            // btn.setAttribute('type', 'button');
+            linkToMail.innerHTML = `${email}`;
+            linkToMail.setAttribute('value', email);
+            linkToMail.setAttribute('href', `mailto:${email}`);
+            this.orderKeyElement.append(span, linkToMail);
+        } else if (key === 'photographerLink' || key === 'editorLink') {
+                const link = order[key];
+                // console.log('# link = ', link);
+                const span = createCustomElement('span', 'order-${key}-span');
+                span.innerHTML = `${titles[key].ru}:`;
+                const linkElement = createCustomElement('a', `order-link order-email-link order-${key}-link`);
+                linkElement.innerHTML = 'ссылка';
+                linkElement.setAttribute('value', link);
+                linkElement.setAttribute('href', `${link}`);
+                this.orderKeyElement.append(span, linkElement);
+        } else {
+            this.orderKeyElement.className = `order_item order-item-cab cab-${key}`;
+            this.orderKeyElement.innerHTML = orderValue; // Заменил innerText на innerHTML для того чтоб использовать теги в шаблонной строке
+        }
+        
+        this.orderItemsContainer.append(this.orderKeyElement);
+    }
+}
+
+export default OrderInCab;
+
+// renderOrderKeyElement(props, key) {
+//     const { role, roleStatus, orderStatuses, order, orderButtonListener, statusButtonListener } = props;
+
+//     const orderItem = document.createElement('div');
+
+//     let orderKey = '';
+//     let orderValue = '';
+
+//     if (key === 'date') {
+//         orderKey = key[roleStatus];
+//         const orderDate = order[key][roleStatus];
+//         orderValue = getFormattedDate(orderDate);
+//     } else {
+//         orderKey = key;
+//         orderValue = order[key];
+//     }
+
+//     orderItem.className = `order-item order-item-cab cab-${orderKey}`;
+//     orderItem.innerText = orderValue;
+//     this.orderData.append(orderItem);
+//     if (key === 'email') {
+//         const btn = document.createElement('button');
+//         btn.innerText = key;
+//         this.orderData.append(btn);
+//     }
+// }

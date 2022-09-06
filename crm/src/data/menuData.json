@@ -1,0 +1,144 @@
+{
+    "manager": {
+        "incoming": {
+            "roleStatus": "incoming",
+            "path": "/manager/incoming",
+            "ru": "Входящие"
+        },
+        "acceptingPhotographer": {
+            "roleStatus": "acceptingPhotographer",
+            "path": "/manager/accepting-photographer",
+            "ru": "Фотограф принимает"
+        },
+        "shooting": {
+            "roleStatus": "shooting",
+            "path": "/manager/shooting",
+            "ru": "У фотографа в работе"
+        },
+        "acceptingEditor": {
+            "roleStatus": "acceptingEditor",
+            "path": "/manager/accepting-editor",
+            "ru": "Обработчик принимает"
+        },
+        "editing": {
+            "roleStatus": "editing",
+            "path": "/manager/editing",
+            "ru": "У обработчика в работе"
+        },
+        "sending": {
+            "roleStatus": "sending",
+            "path": "/manager/sending",
+            "ru": "Отправить клиенту"
+        },
+        "completed": {
+            "roleStatus": "completed",
+            "path": "/manager/completed",
+            "ru": "Завершенные"
+        },
+        "canceled": {
+            "roleStatus": "canceled",
+            "path": "/manager/canceled",
+            "ru": "Отмененные"
+        },
+        "feedbacks": {
+            "roleStatus": "feedbacks",
+            "path": "/manager/feedbacks",
+            "ru": "Отзывы"
+        },
+        "addOrder": {
+            "roleStatus": null,
+            "path": "/manager/add-order",
+            "ru": "Добавить заказ"
+        },
+        "statistics": {
+            "roleStatus": null,
+            "path": "/manager/statistics",
+            "ru": "Статистика"
+        },
+        "employees": {
+            "roleStatus": null,
+            "path": "/manager/employees",
+            "ru": "Сотрудники"
+        },
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/manager/exit",
+            "ru": "Выйти"
+        }
+    },
+    "photographer": {
+        "acceptingPhotographer": {
+            "roleStatus": "incoming",
+            "path": "/photographer/incoming",
+            "ru": "Входящие"
+        },
+        "shooting": {
+            "roleStatus": "shooting",
+            "path": "/photographer/shooting",
+            "ru": "Текущие"
+        },
+        "acceptingEditor": {
+            "roleStatus": "acceptingEditor",
+            "path": "/photographer/acceptingEditor",
+            "ru": "Обработчик принимает"
+        },
+        "editing": {
+            "roleStatus": "editing",
+            "path": "/photographer/editing",
+            "ru": "У обработчика"
+        },
+        "completed": {
+            "roleStatus": "completed",
+            "path": "/photographer/completed",
+            "ru": "Завершенные"
+        },
+        "canceled": {
+            "roleStatus": "canceled",
+            "path": "/photographer/canceled",
+            "ru": "Отмененные"
+        },
+        "feedbacks": {
+            "roleStatus": "feedbacks",
+            "path": "/photographer/feedbacks",
+            "ru": "Отзывы"
+        },
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/photographer/exit",
+            "ru": "Выйти"
+        }
+    },
+    "editor": {
+        "acceptingEditor": {
+            "roleStatus": "incoming",
+            "path": "/editor/incoming",
+            "ru": "Входящие"
+        },
+        "editing": {
+            "roleStatus": "editing",
+            "path": "/editor/editing",
+            "ru": "Текущие"
+        },
+        "sending": {
+            "roleStatus": "sending",
+            "path": "/editor/sending",
+            "ru": "На проверке"
+        },
+        "completed": {
+            "roleStatus": "completed",
+            "path": "/editor/completed",
+            "ru": "Завершенные"
+        },
+        "feedbacks": {
+            "roleStatus": "feedbacks",
+            "path": "/editor/feedbacks",
+            "ru": "Отзывы"
+        },
+        "exit": {
+            "roleStatus": "exit",
+            "path": "/editor/exit",
+            "ru": "Выйти"
+        }
+    },
+    "signin": "Войти"
+}

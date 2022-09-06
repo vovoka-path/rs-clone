@@ -1,0 +1,459 @@
+import { editorId } from '../data/constants.js';
+import Router from './router.js';
+import CompletedEmail from '../components/CompletedEmail/CompletedEmail.js';
+import EmployeeListener from './employeeListener.js';
+import cabViews from '../data/cabViews.json' assert { type: "json" };
+import menuData from '../data/menuData.json' assert { type: "json" };
+import emailSending from '../data/emailSending.json' assert { type: "json" };
+import titles from '../data/titles.json' assert { type: "json" };
+import orderStatusToRoleStatus from '../data/orderStatusToRoleStatus.json' assert { type: "json" };
+import { getStatuses, getOrdersByStatuses } from '../utils/utils.js';
+
+const lang = 'ru';
+class Listeners extends Router{
+    constructor(controller) {
+        super();
+        this.controller = controller;
+        this.employeeListener = new EmployeeListener();
+    }
+    
+    bindHandlers() {
+        this.orderButtonListener = this.orderButtonListenerNotBind.bind(this.controller);
+        // this.orderButtonListener.bind(this.controller)
+        this.statusButtonListener = this.statusButtonListenerNotBind.bind(this.controller)
+        // this.statusButtonListener.bind(this.controller)
+        this.employeeEditListener = this.employeeListener.editNotBind.bind(this.controller)
+        // console.log('# employeeEditListener = ', this.employeeEditListener);
+        // this.employeeEditListener();
+        this.btnSendListener = this.btnSendListenerNotBind.bind(this.controller);
+        this.btnRegistrationUserListener = this.btnRegistrationUserListenerNotBind.bind(this.controller);
+        this.btnCreateUserListener = this.btnCreateUserListenerNotBind.bind(this.controller);
+        this.btnEditUserListener = this.btnEditUserListenerNotBind.bind(this.controller);
+        this.btnDeleteUserListener = this.btnDeleteUserListenerNotBind.bind(this.controller);
+        this.btnUpdateUserListener = this.btnUpdateUserListenerNotBind.bind(this.controller);
+        this.btnAddLinkListener = this.btnAddLinkListenerNotBind.bind(this.controller);
+        this.btnBackListener = this.btnBackListenerNotBind.bind(this.controller);
+        this.btnAddMessageListener = this.btnAddMessageListenerNotBind.bind(this.controller);
+    }
+
+    async signIn() {
+        const view = this.controller.view;
+
+        view.signIn.button.addEventListener('click', async event => {
+            event.preventDefault();
+            
+            const formData = {
+                username: view.signIn.login.value,
+                password: view.signIn.password.value,
+            }
+            
+            const json = await this.controller.getRole(formData);
+            const { role, token, username } = json;
+
+            localStorage.setItem('signup', JSON.stringify(json));
+
+            // const startStatus = this.controller.model.startStatuses[role];
+            const roleStatus = 'incoming';
+
+            const props = await this.createPropsByRoleStatus(roleStatus);
+            
+            // Рисуем кабинет со списком входящих заказов
+            this.controller.view.renderCab(props);
+            // Вешаем на меню обработчики
+            this.routingMenu(role);
+        }, true);
+    }
+
+    async signInToken() {
+        const { role, token, username } = this.controller.model.auth;
+        
+        const roleStatus = 'incoming';
+
+        const props = await this.createPropsByRoleStatus(roleStatus);
+        
+        // Рисуем кабинет со списком входящих заказов
+        this.controller.view.renderCab(props);
+        // Вешаем на меню обработчики
+        this.routingMenu(role);
+    }
+
+    // обработчик кликов по меню
+    async handleMenuClick(roleStatus) {
+        const props = await this.createPropsByRoleStatus(roleStatus);
+
+        if (cabViews.notOrderStatus.includes(roleStatus)) {
+            const { role } = props;
+            const methodName = cabViews[role][roleStatus].method;
+            this.controller.view.cab[methodName](props);
+        } else {
+            this.controller.view.cab.renderOrderList(props);
+        }
+    }
+
+    async createPropsByRoleStatus(roleStatus) {
+        await this.controller.updateModelDataByNewRoleStatus(roleStatus);
+        
+        const role = this.controller.model.auth.role;
+        const users = this.controller.model.users;
+        const orderStatuses = this.controller.model.statuses;
+        const ordersByRoleStatus = this.controller.getOrdersByRoleStatus();
+        const allOrders = this.controller.model.allOrders;
+
+        const props = {
+            role: role,
+            roleStatus: roleStatus,
+            orderStatuses: orderStatuses,
+            order: {},
+            employees: {
+                photographer: {},
+                editor: {},
+            },
+            allOrders: allOrders,
+            orders: ordersByRoleStatus,
+            users: users,
+            orderButtonListener: this.orderButtonListener,
+            statusButtonListener: () => {}, // добавляем после входа в конкретный заказ
+            employeeListener: this.employeeEditListener, // for EMPLOYEES VIEW
+            btnRegistrationUserListener: this.btnRegistrationUserListener,
+            btnSendListener: this.btnSendListener, // Create new Order
+            btnCreateUserListener: this.btnCreateUserListener,
+            btnEditUserListener: this.btnEditUserListener,
+            btnDeleteUserListener: this.btnDeleteUserListener,
+            btnUpdateUserListener: this.btnUpdateUserListener,
+            btnAddLinkListener: this.btnAddLinkListener,
+            btnBackListener: this.btnBackListener,
+            btnAddMessageListener: this.btnAddMessageListener,
+            // signIn: this.signIn,
+            start: this.controller.start,
+        };
+
+        return props;
+   }
+
+    async createPropsByOrderId(orderId) {
+        await this.controller.updateModelDataByOrderId(orderId);
+
+        const roleStatus = this.controller.model.roleStatus;
+        let props = await this.createPropsByRoleStatus(roleStatus);
+        const order = this.controller.model.orderData;
+        const [ photographer ] = order.photographerId ? await this.controller.getUserById(order.photographerId) : [{}];
+        const [ editor ] = order.editorId ? await this.controller.getUserById(order.editorId) : [{}];
+
+        props = {
+            ...props,
+            order: order,
+            employees: {
+                photographer: photographer,
+                editor: editor,
+            },
+            statusButtonListener: this.statusButtonListener,
+        }
+        
+        return props;
+    }
+
+    // обработчик кнопки списка заказов "Посмотреть"
+    orderButtonListenerNotBind() {
+        return async (event) => {
+            const orderId = event.currentTarget.id;
+            const props = await this.listeners.createPropsByOrderId(orderId);
+
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    getOrderById(orderId) {
+        return this.controller.model.orders.filter((order) => order._id === orderId)[0];
+    }
+
+    getRoleStatusFromOrderStatus(orderStatus, role) {
+        const roleStatus = orderStatusToRoleStatus[orderStatus][role];
+
+        this.controller.model.roleStatus = roleStatus;
+
+        return roleStatus;
+    }
+
+    statusButtonListenerNotBind() {
+        return async (event) => {
+            // this = controller
+            const action = event.target.getAttribute('action');
+            // const orderId = this.model.orderId;
+
+            const role = this.model.auth.role;
+            const roleStatus = this.model.roleStatus;
+            let newOrderStatus = cabViews[role][roleStatus].statusButton[action].newOrderStatus;
+            
+            let orderDates = {
+                ...this.model.orderData.date,
+                [newOrderStatus]: Date.now(),
+            };
+
+            let orderData = {
+                _id: this.model.orderId,
+                status: newOrderStatus,
+                date: orderDates,
+            };
+
+            // --- Set new photographerId
+            const photographerId = event.target.parentElement.getAttribute('id');
+            
+            if (role === 'manager' && roleStatus === 'incoming') {
+                orderData = {
+                    ...orderData,
+                    photographerId: photographerId,
+                }
+            }
+
+            // Если фотограф отказался от заказа
+            if (role === 'photographer' && newOrderStatus === 'incoming') {
+                orderData = {
+                    ...orderData,
+                    photographerId: '',
+                }
+            }
+
+            // Update order in Mongo
+            await this.updateOrder(orderData);
+
+            // Update all orders in model
+            this.model.orders = await this.getOrderData();
+
+            // Show page
+            if (orderStatusToRoleStatus[newOrderStatus][role] === 'none') {
+                newOrderStatus = this.model.startStatuses[role];
+            }
+
+            const path = menuData[role][newOrderStatus].path;
+            this.listeners.handleStatusButtonClick(path);
+
+            // Отправка писем emailSending
+            const order = this.model.orderData;
+            
+            const [ manager ] = await this.getUsersByRole('manager');
+            const [ photographer ] = order.photographerId ? await this.getUserById(order.photographerId) : '';
+            const [ editor ] = order.editorId ? await this.getUserById(order.editorId) : '';
+            const emails = {
+                manager: manager.email,
+                photographer: photographer.email,
+                editor: editor.email,
+            };
+            const names = {
+                manager: manager.name,
+                photographer: photographer.name,
+                editor: editor.name,
+            };
+            const newRoleStatus = orderStatusToRoleStatus[newOrderStatus][role];
+
+            for (let [ role, isSending ] of Object.entries(emailSending[newRoleStatus])) {
+                if (isSending) {
+                    const mailData = {
+                        clientEmail: emails[role], 
+                        title: `
+                        CYP: У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}"!`, 
+                        msg: `У ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".
+                        `,
+                    }
+                    
+                    await this.sendEmail(mailData);
+
+                    console.log(`# ${titles[role][lang]} ${names[role]} получил почту на свой ящик ${emails[role]}. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
+                }
+            };
+
+            if (newOrderStatus === 'completed') {
+                const mailData = CompletedEmail.create(order);
+
+                await this.sendEmail(mailData);
+
+                console.log(`# ${mailData.clientEmail} получил письмо со ссылкой ${order.editorLink} на обработанные фотографии. У клиента ${order.clientEmail} сменился статус на "${menuData[role][newOrderStatus].ru}".`);
+
+            }
+        }
+    }
+
+    btnSendListenerNotBind() {
+        const orderData =  {};
+        const inputs = ['city', 'route', 'package_name', 'clientEmail', 'clientMessage'];
+        const date = Date.now();
+        inputs.forEach((el) => {
+            console.log('# el = ', el);
+            const curInput = document.querySelector(`#${el}`);
+            orderData[el] = curInput.value;
+            curInput.value ='';
+        });
+        orderData.date = {
+            incoming: date,
+        };
+        
+        this.createNewOrder(orderData);
+    }
+
+    btnRegistrationUserListenerNotBind() {
+        return async (event) => {
+            this.view.cab.employees.employee.employeeCreate.create();
+        }
+    }
+
+    btnCreateUserListenerNotBind() {
+        return async (event) => {
+            console.log('# btnCreateUserListener:');
+
+            const userData =  {};
+            const inputs = ['username', 'password', 'role', 'status', 'email', 'name'];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#userCreate-${el}`);
+                userData[el] = curInput.value;
+                // console.log('# curInput = ', curInput.value, el);
+            });
+
+            await this.registrationUser(userData);
+            
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
+        }
+    }
+
+    btnEditUserListenerNotBind() {
+        return async (event) => {
+            const id = event.target.id;
+            const [ user ] = await this.getUserById(id);
+            this.model.user = user;
+            
+            this.view.cab.employees.employee.employeeEdit.create(user);
+        }
+    }
+
+    btnDeleteUserListenerNotBind() {
+        return async (event) => {
+            const id = event.target.id;
+            await this.deleteUser(id); // ОСТОРОЖНО !!!
+
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
+        }
+    }
+
+    btnUpdateUserListenerNotBind() {
+        return async (event) => {
+            const user = this.model.user;
+
+            const userData =  {
+                _id: user._id,
+            };
+            const inputs = ['username', 'role', 'status', 'email', 'name'];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#userEdit-${el}`);
+                userData[el] = curInput.value;
+            });
+
+            await this.updateUser(userData);
+
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.employees.create(this.model.users);
+        }
+    }
+
+    btnAddLinkListenerNotBind() {
+        return async (event) => {
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+
+            const formData = {
+                photographer: {
+                    inputs: 'photographerLink',
+                },
+                editor: {
+                    inputs: 'editorLink',
+                }, 
+            }
+
+            const orderData =  {
+                _id: orderId,
+            };
+            const inputs = [formData[role].inputs];
+            inputs.forEach((el) => {
+                const curInput = document.querySelector(`#add-link-${el}`);
+                orderData[el] = curInput.value;
+            });
+
+            await this.updateOrder(orderData);
+
+            const props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    btnAddMessageListenerNotBind() {
+        return async (event) => {
+            // event.preventDefault();
+
+            const orderId = event.target.id;
+            const role = this.model.auth.role;
+            let props = await this.listeners.createPropsByOrderId(orderId);
+
+            const formData = {
+                manager: {
+                    labels: 'Комментарий для фотографа',
+                    header: 'Комментарии от обработчика',
+                    inputs: 'comments',
+                    from: 'manager',
+                    to: 'photographer',
+                }, 
+                photographer: {
+                    labels: 'Комментарий для обработчика',
+                    header: 'Комментарии от менеджера',
+                    inputs: 'comments',
+                    from: 'photographer',
+                    to: 'editor',
+                },
+                editor: {
+                    labels: 'Комментарий для менеджера',
+                    header: 'Комментарии от фотографа',
+                    inputs: 'comments',
+                    from: 'editor',
+                    to: 'manager',
+                }, 
+            }
+
+            const curInput = document.querySelector(`#add-message`);
+
+            const order = this.model.orderData;
+            const comments = order.comments;
+            const message = curInput.value;
+
+            const comment = {
+                from: formData[role].from,
+                to: formData[role].to,
+                message: message,
+            };
+
+            comments.push(comment);
+
+            const orderData =  {
+                _id: orderId,
+                comments: comments,
+            };
+
+            await this.updateOrder(orderData);
+            
+            props = await this.listeners.createPropsByOrderId(orderId);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderStatusView(props);
+        }
+    }
+
+    btnBackListenerNotBind() {
+        return async (event) => {
+            const roleStatus = this.model.roleStatus;
+
+            const props = await this.listeners.createPropsByRoleStatus(roleStatus);
+            this.view.cab.cabContainer.innerHTML = '';
+            this.view.cab.renderOrderList(props);
+        }
+    }
+}
+
+export default Listeners;
