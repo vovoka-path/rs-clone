@@ -9,11 +9,13 @@ class statusButton {
     create(props) {
         const { statusButtonText, action } = props;
         this.button.innerText = statusButtonText;
+        this.button.className = 'status-btn';
         this.action = action;
         this.button.setAttribute('action', action);
         //, 'btn-status'
         
         return this.button;
+
     }
 }
 

@@ -19,7 +19,7 @@ class MenuItem {
       orderStatus,
     );
     const link = Link.create(classForLink, path, orderStatus, ru, atrrForLink);
-    const img = Image.create("menu-img", `./public/${orderStatus}.png`);
+    const img = Image.create("menu-img", `./assets/${orderStatus}.png`);
 
     listItem.append(link, img);
 

@@ -76,8 +76,25 @@
     .subcab,
     .status-button-container,
     .cab-incoming,
-    .add-message__container {
+    .add-message__container,
+    .add-link__container {
         margin: 0 auto;
         width:700px
     }
   }
+
+  .add-link__btn {
+  
+  align-self: center;
+    width: 90%;
+    margin-top: 10px;
+    background: linear-gradient(342deg, rgba(22,117,148,1) 31%, rgba(12,168,150,1) 57%);
+    border: none;
+    height: 30px;
+    border-radius: 100px;
+    box-shadow: 0 0 5px grey;
+    color: white;
+    cursor: pointer;
+    transform: scale(1.1);
+}
+  

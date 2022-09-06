@@ -1,4 +1,7 @@
+import './styles/style.css';
 import App from './app/app.js';
 
-const app = new App();
-await app.start();
+(async () => {
+    const app = new App();
+    await app.start();
+})();

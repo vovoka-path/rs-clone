@@ -23,7 +23,7 @@ import {  Chart,
     Legend,
     Title,
     Tooltip,
-    SubTitle } from '../../node_modules/chart.js/dist/chart.mjs';
+    SubTitle } from '../../../node_modules/chart.js/dist/chart.mjs';
 import Container from "../Container/Container.js";
 import Header from "../Header/Header.js";
 import Select from "../Select/Select.js";
