@@ -32,7 +32,7 @@ class viewSignIn{
             const top = Math.floor(Math.random() * (screenHeight - 50));
             const left = Math.floor(Math.random() * (screenWidth - 50));
             const img = document.createElement('img');
-            img.src = `./public/${i}.svg`;
+            img.src = `./assets/${i}.svg`;
             img.className = 'form-img';
             img.style.top = `${top}px`;
             img.style.left = `${left}px`;

@@ -47,7 +47,8 @@
 .photographer-container button,
 .back__btn,
 .add-message__btn,
-.status-button-container button{
+.status-button-container button, 
+.add-link__btn {
     align-self: center;
     width: 90%;
     margin-top: 10px;
@@ -100,4 +101,17 @@ button.btn-disabled{
 .order-cab-container {
     display: flex;
     flex-direction: column;
+}
+.add-link__container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.add-link__item {
+    padding: 8px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 0 0 10px rgba(22, 116, 148, 0.301);
+    margin-top: 5px;
+    width: 100%;
 }
