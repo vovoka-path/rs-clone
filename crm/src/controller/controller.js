@@ -31,10 +31,10 @@ class Controller {
         if (authData) {
             const signUpData = JSON.parse(localStorage.getItem('signup'));
             this.model.setAuth(signUpData);
-            
-            const res = await this.getOrderData();
-            
-            if (Array.isArray(res)) {
+            const { token, role } = this.model.auth;
+            const allOrders = await this.api.getOrderData(token, role);
+
+            if (Array.isArray(allOrders)) {
                 isTokenExpires = false;
             }
         }
@@ -53,7 +53,6 @@ class Controller {
     async getOrderData(){
         const { token, role } = this.model.auth;
         const allOrders = await this.api.getOrderData(token, role);
-        
 
         // this.model.users = await this.getAllUsers();
         this.model.photographers = this.getUsersByRole('photographer');
