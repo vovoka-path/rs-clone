@@ -11,7 +11,7 @@ const app = express();
 
 app.use(jsonParser);
 app.use(cors({
-  origin: 'https://vovoka-path.github.io'
+  origin: process.env.ORIGIN
 }));
 app.use('/auth', AuthRouter);
 app.use('/api', ApiRouter);
