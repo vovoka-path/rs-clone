@@ -1,13 +1,5 @@
-Contains:
-
-1. Webpage
-2. CRM
-3. Server
-
-
-
-# CRM Photo-agancy API
-Api for "CRM Photo-agancy".
+# CRM photo agency API
+Api for "CRM photo agency".
 
 
 ## Setup and Running
