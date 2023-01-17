@@ -1,5 +1,4 @@
-# rs-clone
-Photo agency CRM
+# Photo agency CRM
 
 ## Stack: 
 - Typescript
@@ -23,12 +22,13 @@ Photo agency CRM
 > - [CRM](https://github.com/vovoka-path/rs-clone/tree/develop/crm)
 > - [Сервер](https://github.com/vovoka-path/rs-clone/tree/develop/server)
 
-## Video presentation: [link](https://youtu.be/F9-kDCBdz2A)
+## Presentation
 
-### Доступы
-Логины сотрудников. 
-Пароль для всех одинаковый: **qweasdzxcqweasdzxc**
-`**ВАЖНО!** Пожалуйста, не удаляйте этих сотрудников!!! Этим просто усложните проверку таска другими проверяющими) `
-> - менеджер: **manager**
-> - фотограф: **alex**
-> - обработчик: **nataly**
+> - [Video on Youtube](https://youtu.be/F9-kDCBdz2A)
+
+## Логины/пароли
+`**ВАЖНО!** Пожалуйста, не удаляйте этих сотрудников!!!`
+
+> - Менеджер: **manager** / **qweasdzxcqweasdzxc**
+> - Фотограф: **alex** / **qweasdzxcqweasdzxc**
+> - Обработчик фотографий: **nataly** / **qweasdzxcqweasdzxc**
