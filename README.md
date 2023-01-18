@@ -3,6 +3,8 @@
 
 This project is a complete service with a landing page for attracting customers, CRM [^1] system for employee interaction and REST API backend with database. 
 
+## Used By
+
 App was developed for a current photo agency [**cyp.photo**](https://cyp.photo) that organises photo shoots for visitors to European cities.
 
 [^1]: _CRM - customer relationship management software is a system for managing your relationships with customers._
