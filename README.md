@@ -9,6 +9,18 @@ App was developed for a current photo agency [**cyp.photo**](https://cyp.photo) 
 
 [^1]: _CRM - customer relationship management software is a system for managing your relationships with customers._
 
+## Code
+
+> - [CRM app](https://github.com/vovoka-path/rs-clone/tree/develop/crm)
+> - [Server](https://github.com/vovoka-path/rs-clone/tree/develop/server)
+> - [Web page](https://github.com/vovoka-path/rs-clone/tree/develop/web)
+
+## Deploy
+
+> - [CRM app](https://vovoka-path.github.io/rs-clone/crm/)
+> - Server on [Render hosting](https://render.com)
+> - [Web page](https://vovoka-path.github.io/rs-clone/web/web/)
+
 ## Development time
 
 - **3 weeks** (15.08.2022 - 05.09.2022)
@@ -55,18 +67,6 @@ App was developed for a current photo agency [**cyp.photo**](https://cyp.photo) 
 - [Github Projects](https://github.com/users/vovoka-path/projects/1)
 - Discord for meetings
 - Figma
-
-## Code
-
-> - [CRM app](https://github.com/vovoka-path/rs-clone/tree/develop/crm)
-> - [Server](https://github.com/vovoka-path/rs-clone/tree/develop/server)
-> - [Web page](https://github.com/vovoka-path/rs-clone/tree/develop/web)
-
-## Deploy
-
-> - [CRM app](https://vovoka-path.github.io/rs-clone/crm/)
-> - Server on [Render hosting](https://render.com)
-> - [Web page](https://vovoka-path.github.io/rs-clone/web/web/)
 
 ## Login/password
 Attention! Please, `DO NOT DELETE` these users! You can create a new employee, then delete them.
